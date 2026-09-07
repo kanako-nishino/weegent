@@ -1,176 +1,229 @@
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".js-logo-track").forEach((track) => {
-    const logoList = track.querySelector(".client-logos__list");
+jQuery(function ($) { // この中であればWordPressでも「$」が使用可能になる
+  // 導入企業ロゴの無限ループ用複製
+  $(".js-logo-track").each(function () {
+    var $track = $(this);
+    var $logoList = $track.find(".client-logos__list").first();
 
-    if (!logoList) return;
+    if (!$logoList.length) return;
 
-    const clone = logoList.cloneNode(true);
-    clone.setAttribute("aria-hidden", "true");
-    clone.querySelectorAll("img").forEach((image) => image.setAttribute("alt", ""));
-    track.appendChild(clone);
+    var $clone = $logoList.clone();
+    $clone.attr("aria-hidden", "true");
+    $clone.find("img").attr("alt", "");
+    $track.append($clone);
   });
 
-  const pageTop = document.querySelector(".pagetop");
+  var topBtn = $(".pagetop");
+  topBtn.hide();
 
-  if (pageTop) {
-    pageTop.hidden = true;
+  // ボタンの表示設定
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 70) {
+      // 指定px以上のスクロールでボタンを表示
+      topBtn.fadeIn();
+    } else {
+      // 画面が指定pxより上ならボタンを非表示
+      topBtn.fadeOut();
+    }
+  });
 
-    window.addEventListener("scroll", () => {
-      pageTop.hidden = window.scrollY <= 70;
+  // ボタンをクリックしたらスクロールして上に戻る
+  topBtn.click(function () {
+    $("body,html").animate({
+      scrollTop: 0
+    }, 300, "swing");
+    return false;
+  });
+
+  $("#MenuButton").click(function () {
+    // $(".l-drawer-menu").toggleClass("is-show");
+    // $(".p-drawer-menu").toggleClass("is-show");
+    $(".js-drawer-open").toggleClass("open");
+    $(".drawer-menu").toggleClass("open");
+    $("html").toggleClass("is-fixed");
+  });
+
+  // スムーススクロール（絶対パスのリンク先が現在のページであった場合でも作動）
+  $(document).on("click", 'a[href*="#"]', function () {
+    var time = 400;
+    var header = $("header").innerHeight() || 0;
+    var target = $(this.hash);
+
+    if (!target.length) return;
+
+    var targetY = target.offset().top - header;
+    $("html,body").animate({
+      scrollTop: targetY
+    }, time, "swing");
+    return false;
+  });
+
+  var $hamburger = $(".js-hamburger");
+  var $drawer = $(".js-drawer");
+  var $drawerPanel = $drawer.find(".drawer__panel");
+
+  function setDrawerState(isOpen, returnFocus) {
+    $hamburger.toggleClass("is-open", isOpen);
+    $hamburger.attr({
+      "aria-expanded": String(isOpen),
+      "aria-label": isOpen ? "メニューを閉じる" : "メニューを開く"
     });
-
-    pageTop.addEventListener("click", (event) => {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
-  const hamburger = document.querySelector(".js-hamburger");
-  const drawer = document.querySelector(".js-drawer");
-  const drawerPanel = drawer?.querySelector(".drawer__panel");
-
-  const setDrawerState = (isOpen, returnFocus = false) => {
-    hamburger?.classList.toggle("is-open", isOpen);
-    hamburger?.setAttribute("aria-expanded", String(isOpen));
-    hamburger?.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
-    drawer?.classList.toggle("is-open", isOpen);
-    drawer?.setAttribute("aria-hidden", String(!isOpen));
-    document.documentElement.classList.toggle("is-fixed", isOpen);
+    $drawer.toggleClass("is-open", isOpen);
+    $drawer.attr("aria-hidden", String(!isOpen));
+    $("html").toggleClass("is-fixed", isOpen);
 
     if (isOpen) {
-      drawer?.querySelector(".drawer__close")?.focus();
+      $drawer.find(".drawer__close").first().trigger("focus");
     } else if (returnFocus) {
-      hamburger?.focus();
+      $hamburger.trigger("focus");
     }
-  };
+  }
 
-  const closeDrawer = (returnFocus = false) => setDrawerState(false, returnFocus);
+  function openDrawer() {
+    setDrawerState(true, false);
+  }
 
-  hamburger?.addEventListener("click", () => {
-    const isOpen = hamburger.getAttribute("aria-expanded") !== "true";
-    setDrawerState(isOpen);
+  function closeDrawer(returnFocus) {
+    setDrawerState(false, Boolean(returnFocus));
+  }
+
+  // ハンバーガーメニュー
+  $(function () {
+    $hamburger.click(function () {
+      if ($(this).attr("aria-expanded") !== "true") {
+        openDrawer();
+      } else {
+        closeDrawer();
+      }
+    });
+
+    // background・閉じるボタン・ページ内リンクをクリックすると閉じる
+    $drawer.find("a[href]").on("click", function () {
+      closeDrawer();
+    });
+
+    $(".js-drawer-close").on("click", function () {
+      closeDrawer(true);
+    });
+
+    // resizeイベント
+    $(window).on("resize", function () {
+      if (window.matchMedia("(min-width: 768px)").matches) {
+        closeDrawer();
+      }
+    });
   });
 
-  drawer?.querySelectorAll("a[href]").forEach((link) => {
-    link.addEventListener("click", () => closeDrawer());
-  });
-
-  drawer?.querySelectorAll(".js-drawer-close").forEach((button) => {
-    button.addEventListener("click", () => closeDrawer(true));
-  });
-
-  drawerPanel?.addEventListener("keydown", (event) => {
+  // ドロワー内のフォーカスを循環させる
+  $drawerPanel.on("keydown", function (event) {
     if (event.key !== "Tab") return;
 
-    const focusableElements = [...drawerPanel.querySelectorAll('a[href], button:not([disabled])')];
-    const firstElement = focusableElements[0];
-    const lastElement = focusableElements[focusableElements.length - 1];
+    var $focusableElements = $drawerPanel.find('a[href], button:not([disabled])');
+    var firstElement = $focusableElements.get(0);
+    var lastElement = $focusableElements.get($focusableElements.length - 1);
 
     if (event.shiftKey && document.activeElement === firstElement) {
       event.preventDefault();
-      lastElement?.focus();
+      if (lastElement) lastElement.focus();
     } else if (!event.shiftKey && document.activeElement === lastElement) {
       event.preventDefault();
-      firstElement?.focus();
+      if (firstElement) firstElement.focus();
     }
   });
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && hamburger?.getAttribute("aria-expanded") === "true") {
+  // Escキーでドロワーを閉じる
+  $(document).on("keydown", function (event) {
+    if (event.key === "Escape" && $hamburger.attr("aria-expanded") === "true") {
       closeDrawer(true);
     }
   });
 
-  window.addEventListener("resize", () => {
-    if (window.matchMedia("(min-width: 768px)").matches) {
-      closeDrawer();
-    }
-  });
-
-  document.querySelectorAll('a[href*="#"]').forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const hash = new URL(link.href, window.location.href).hash;
-      const target = hash ? document.querySelector(hash) : null;
-
-      if (!target) return;
-
+  // modal
+  $(".js-modal-open").each(function () {
+    $(this).on("click", function (event) {
       event.preventDefault();
-      const headerHeight = document.querySelector("header")?.offsetHeight ?? 0;
-      const targetY = target.getBoundingClientRect().top + window.scrollY - headerHeight;
-      window.scrollTo({ top: targetY, behavior: "smooth" });
-    });
-  });
-
-  document.querySelectorAll(".js-modal-open").forEach((button) => {
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      const modal = document.getElementById(button.dataset.target);
+      var target = $(this).data("target");
+      var modal = document.getElementById(target);
 
       if (!modal) return;
 
-      modal.hidden = false;
-      document.documentElement.classList.add("is-fixed");
+      $(modal).prop("hidden", false).fadeIn();
+      $("html,body").css("overflow", "hidden");
     });
   });
 
-  document.querySelectorAll(".js-modal-close").forEach((button) => {
-    button.addEventListener("click", () => {
-      document.querySelectorAll(".js-modal").forEach((modal) => {
-        modal.hidden = true;
-      });
-      document.documentElement.classList.remove("is-fixed");
+  $(".js-modal-close").on("click", function () {
+    $(".js-modal").fadeOut(function () {
+      $(this).prop("hidden", true);
     });
+    $("html,body").css("overflow", "initial");
   });
 
-  document.querySelectorAll(".js-document-slider").forEach((slider) => {
-    const slides = [...slider.querySelectorAll(".js-document-slide")];
-    const pagination = slider.parentElement?.querySelector(".js-document-pagination");
+  // お役立ち資料スライダー
+  $(".js-document-slider").each(function () {
+    var slider = this;
+    var $slider = $(slider);
+    var $slides = $slider.find(".js-document-slide");
+    var $pagination = $slider.parent().find(".js-document-pagination").first();
 
-    if (!slides.length || !pagination) return;
+    if (!$slides.length || !$pagination.length) return;
 
-    const bullets = slides.map((_, index) => {
-      const bullet = document.createElement("button");
-      bullet.type = "button";
-      bullet.className = "document-pagination__bullet";
-      bullet.setAttribute("aria-label", `${index + 1}枚目の資料を表示`);
-      bullet.addEventListener("click", () => {
-        slides[index].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+    var $bullets = $slides.map(function (index) {
+      var slide = this;
+      var $bullet = $("<button>", {
+        type: "button",
+        class: "document-pagination__bullet",
+        "aria-label": (index + 1) + "枚目の資料を表示"
       });
-      pagination.appendChild(bullet);
-      return bullet;
+
+      $bullet.on("click", function () {
+        slide.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "start"
+        });
+      });
+
+      $pagination.append($bullet);
+      return $bullet.get(0);
     });
 
-    const updatePagination = () => {
-      const sliderLeft = slider.getBoundingClientRect().left;
-      const activeIndex = slides.reduce((closestIndex, slide, index) => {
-        const currentDistance = Math.abs(slides[closestIndex].getBoundingClientRect().left - sliderLeft);
-        const distance = Math.abs(slide.getBoundingClientRect().left - sliderLeft);
-        return distance < currentDistance ? index : closestIndex;
-      }, 0);
+    function updatePagination() {
+      var sliderLeft = slider.getBoundingClientRect().left;
+      var activeIndex = 0;
+      var closestDistance = Infinity;
 
-      bullets.forEach((bullet, index) => {
-        const isActive = index === activeIndex;
-        bullet.classList.toggle("is-active", isActive);
-        bullet.setAttribute("aria-current", isActive ? "true" : "false");
+      $slides.each(function (index) {
+        var distance = Math.abs(this.getBoundingClientRect().left - sliderLeft);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          activeIndex = index;
+        }
       });
-    };
 
-    slider.addEventListener("scroll", updatePagination, { passive: true });
+      $bullets.each(function (index) {
+        var isActive = index === activeIndex;
+        $(this).toggleClass("is-active", isActive);
+        $(this).attr("aria-current", isActive ? "true" : "false");
+      });
+    }
+
+    $slider.on("scroll", updatePagination);
     updatePagination();
   });
 
-  document.querySelectorAll(".js-faq-trigger").forEach((trigger) => {
-    trigger.addEventListener("click", () => {
-      const answerId = trigger.getAttribute("aria-controls");
-      const answer = answerId ? document.getElementById(answerId) : null;
-      const faqItem = trigger.closest(".faq-item");
+  // よくある質問
+  $(".js-faq-trigger").on("click", function () {
+    var $trigger = $(this);
+    var answerId = $trigger.attr("aria-controls");
+    var $answer = answerId ? $("#" + answerId) : $();
+    var $faqItem = $trigger.closest(".faq-item");
 
-      if (!answer || !faqItem) return;
+    if (!$answer.length || !$faqItem.length) return;
 
-      const isOpen = trigger.getAttribute("aria-expanded") === "true";
-      trigger.setAttribute("aria-expanded", String(!isOpen));
-      answer.hidden = isOpen;
-      faqItem.classList.toggle("is-open", !isOpen);
-    });
+    var isOpen = $trigger.attr("aria-expanded") === "true";
+    $trigger.attr("aria-expanded", String(!isOpen));
+    $answer.prop("hidden", isOpen);
+    $faqItem.toggleClass("is-open", !isOpen);
   });
 });
