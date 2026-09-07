@@ -3861,9 +3861,27 @@ html.is-fixed {
   --fv-image-pc: url("../img/sub-out-bound-enterprise/fv-out-bound-enterprise.jpg");
 }
 
+.strength-section--out-bound-enterprise {
+  padding-bottom: 6rem;
+}
+@media screen and (min-width: 768px) {
+  .strength-section--out-bound-enterprise {
+    padding-bottom: 7.5rem;
+  }
+}
+
 .fv--inbound {
   --fv-image-sp: url("../img/sub-inbound/fv-inbound-sp.jpg");
   --fv-image-pc: url("../img/sub-inbound/fv-inbound.jpg");
+}
+
+.strength-section--inbound {
+  padding-bottom: 6rem;
+}
+@media screen and (min-width: 768px) {
+  .strength-section--inbound {
+    padding-bottom: 7.5rem;
+  }
 }
 
 .fv--test-marketing {
@@ -3871,9 +3889,27 @@ html.is-fixed {
   --fv-image-pc: url("../img/sub-test-marketing/fv-test-marketing.jpg");
 }
 
+.strength-section--test-marketing {
+  padding-bottom: 6rem;
+}
+@media screen and (min-width: 768px) {
+  .strength-section--test-marketing {
+    padding-bottom: 7.5rem;
+  }
+}
+
 .fv--out-bound-smb {
   --fv-image-sp: url("../img/sub-out-bound-smb/fv-out-bound-smb-sp.jpg");
   --fv-image-pc: url("../img/sub-out-bound-smb/fv-out-bound-smb.jpg");
+}
+
+.strength-section--out-bound-smb {
+  padding-bottom: 6rem;
+}
+@media screen and (min-width: 768px) {
+  .strength-section--out-bound-smb {
+    padding-bottom: 7.5rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

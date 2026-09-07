@@ -8,3 +8,13 @@
   --fv-image-sp: url("../img/sub-test-marketing/fv-test-marketing-sp.jpg");
   --fv-image-pc: url("../img/sub-test-marketing/fv-test-marketing.jpg");
 }
+
+// 強みセクションの直後にCTA（資料請求）セクションが続く構成のため、
+// 強みセクション自体にも下余白を持たせる（トップページの並び順には影響しない）
+.strength-section--test-marketing {
+  padding-bottom: rem(96);
+
+  @include mq("md") {
+    padding-bottom: rem(120);
+  }
+}
