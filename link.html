@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Weegentサイト内の各ページへのリンクをまとめた一覧ページです。">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#1A1C3D',
+            navydark: '#090A1B',
+            beige: '#F1F0EA',
+            brown: '#A3814F',
+            camel: '#9B6A22',
+          },
+          fontFamily: {
+            sans: ['"Noto Sans JP"', 'sans-serif'],
+            serif: ['"Noto Serif JP"', 'serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <title>サイトリンク一覧｜Weegent</title>
+</head>
+
+<body class="font-sans bg-beige text-navy">
+
+  <header class="bg-navydark text-white">
+    <div class="max-w-[1200px] mx-auto pt-6 pl-6 pr-6 pb-6 md:pt-8 md:pl-8 md:pr-8 md:pb-8">
+      <a href="./" class="inline-block" aria-label="Weegent トップページへ">
+        <img src="./img/common/logo.png" alt="Weegent" class="h-8 w-auto">
+      </a>
+      <h1 class="mt-6 font-serif text-2xl md:text-3xl font-medium">サイトリンク一覧</h1>
+    </div>
+  </header>
+
+  <main class="max-w-[1200px] mx-auto pt-10 pl-6 pr-6 pb-20 md:pt-14 md:pl-8 md:pr-8">
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+      <li>
+        <a href="./index.html"
+          class="group flex items-center justify-between gap-3 min-h-[64px] px-6 rounded-sm bg-white text-navy font-medium transition-all duration-200 hover:bg-navy hover:text-white hover:-translate-y-0.5 hover:shadow-lg">
+          <span>営業代行・インサイドセールスのWeegent（TOP）</span>
+          <img src="./img/common/button-icon-navy.svg" alt=""
+            class="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:invert">
+        </a>
+      </li>
+
+      <li>
+        <a href="./inbound.html"
+          class="group flex items-center justify-between gap-3 min-h-[64px] px-6 rounded-sm bg-white text-navy font-medium transition-all duration-200 hover:bg-navy hover:text-white hover:-translate-y-0.5 hover:shadow-lg">
+          <span>インバウンドリード対応（SDR代行）</span>
+          <img src="./img/common/button-icon-navy.svg" alt=""
+            class="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:invert">
+        </a>
+      </li>
+
+      <li>
+        <a href="./out-bound-enterprise.html"
+          class="group flex items-center justify-between gap-3 min-h-[64px] px-6 rounded-sm bg-white text-navy font-medium transition-all duration-200 hover:bg-navy hover:text-white hover:-translate-y-0.5 hover:shadow-lg">
+          <span>アウトバウンド営業（ABM・エンプラ開拓）</span>
+          <img src="./img/common/button-icon-navy.svg" alt=""
+            class="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:invert">
+        </a>
+      </li>
+
+      <li>
+        <a href="./out-bound-smb.html"
+          class="group flex items-center justify-between gap-3 min-h-[64px] px-6 rounded-sm bg-white text-navy font-medium transition-all duration-200 hover:bg-navy hover:text-white hover:-translate-y-0.5 hover:shadow-lg">
+          <span>アウトバウンド営業（SMB・SME開拓）</span>
+          <img src="./img/common/button-icon-navy.svg" alt=""
+            class="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:invert">
+        </a>
+      </li>
+
+      <li>
+        <a href="./test-marketing.html"
+          class="group flex items-center justify-between gap-3 min-h-[64px] px-6 rounded-sm bg-white text-navy font-medium transition-all duration-200 hover:bg-navy hover:text-white hover:-translate-y-0.5 hover:shadow-lg">
+          <span>テストマーケティング</span>
+          <img src="./img/common/button-icon-navy.svg" alt=""
+            class="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:invert">
+        </a>
+      </li>
+
+    </ul>
+  </main>
+
+  <footer class="bg-navydark text-beige">
+    <div class="max-w-[1200px] mx-auto pt-8 pl-6 pr-6 pb-8 md:pl-8 md:pr-8">
+      <small class="text-xs text-beige/70">&copy; <time datetime="2026">2026</time> Weegent Inc.</small>
+    </div>
+  </footer>
+
+</body>
+
+</html>

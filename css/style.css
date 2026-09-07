@@ -3557,7 +3557,7 @@ html.is-fixed {
     min-height: 8.25rem;
     padding: 2rem;
     display: grid;
-    grid-template-columns: 13rem minmax(0, 1fr);
+    grid-template-columns: 21.25rem minmax(0, 1fr);
     align-items: center;
     gap: 1.75rem;
   }
