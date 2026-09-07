@@ -1,0 +1,67 @@
+@use "sass:math";
+
+// ==============================
+// 関数定義
+// ==============================
+
+// --------------------------------
+// 単位を外す  strip-unit(25px) => 25
+// --------------------------------
+@function strip-unit($value) {
+  @return math.div($value, 1px);
+}
+
+// --------------------------------
+// remの換算  rem(20) => 1.25rem
+// --------------------------------
+@function rem($pixel) {
+  @return calc($pixel / 16 * 1rem);
+}
+
+// 2倍サイズのカンプ用
+@function rem2($pixel) {
+  @return calc($pixel / 32 * 1rem);
+}
+
+// --------------------------------
+// vwにする  vw(375, 16) => calc(16 / 375 * 100vw)
+// --------------------------------
+@function vw($window_width, $size) {
+  @return calc($size / $window_width * 100vw);
+}
+
+// 指定pxを上限にするvw
+@function vwmin($window_width, $size) {
+  @return min(calc($size / $window_width * 100vw), $size * 1px);
+}
+
+// --------------------------------
+// 親要素に対する割合  per(1000, 500) => 50%
+// --------------------------------
+@function per($parent_width, $child_width) {
+  @return calc($child_width / $parent_width * 100%);
+}
+
+// --------------------------------
+// 背景のグラデーション  lg($black, $white, 90)
+// --------------------------------
+@function lg($color01, $color02, $deg: 0) {
+  @return linear-gradient($deg * 1deg, $color01 0%, $color02 100%);
+}
+
+// --------------------------------
+// 一次関数
+// 画面幅1440pxの時120px、1000pxの時20px、のように可変させたい時に使う
+// --------------------------------
+@function linear_func($point_x1, $point_y1, $point_x2, $point_y2) {
+  @return calc(($point_y2 - $point_y1) * (100vw - $point_x1 * 1px) / ($point_x2 - $point_x1) + $point_y1 * 1px);
+}
+
+// --------------------------------
+// 一次関数（最大値・最小値付き）
+// --------------------------------
+@function linear_func_clamp($point_x1, $point_y1, $point_x2, $point_y2) {
+  @return clamp($point_y2 * 1px,
+    calc(($point_y2 - $point_y1) * (100vw - $point_x1 * 1px) / ($point_x2 - $point_x1) + $point_y1 * 1px),
+    $point_y1 * 1px);
+}

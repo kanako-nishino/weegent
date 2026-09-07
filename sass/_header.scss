@@ -1,0 +1,336 @@
+@use "global" as *;
+
+// --------------------------------
+// ヘッダー
+// --------------------------------
+.header {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: $white;
+}
+
+.header__inner {
+  width: 100%;
+  min-height: rem(80);
+  padding: rem(16);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include mq("md") {
+    min-height: rem(121);
+    padding: rem(16) rem(40);
+    align-items: flex-start;
+  }
+}
+
+.header__logo {
+  width: rem(131);
+
+  @include mq("md") {
+    width: rem(196);
+  }
+}
+
+.header__pc {
+  margin-left: auto;
+}
+
+.header__contact {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: rem(8);
+}
+
+.header__tel {
+  color: $white;
+  text-align: right;
+}
+
+.header__tel-number,
+.header__tel-hours {
+  display: block;
+}
+
+.header__tel-number {
+  font-family: $serif;
+  @include font(24, 24, null, $medium);
+}
+
+.header__tel-hours {
+  @include font(12, 12, 60, $medium);
+  margin-top: rem(5);
+  padding-top: rem(5);
+  border-top: 1px solid $white;
+}
+
+.header__button {
+  min-width: rem(144);
+  min-height: rem(48);
+  padding: rem(10) rem(20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(6);
+  @include font(14, 14, null, $bold);
+}
+
+.header__button span {
+  padding: rem(4) rem(9) rem(5);
+  border: rem(1) solid currentColor;
+  border-radius: rem(20);
+  @include font(11, 11, null, $bold);
+}
+
+.header__button--white {
+  color: $navy;
+  background-color: $white;
+}
+
+.header__button--brown {
+  color: $white;
+  background-color: $brown;
+}
+
+.header__nav {
+  margin-top: rem(24);
+  display: flex;
+  justify-content: flex-end;
+  gap: rem(24);
+}
+
+.header__nav a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: rem(10);
+  color: $white;
+  @include font(16, 16, null, $medium);
+}
+
+.header__nav-icon {
+  width: rem(16);
+  height: rem(16);
+  flex: 0 0 auto;
+}
+
+
+.header__hamburger {
+  width: rem(48);
+  height: rem(48);
+  padding: rem(14);
+  background-color: $brown;
+  border-radius: rem(2);
+}
+
+.header__hamburger span {
+  width: 100%;
+  height: rem(2);
+  display: block;
+  background-color: $beige;
+  border-radius: rem(1);
+}
+
+.header__hamburger span + span {
+  margin-top: rem(4);
+}
+
+html.is-fixed {
+  overflow: hidden;
+}
+
+// --------------------------------
+// ドロワーメニュー
+// --------------------------------
+.drawer {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: visibility 0.35s, opacity 0.35s;
+
+  @include mq("md") {
+    display: none;
+  }
+}
+
+.drawer.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background-color: rgba(#050617, 0.72);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.drawer.is-open .drawer__backdrop {
+  opacity: 1;
+}
+
+.drawer__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(#{rem(360)}, calc(100% - #{rem(24)}));
+  height: 100dvh;
+  padding: rem(20) rem(24) rem(32);
+  overflow-y: auto;
+  color: $white;
+  border-left: rem(1) solid rgba($brown, 0.75);
+  background-color: #10122f;
+  box-shadow: rem(-10) 0 rem(30) rgba(#000, 0.24);
+  transform: translateX(100%);
+  transition: transform 0.35s ease;
+}
+
+.drawer__panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: rem(390);
+  background-image: url("../img/common/deco-wave.png");
+  background-repeat: no-repeat;
+  background-position: center rem(-30);
+  background-size: auto rem(360);
+  opacity: 0.13;
+  pointer-events: none;
+}
+
+.drawer.is-open .drawer__panel {
+  transform: translateX(0);
+}
+
+.drawer__header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.drawer__logo {
+  width: rem(122);
+}
+
+.drawer__close {
+  position: relative;
+  width: rem(44);
+  height: rem(44);
+  border: rem(1) solid rgba($white, 0.65);
+  background-color: rgba($navy, 0.72);
+}
+
+.drawer__close span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: rem(20);
+  height: rem(1);
+  background-color: $white;
+}
+
+.drawer__close span:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.drawer__close span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.drawer-nav {
+  position: relative;
+  z-index: 1;
+  margin-top: rem(38);
+}
+
+.drawer-nav__list {
+  border-top: rem(1) solid rgba($white, 0.24);
+}
+
+.drawer-nav__link {
+  position: relative;
+  min-height: rem(48);
+  padding: rem(12) rem(30) rem(12) rem(4);
+  display: flex;
+  align-items: center;
+  color: $white;
+  font-family: $serif;
+  border-bottom: rem(1) solid rgba($white, 0.24);
+  @include font(16, 24, 20, $medium);
+}
+
+.drawer-nav__link::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: rem(7);
+  width: rem(7);
+  height: rem(7);
+  border-top: rem(1) solid $brown;
+  border-right: rem(1) solid $brown;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.drawer-contact {
+  position: relative;
+  z-index: 1;
+  margin-top: rem(28);
+}
+
+.drawer-contact__tel {
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  color: $white;
+  text-align: center;
+}
+
+.drawer-contact__tel span {
+  padding: 0 rem(8) rem(3);
+  display: block;
+  font-family: $serif;
+  border-bottom: rem(1) solid rgba($white, 0.8);
+  @include font(20, 28, 0, $medium);
+}
+
+.drawer-contact__tel small {
+  margin-top: rem(3);
+  display: block;
+  @include font(10, 16, 0, $medium);
+}
+
+.drawer-contact__button {
+  min-height: rem(48);
+  margin-top: rem(14);
+}
+
+.drawer-contact__button + .drawer-contact__button {
+  margin-top: rem(8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .drawer__backdrop,
+  .drawer__panel {
+    transition-duration: 0.01ms;
+  }
+}
+

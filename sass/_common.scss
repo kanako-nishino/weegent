@@ -1,0 +1,172 @@
+@use "global" as *;
+
+// ==============================
+// 全ページ共通のパーツ
+// ==============================
+
+.br-lg{
+  display: none;
+
+  @include mq('lg'){
+    display: block;
+  }
+}
+
+.inner {
+  width: 100%;
+  padding-right: $padding-sp;
+  padding-left: $padding-sp;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 500px;
+
+  @include mq("md") {
+    max-width: $inner + strip-unit($padding-pc) * 2;
+    padding-right: $padding-pc;
+    padding-left: $padding-pc;
+  }
+}
+
+.inner--content {
+  padding-right: rem(24);
+  padding-left: rem(24);
+
+  @include mq("md") {
+    max-width: rem(1280);
+    padding-right: rem(40);
+    padding-left: rem(40);
+  }
+}
+
+.inner--content-narrow {
+  padding-right: rem(40);
+  padding-left: rem(40);
+
+  @include mq("md") {
+    max-width: rem(1070);
+    padding-right: rem(35);
+    padding-left: rem(35);
+  }
+}
+
+// --------------------------------
+// セクション共通余白
+// --------------------------------
+.section-space {
+  padding-top: rem(96);
+
+  @include mq("md") {
+    padding-top: rem(120);
+  }
+}
+
+// --------------------------------
+// 共通ボタン
+// --------------------------------
+.c-button {
+  width: 100%;
+  min-height: rem(56);
+  padding: rem(12) rem(16);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem(12);
+  color: $navy;
+  @include font(14, 14, null, $medium);
+  border-radius: rem(2);
+  background-color: $beige;
+
+  img {
+    width: rem(16);
+    height: rem(16);
+    flex-shrink: 0;
+  }
+
+  small {
+    display: inline-flex;
+    align-items: center;
+    margin-left: rem(8);
+    padding: rem(4) rem(10);
+    border: rem(1) solid currentColor;
+    border-radius: rem(20);
+    @include font(12, 12, null, $medium);
+  }
+
+  @include mq("md") {
+    min-height: rem(64);
+    padding: rem(24);
+    @include font(16, 16, 0, $medium);
+  }
+}
+
+.c-button--white {
+  background-color: $white;
+}
+
+.c-button--brown {
+  color: $white;
+  background-color: $brown;
+}
+
+.c-button__content {
+  display: flex;
+  align-items: center;
+  gap: rem(10);
+}
+
+.c-button__content img {
+  width: rem(22);
+  height: rem(16);
+  object-fit: contain;
+}
+
+// --------------------------------
+// 波背景
+// --------------------------------
+.section-wave {
+  position: relative;
+  overflow: hidden;
+  background-color: $navy;
+}
+
+.section-wave::before {
+  --wave-size-sp: clamp(
+    #{rem(609)},
+    calc(#{rem(446)} + 41.9vw),
+    #{rem(767)}
+  );
+  --wave-position-x-sp: clamp(
+    0rem,
+    calc(#{rem(183)} - 23.9vw),
+    #{rem(90)}
+  );
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background-color: #4050b2;
+  -webkit-mask-image: url("../img/common/deco-wave.png");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: calc(50% + var(--wave-position-x-sp)) var(--wave-offset-y-sp, top);
+  -webkit-mask-size: var(--wave-size-sp) auto;
+  mask-image: url("../img/common/deco-wave.png");
+  mask-repeat: no-repeat;
+  mask-position: calc(50% + var(--wave-position-x-sp)) var(--wave-offset-y-sp, top);
+  mask-size: var(--wave-size-sp) auto;
+  opacity: 0.4;
+  pointer-events: none;
+
+  @include mq("md") {
+    -webkit-mask-position: center var(--wave-offset-y-pc, top);
+    -webkit-mask-size: clamp(#{rem(1440)}, 100vw, #{rem(1920)}) auto;
+    mask-position: center var(--wave-offset-y-pc, top);
+    mask-size: clamp(#{rem(1440)}, 100vw, #{rem(1920)}) auto;
+  }
+}
+
+.section-wave > * {
+  position: relative;
+  z-index: 1;
+}
+
+

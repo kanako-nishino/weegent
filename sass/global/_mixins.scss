@@ -1,0 +1,164 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "variables" as *;
+@use "functions" as *;
+
+// ==============================
+// mixin定義
+// ==============================
+
+// --------------------------
+// 文字に対して、一括でfont-size、line-height、letter-spacing、font-weightを指定する
+// line-heightがpxの場合
+// ---------------------------
+@mixin font($font-size: null,
+  $line-height: null,
+  $letter-spacing: null,
+  $font-weight: null) {
+  @if $font-size {
+    font-size: calc($font-size / 16 * 1rem);
+  }
+
+  @if $line-height {
+    line-height: calc($line-height / $font-size);
+  }
+
+  @if $letter-spacing {
+    letter-spacing: calc($letter-spacing / 1000 * 1em);
+  }
+
+  @if $font-weight {
+    font-weight: $font-weight;
+  }
+}
+
+// --------------------------
+// 文字に対して、一括でfont-size、line-height、letter-spacing、font-weightを指定する
+// line-heightが％の場合
+// ---------------------------
+@mixin f($font-size: null,
+  $line-height: null,
+  $letter-spacing: null,
+  $font-weight: null) {
+  @if $font-size {
+    font-size: calc($font-size / 16 * 1rem);
+  }
+
+  @if $line-height {
+    line-height: calc($line-height / 100);
+  }
+
+  @if $letter-spacing {
+    letter-spacing: calc($letter-spacing / 1000 * 1em);
+  }
+
+  @if $font-weight {
+    font-weight: $font-weight;
+  }
+}
+
+// --------------------------------
+// 擬似要素の背景
+// --------------------------------
+@mixin bgimage($bg_width, $bg_height) {
+  content: "";
+  position: absolute;
+  width: rem($bg_width);
+  height: rem($bg_height);
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: rem($bg_width) rem($bg_height);
+}
+
+@mixin bgimage_double($bg_width, $bg_height) {
+  content: "";
+  position: absolute;
+  width: rem2($bg_width);
+  height: rem2($bg_height);
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: rem2($bg_width) rem2($bg_height);
+}
+
+// --------------------------------
+// 画像サイズ
+// --------------------------------
+@mixin image_size($width, $height) {
+  width: rem($width);
+  height: rem($height);
+  display: block;
+
+  img {
+    aspect-ratio: #{$width} / #{$height};
+    object-fit: cover;
+  }
+}
+
+@mixin image_double($width, $height) {
+  width: rem2($width);
+  height: rem2($height);
+  display: block;
+
+  img {
+    aspect-ratio: #{$width} / #{$height};
+    object-fit: cover;
+  }
+}
+
+// --------------------------------
+// 三角形
+// --------------------------------
+@mixin custom-border($left-right-size: 3, $top-size: 8, $top-color: white) {
+  border-left: #{$left-right-size}px solid transparent;
+  border-right: #{$left-right-size}px solid transparent;
+  border-top: #{$top-size}px solid $top-color;
+  bottom: -#{$top-size}px;
+}
+
+@mixin custom-border-sp($left-right-size: 3, $top-size: 8, $top-color: white) {
+  border-left: #{$left-right-size}px solid transparent;
+  border-right: #{$left-right-size}px solid transparent;
+  border-top: #{$top-size}px solid $top-color;
+  bottom: -#{$top-size}px;
+}
+
+// ==============================
+// メディアクエリー mixin（SPファースト）
+// ・デフォルト：min-width
+// ・キー / 数値 両対応
+// ・必要な時だけ max を使う
+// ==============================
+//
+// 使い方:
+// @include mq(md) {}          // min-width: 768px
+// @include mq(1000) {}        // min-width: 1000px
+// @include mq(lg, max) {}     // max-width: 1280px
+//
+@mixin mq($size: md, $type: min) {
+  $breakpoint: null;
+
+  // 数値が直接渡された場合
+  @if meta.type-of($size) == number {
+    $breakpoint: $size;
+  }
+  // キー指定の場合
+  @else {
+    $breakpoint: map.get($breakpoints, $size);
+
+    @if $breakpoint == null {
+      @error "Unknown breakpoint: #{$size}";
+    }
+  }
+
+  // min / max バリデーション
+  @if not list.index(min max, $type) {
+    @error "mq() second argument must be 'min' or 'max'.";
+  }
+
+  @media screen and (#{$type}-width: #{$breakpoint}px) {
+    @content;
+  }
+}

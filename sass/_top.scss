@@ -1,0 +1,10 @@
+@use "global" as *;
+
+// ==============================
+// TOPページ固有スタイル
+// ==============================
+
+.page-top .fv {
+  --fv-image-sp: url("../img/top/fv-top-sp.jpg");
+  --fv-image-pc: url("../img/top/fv-top.jpg");
+}

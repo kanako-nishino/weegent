@@ -1,0 +1,9 @@
+// ==============================
+// global モジュールの入口
+// 各パーツからは @use "global" as *; の1行で
+// 変数・関数・mixin がすべて使えるようになる
+// ==============================
+
+@forward "variables";
+@forward "functions";
+@forward "mixins";

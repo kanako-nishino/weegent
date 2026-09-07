@@ -1,0 +1,2428 @@
+@use "global" as *;
+
+// ==============================
+// 全ページ共通コンポーネント
+// ==============================
+
+.fv {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  color: $white;
+  background-color: $navy;
+}
+
+.fv__background {
+  position: relative;
+  grid-area: 1 / 1;
+  width: 100%;
+  aspect-ratio: var(--fv-image-aspect-sp, 390 / 361);
+  align-self: start;
+  background-image: var(--fv-image-sp, none);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+
+  @include mq("md") {
+    aspect-ratio: var(--fv-image-aspect-pc, 1440 / 618);
+    background-image: var(--fv-image-pc, var(--fv-image-sp, none));
+  }
+}
+
+.fv__background::before,
+.fv__background::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.fv__background::before {
+  inset: 0 0 auto;
+  height: rem(96);
+  background: linear-gradient(180deg, rgba(27, 34, 76, 0.7) 0%, rgba(27, 34, 76, 0) 100%);
+  mix-blend-mode: multiply;
+
+  @include mq("md") {
+    height: rem(155);
+  }
+}
+
+.fv__background::after {
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba($navy, 0) var(--fv-fade-start-sp, 58%),
+    $navy 100%
+  );
+
+  @include mq("md") {
+  display: none;
+  }
+}
+
+.fv__inner {
+  grid-area: 1 / 1;
+  position: relative;
+  z-index: 1;
+  padding: rem(192) rem(24) 0;
+
+  @include mq("md") {
+    padding-top: rem(249);
+    padding-right: rem(25);
+    padding-left: rem(25);
+  }
+}
+
+.fv__content {
+  @include mq("md") {
+    display: grid;
+    grid-template-columns: rem(671) rem(384);
+    grid-template-areas:
+      "title title"
+      "lead lead"
+      "actions achievement";
+    justify-content: space-between;
+  }
+}
+
+.fv__title {
+  max-width: rem(310);
+  font-family: $serif;
+  text-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+  @include font(36, null, 60, $medium);
+
+  @include mq("md") {
+    grid-area: title;
+    max-width: none;
+    @include font(56, null, 60, $medium);
+  }
+}
+
+.fv__lead {
+  margin-top: rem(24);
+  text-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+  @include font(14, 25.2, 40, $medium);
+
+  @include mq("md") {
+    grid-area: lead;
+    margin-top: rem(20);
+    @include font(20, 36, 40, $medium);
+  }
+}
+
+.fv__achievement {
+  margin-top: rem(12);
+
+  @include mq("md") {
+    grid-area: achievement;
+    align-self: end;
+    margin-top: rem(40);
+  }
+}
+
+.achievement-card {
+  min-height: rem(69);
+  padding: rem(8) rem(16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(16);
+  color: $navy;
+border-radius: rem(2);
+background: rgba(255, 255, 255, 0.70);
+backdrop-filter: blur(12px);
+
+  @include mq("md") {
+    min-height: rem(72);
+    padding: rem(16) rem(24);
+    gap: rem(24);
+    margin-top: 0;
+  }
+}
+
+.achievement-card__rate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $serif;
+  margin-right: rem(8);
+
+  @include mq('md'){
+    margin-right: rem(16);
+  }
+}
+
+.achievement-card__label {
+  width: rem(89);
+  padding: rem(4) rem(5) rem(5);
+  color: $white;
+  background-color: $navy;
+  text-align: center;
+  text-indent: 0.5em;
+  @include font(12, 12, 500, $bold);
+  font-family: $sans;
+  border-radius: rem(2);
+
+  @include mq("md") {
+    width: rem(132);
+    text-indent: 0.18em;
+    @include font(14, 14, 500, $bold);
+    padding-top: rem(4);
+    padding-bottom: rem(6);
+  }
+}
+
+.achievement-card__rate strong {
+  @include font(32, 32, 60, $medium);
+
+  @include mq("md") {
+    @include font(48, 48, 60, $medium);
+  }
+}
+
+.achievement-card__rate small {
+  @include font(18, 18, 60, $bold);
+
+  @include mq('md'){
+    @include font(34,34);
+  }
+}
+
+.achievement-card__rate span {
+  margin-left: rem(4);
+  font-family: $sans;
+  @include font(12, 12, 200, $bold);
+
+  @include mq('md'){
+    margin-left: rem(7);
+    @include font(14,14);
+  }
+}
+
+.achievement-card__badge {
+  width: auto;
+  height: rem(52);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include mq("md") {
+  height: rem(72);
+  }
+}
+
+.achievement-card__badge img {
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.fv__actions {
+  margin-top: rem(32);
+
+  @include mq("md") {
+    grid-area: actions;
+    margin-top: rem(40);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: rem(16);
+  }
+}
+
+.fv__action + .fv__action {
+  margin-top: rem(16);
+
+  @include mq("md") {
+    margin-top: 0;
+  }
+}
+
+.fv__action-label {
+  text-align: center;
+  @include font(14, 14, null, $bold);
+}
+
+.fv__action .c-button {
+  margin-top: rem(9);
+  @include font(16, 16, null, $bold);
+
+  @include mq("md") {
+    @include font(18, 18, null, $bold);
+  }
+}
+
+.client-logos {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  background-color: $white;
+  margin-top: rem(48);
+
+  @include mq('md'){
+    margin-top: rem(28);
+    margin-bottom: rem(28);
+  }
+}
+
+.client-logos__row {
+  width: 100%;
+  overflow: hidden;
+}
+
+.client-logos__track {
+  width: max-content;
+  display: flex;
+  will-change: transform;
+}
+
+.client-logos__row--left .client-logos__track {
+  animation: logo-marquee-left 32s linear infinite;
+
+  @include mq("md") {
+    animation-duration: 38s;
+  }
+}
+
+.client-logos__row--right .client-logos__track {
+  animation: logo-marquee-right 32s linear infinite;
+
+  @include mq("md") {
+    animation-duration: 38s;
+  }
+}
+
+.client-logos__list {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.client-logos__item {
+  width: rem(112);
+  height: rem(56);
+  border-radius: rem(1.4);
+  padding: rem(14) rem(6);
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-right: rem(2.8) solid $navy;
+
+  @include mq("md") {
+    width: calc(100vw / 9);
+    height: rem(80);
+    padding: rem(12) rem(20);
+    border-width: rem(4);
+  }
+}
+
+.client-logos__row--right .client-logos__item {
+  border-top: rem(2.8) solid $navy;
+
+  @include mq('md'){
+    border-width: rem(4);
+  }
+}
+
+@keyframes logo-marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes logo-marquee-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.client-logos__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .client-logos__track {
+    animation-play-state: paused;
+  }
+}
+
+// --------------------------------
+// セクション見出し
+// --------------------------------
+.section-head {
+  color: $beige;
+}
+
+.section-head__title {
+  font-family: $serif;
+  @include font(28, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(48, null, 60, $medium);
+  }
+}
+
+.section-head__description {
+  margin-top: rem(12);
+  @include font(14, 25.2, 40, $medium);
+
+  @include mq("md") {
+    margin-top: rem(16);
+    @include font(18, 32.4, 40, $regular);
+  }
+}
+
+// --------------------------------
+// 見出し・一覧・CTAの共通レイアウト
+// --------------------------------
+.section-layout {
+  @include mq("md") {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "head button"
+      "list list";
+    column-gap: rem(40);
+  }
+}
+
+.section-layout__head {
+  @include mq("md") {
+    grid-area: head;
+  }
+}
+
+.section-layout__body {
+  @include mq("md") {
+    grid-area: list;
+  }
+}
+
+.section-layout__button {
+  min-height: rem(48);
+  margin-top: rem(32);
+
+  @include mq("md") {
+    grid-area: button;
+    min-height: rem(64);
+    margin-top: 0;
+    align-self: end;
+  }
+}
+
+// --------------------------------
+// 導入事例セクション
+// --------------------------------
+.case-section {
+  color: $beige;
+  --wave-offset-y-sp: #{rem(-90)};
+
+  @include mq('md'){
+    --wave-offset-y-pc: #{rem(-270)};
+  }
+}
+
+.case-section__button{
+  @include mq('md'){
+    width: rem(239);
+  }
+}
+
+.case-list {
+  margin-top: rem(40);
+  display: grid;
+  gap: rem(48);
+
+  @include mq("md") {
+    margin-top: rem(56);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: rem(48);
+    row-gap: 0;
+  }
+}
+
+.case-list__item {
+  @include mq("md") {
+    display: grid;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
+  }
+}
+
+.case-card {
+  @include mq("md") {
+    display: grid;
+    grid-row: 1 / -1;
+    grid-template-rows: subgrid;
+  }
+}
+
+.case-card__link {
+  display: block;
+  color: $beige;
+
+  @include mq("md") {
+    display: grid;
+    grid-row: 1 / -1;
+    grid-template-rows: subgrid;
+  }
+}
+
+.case-card__image {
+  overflow: hidden;
+  aspect-ratio: 341 / 256;
+  border-radius: rem(4);
+
+  @include mq('md'){
+    aspect-ratio: 368 / 276;
+  }
+}
+
+.case-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.case-card__title {
+  margin-top: rem(12);
+  font-family: $serif;
+  @include font(20, null, 60, $medium);
+
+  @include mq("md") {
+    margin-top: rem(16);
+    @include font(22, null, 60, $medium);
+  }
+}
+
+.case-card__information {
+  margin-top: rem(12);
+  @include font(12, 12, null, $medium);
+
+  @include mq("md") {
+    margin-top: rem(16);
+    @include font(14, 14, null, $medium);
+  }
+}
+
+.case-card__information-row {
+  display: grid;
+  grid-template-columns: rem(52) 1fr;
+  gap: rem(20);
+
+  @include mq("md") {
+    grid-template-columns: rem(62) 1fr;
+    gap: rem(10);
+  }
+}
+
+.case-card__information-row + .case-card__information-row{
+  margin-top: rem(8);
+}
+
+.case-card__information-row dt {
+  opacity: 0.6;
+  font-weight: $bold;
+  
+  @include mq('md'){
+    font-size: rem(12);
+  }
+}
+
+.case-card__company {
+  margin-top: rem(12);
+  padding-top: rem(12);
+  display: flex;
+  align-items: center;
+  border-top: rem(1) solid rgba($beige, 0.1);
+
+  @include mq("md") {
+    margin-top: rem(16);
+    padding-top: rem(16);
+  }
+}
+
+.case-card__company-logo {
+  width: rem(66);
+  height: rem(32);
+  padding: rem(6) rem(8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $white;
+  border-radius: rem(2);
+
+  @include mq("md") {
+    width: rem(100);
+    height: rem(48);
+    padding: rem(7) rem(20);
+  }
+}
+
+.case-card__company-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.case-card__company-name {
+  margin-left: rem(8);
+  @include font(14, 25.2, null, $medium);
+
+  @include mq("md") {
+    margin-left: rem(16);
+    @include font(16, 28.8, null, $medium);
+  }
+}
+
+.case-card__icon {
+  width: rem(16);
+  height: rem(16);
+  margin-left: auto;
+}
+
+// --------------------------------
+// 動画セクション
+// --------------------------------
+.video-section {
+  --wave-offset-y-sp: #{rem(-90)};
+  color: $beige;
+
+  @include mq("md") {
+    --wave-offset-y-pc: #{rem(-150)};
+  }
+}
+
+.video-section__button{
+  @include mq('md'){
+    width: rem(345);
+  }
+}
+
+.video-list {
+  margin-top: rem(40);
+  display: grid;
+  gap: rem(24);
+
+  @include mq("md") {
+    margin-top: rem(56);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: rem(48);
+  }
+}
+
+.video-card__link {
+  display: block;
+  color: $beige;
+}
+
+.video-card__thumbnail {
+  position: relative;
+  padding: rem(8);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #5F6077;
+  border-radius: rem(4);
+
+  @include mq('md'){
+    padding: rem(12);
+  }
+}
+
+.video-card__thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: rem(2);
+}
+
+.video-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: rem(40);
+  height: rem(40);
+  border-radius: 50%;
+  background-color: $white;
+  transform: translate(-50%, -50%);
+}
+
+.video-card__play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 53%;
+  border-top: rem(6) solid transparent;
+  border-bottom: rem(6) solid transparent;
+  border-left: rem(10) solid #8b8b8b;
+  transform: translate(-50%, -50%);
+}
+
+.video-card__title {
+  margin-top: rem(12);
+  font-family: $serif;
+  @include font(20, null, 60, $medium);
+
+  @include mq("md") {
+    margin-top: rem(18);
+    @include font(22, null, 60, $medium);
+  }
+}
+
+.video-card__channel {
+  margin-top: rem(8);
+  @include font(12, 16.8, null, $medium);
+
+  @include mq("md") {
+    margin-top: rem(16);
+    @include font(14, 19.6, null, $medium);
+  }
+}
+
+// --------------------------------
+// アウトバウンド実績セクション
+// --------------------------------
+.outbound-section {
+  --wave-offset-y-sp: #{rem(-90)};
+  color: $white;
+
+  @include mq("md") {
+    --wave-offset-y-pc: #{rem(-150)};
+  }
+}
+
+.outbound-overview {
+  @include mq("md") {
+    display: grid;
+    grid-template-columns: minmax(0, rem(700)) rem(360);
+    grid-template-areas:
+      "title achievements"
+      "description achievements"
+      "button achievements";
+    column-gap: rem(100);
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+.outbound-overview__title{
+  letter-spacing: 0.01em;
+}
+
+.outbound-overview__title span {
+  color: $brown;
+}
+
+.outbound-overview__achievements {
+  margin-top: rem(33);
+
+  @include mq("md") {
+    grid-area: achievements;
+  }
+}
+
+.achievement-list__item {
+  min-height: rem(84);
+  padding: rem(12) rem(24) rem(20);
+  display: grid;
+  grid-template-columns: rem(32) minmax(0, 1fr);
+  align-items: center;
+  gap: rem(24);
+  border-bottom: 1px solid #5B5C71;
+
+  @include mq("md") {
+    min-height: rem(110);
+    padding: rem(20) rem(8) rem(32);
+    grid-template-columns: rem(40) minmax(0, 1fr);
+    gap: rem(24);
+  }
+}
+
+.achievement-list__item:first-child{
+  padding-top: 0;
+}
+
+.achievement-list__icon {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.achievement-list__content {
+  display: flex;
+  flex-direction: column;
+  color: $white;
+}
+
+.achievement-list__label {
+  margin-top: rem(10);
+  @include font(14, 14, null, $bold);
+
+  @include mq("md") {
+    margin-top: rem(12);
+    @include font(18, 18, null, $bold);
+  }
+}
+
+.achievement-list__value {
+  font-family: $serif;
+  @include font(26, 26, 60, $bold);
+
+  @include mq("md") {
+    @include font(24, 24, 60, $bold);
+  }
+}
+
+.achievement-list__content strong {
+  @include font(40, 40, 60, $medium);
+  margin-right: rem(2);
+
+  @include mq("md") {
+    @include font(48, 48, 60, $medium);
+  }
+}
+
+.outbound-overview__description {
+  margin-top: rem(12);
+  @include font(14, 25.2, 40, $medium);
+
+  @include mq("md") {
+    grid-area: description;
+    margin-top: rem(32);
+    @include font(18, 32.4, null, $medium);
+  }
+}
+
+.outbound-overview__description p + p {
+  margin-top: rem(8);
+
+  @include mq("md") {
+    margin-top: rem(16);
+  }
+}
+
+.outbound-overview__button {
+  min-height: rem(48);
+  margin-top: rem(12);
+
+  @include mq("md") {
+    grid-area: button;
+    width: rem(308);
+    min-height: rem(64);
+    margin-top: rem(24);
+  }
+}
+
+// --------------------------------
+// 市場検証プラン
+// --------------------------------
+.market-test {
+  margin-top: rem(40);
+  padding: rem(24);
+  color: $navy;
+  background-color: $beige;
+  border-radius: rem(4);
+
+  @include mq("md") {
+    width: min(#{rem(1320)}, calc(100vw - #{rem(80)}));
+    margin-top: rem(56);
+    margin-left: 50%;
+    padding: rem(60);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) rem(442);
+    align-items: center;
+    gap: rem(80);
+    transform: translateX(-50%);
+  }
+}
+
+.market-test__title {
+  font-family: $serif;
+  @include font(24, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(32, null, 60, $medium);
+  }
+}
+
+.market-test__emphasis {
+  display: inline-block;
+  color: $camel;
+  white-space: nowrap;
+}
+
+.market-test__emphasis-character {
+  position: relative;
+  display: inline-block;
+  letter-spacing: 0;
+}
+
+.market-test__emphasis-character + .market-test__emphasis-character {
+  margin-left: 0.06em;
+
+  @include mq("md") {
+    margin-left: 0.02em;
+  }
+}
+
+.market-test__emphasis-character::before {
+  content: "";
+  position: absolute;
+  top: rem(2);
+  left: 50%;
+  width: rem(3);
+  height: rem(3);
+  background-color: $camel;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+
+  @include mq("md") {
+    width: rem(4);
+    height: rem(4);
+  }
+}
+
+.market-test__description {
+  margin-top: rem(16);
+  @include font(14, 25.2, null, $medium);
+
+  @include mq("md") {
+    margin-top: rem(24);
+    @include font(18, 32.4, null, $medium);
+  }
+}
+
+.market-test__note {
+  margin-top: rem(12);
+  @include font(12, 21.6, null, $medium);
+
+  @include mq("md") {
+    margin-top: rem(16);
+  }
+}
+
+.market-test__plan {
+  margin-top: rem(16);
+
+  @include mq("md") {
+    margin-top: 0;
+  }
+}
+
+.test-call-plan {
+  padding: rem(16);
+  text-align: center;
+  background-color: $white;
+  border-radius: rem(2);
+
+  @include mq("md") {
+    padding: rem(24) rem(40);
+  }
+}
+
+.test-call-plan__title {
+  font-family: $serif;
+  @include font(26, null, 60, $bold);
+
+  @include mq('md'){
+    @include font(34,34);
+  }
+}
+
+.test-call-plan__title strong {
+  margin-right: rem(2);
+  @include font(40, 40, 60, $medium);
+
+  @include mq("md") {
+    @include font(48, 48, 60, $medium);
+  }
+}
+
+.test-call-plan__subtitle {
+  margin-top: rem(12);
+  @include font(16, 16, null, $bold);
+
+  @include mq("md") {
+    margin-top: rem(16);
+    @include font(18, 18, null, $bold);
+  }
+}
+
+.test-call-plan__button {
+  margin-top: rem(16);
+  text-align: left;
+  line-height: 1.2;
+
+  @include mq("md") {
+    min-height: rem(66);
+    margin-top: rem(16);
+    @include font(18, 18, null, $bold);
+  }
+}
+
+.test-call-plan__note {
+  margin-top: rem(8);
+  text-align: center;
+  @include font(12, 21.6, null, $medium);
+}
+
+// --------------------------------
+// 営業組織構築・資料導線セクション
+// --------------------------------
+.support-section {
+  margin-top: rem(96);
+  padding-bottom: rem(96);
+  color: $beige;
+
+  @include mq("md") {
+    margin-top: rem(120);
+padding-block: rem(110);
+  }
+}
+
+.resource-background {
+  position: relative;
+  overflow: hidden;
+}
+
+.resource-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/support/support-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  -webkit-mask-image: linear-gradient(180deg, #d9d9d9 74.04%, rgba(217, 217, 217, 0) 100%);
+  mask-image: linear-gradient(180deg, #d9d9d9 74.04%, rgba(217, 217, 217, 0) 100%);
+  transform: translateX(-50%);
+  pointer-events: none;
+
+  @include mq('md'){
+    background-image: url("../img/support/support-bg-pc.jpg");
+    mask-image: none;
+  }
+}
+
+.resource-background--secondary::before {
+  @include mq("md") {
+    background-image: url("../img/support/support-bg-02.jpg");
+  }
+}
+
+.resource-background > * {
+  position: relative;
+  z-index: 1;
+}
+
+.support-section__title {
+  font-family: $serif;
+  @include font(28, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(48, null, 60, $medium);
+  }
+}
+
+.support-section__eyebrow {
+  display: block;
+  @include font(20, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(32, null, 60, $medium);
+  }
+}
+
+.support-section__description {
+  margin-top: rem(12);
+  @include font(14, null, 40, $medium);
+
+  @include mq("md") {
+    margin-top: rem(32);
+    @include font(18, 32.4, null, $medium);
+  }
+}
+
+.resource-list {
+  margin-top: rem(40);
+  display: grid;
+  gap: rem(40);
+
+  @include mq("md") {
+    margin-top: rem(90);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: rem(24);
+  }
+}
+
+.resource-list--standalone {
+  margin-top: 0;
+}
+
+.resource-card {
+  position: relative;
+  min-height: rem(210);
+  padding:  rem(24);
+  display: flex;
+  align-items: flex-end;
+  background-color: $beige;
+  border-radius: rem(4);
+
+  @include mq("md") {
+    min-height: rem(248);
+    padding: rem(32);
+  }
+}
+
+.resource-card__preview {
+  position: absolute;
+  z-index: 2;
+  top: rem(-24);
+  left: 50%;
+  width: rem(187);
+  height: rem(125);
+  background-color: $white;
+  box-shadow: 1.563px 1.563px 6.25px 0 rgba(0, 0, 0, 0.04);
+  transform: translateX(-50%);
+  border-radius: rem(2);
+
+  @include mq("md") {
+    top: rem(-40);
+    width: rem(240);
+    height: rem(160);
+  }
+}
+
+.resource-card__preview--stacked {
+  box-shadow:
+    rem(1.563) rem(1.563) rem(6.25) rgba(0, 0, 0, 0.04),
+    rem(6) rem(6) 0 $white,
+    rem(6) rem(9) rem(6) rgba($navy, 0.08),
+    rem(12) rem(12) 0 $white,
+    rem(12) rem(15) rem(6) rgba($navy, 0.08);
+}
+
+.resource-card__preview img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: $white;
+  border-radius: rem(2);
+}
+
+.resource-card__button {
+  min-height: rem(57);
+  @include font(16, 16, null, $bold);
+
+  @include mq("md") {
+    min-height: rem(66);
+    @include font(18, 18, null, $bold);
+  }
+}
+
+// --------------------------------
+// 営業課題セクション
+// --------------------------------
+.problem-section {
+  --wave-offset-y-sp: #{rem(-90)};
+  padding-bottom: rem(96);
+  color: $beige;
+
+  @include mq("md") {
+    --wave-offset-y-pc: #{rem(-280)};
+    padding-bottom: rem(120);
+  }
+}
+
+.problem-section__title{
+  text-align: center;
+
+  @include mq('md'){
+    text-align: left;
+  }
+}
+
+.problem-list {
+  margin-top: rem(40);
+  display: grid;
+  gap: rem(32);
+
+  @include mq("md") {
+    margin-top: rem(56);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: rem(48);
+  }
+}
+
+.problem-card {
+  text-align: center;
+}
+
+.problem-card__illustration {
+  position: relative;
+  width: rem(280);
+  height: rem(228);
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  @include mq("md") {
+    width: rem(368);
+    height: rem(300);
+  }
+}
+
+
+.problem-card__illustration img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.problem-card__title {
+  margin-top: rem(16);
+  @include font(16, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(20, null, 60, $medium);
+  }
+}
+
+// --------------------------------
+// 支援内容セクション
+// --------------------------------
+.service-section {
+  --wave-offset-y-sp: #{rem(986)};
+
+  @include mq("md") {
+    --wave-offset-y-pc: #{rem(1040)};
+  }
+}
+
+.service-panel {
+  width: 100%;
+  max-width: 500px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: rem(64) rem(24);
+  color: $navy;
+  border-radius: rem(24);
+  background-color: $beige;
+
+  @include mq("md") {
+    width: 100%;
+    padding: rem(120);
+    border-radius: rem(80);
+    max-width: rem(1440);
+  }
+}
+
+.service-heading__eyebrow {
+  font-family: $serif;
+  @include font(20, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(32, null, 60, $medium);
+  }
+}
+
+.service-heading__title {
+  margin-top: rem(1);
+  font-family: $serif;
+
+  @include mq("md") {
+    margin-top: rem(4);
+    @include font(48, null, 60, $medium);
+  }
+}
+
+.primary-service-list {
+  margin-top: rem(40);
+  display: grid;
+  gap: rem(8);
+
+  @include mq("md") {
+    margin-top: rem(56);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: rem(16);
+  }
+}
+
+.primary-service-card {
+  min-height: rem(104);
+  padding: rem(24) rem(16);
+  display: flex;
+  align-items: center;
+  color: $navy;
+  background-color: $white;
+  border-radius: rem(4);
+
+  @include mq("md") {
+    min-height: rem(176);
+    height: 100%;
+    padding: rem(48) rem(40) rem(48) rem(32);
+  }
+}
+
+.primary-service-card__icon {
+  width: rem(56);
+  height: rem(56);
+  padding: rem(11);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: $beige;
+
+  @include mq("md") {
+    width: rem(80);
+    height: rem(80);
+    padding: rem(16);
+  }
+}
+
+.primary-service-card__icon img,
+.available-service-card__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.primary-service-card__body {
+  margin-left: rem(8);
+  display: flex;
+  flex-direction: column;
+
+  @include mq("md") {
+    margin-left: rem(16);
+  }
+}
+
+.primary-service-card__label {
+  @include font(13, 13, 60, $medium);
+
+  @include mq("md") {
+    @include font(18, 18, 60, $medium);
+  }
+}
+
+.primary-service-card__title {
+  margin-top: rem(4);
+  font-family: $serif;
+  @include font(18, null, 60, $medium);
+
+  @include mq("md") {
+    margin-top: rem(12);
+    @include font(24, null, 60, $medium);
+    margin-right: rem(10);
+  }
+}
+
+.primary-service-card__arrow {
+  width: rem(24);
+  height: rem(24);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.available-service-title {
+  margin-top: rem(48);
+  font-family: $serif;
+  @include font(20, null, 60, $medium);
+
+  @include mq("md") {
+    margin-top: rem(100);
+    @include font(28, null, 60, $medium);
+  }
+}
+
+.available-service-list {
+  margin-top: rem(24);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: rem(8);
+
+  @include mq("md") {
+    margin-top: rem(56);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: rem(16);
+  }
+}
+
+
+.available-service-card {
+  position: relative;
+  padding: rem(16) rem(2);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  background-color: $white;
+  border-radius: rem(4);
+  overflow: hidden;
+
+  @include mq("md") {
+    min-height: rem(172);
+    padding: rem(24) rem(12);
+  }
+}
+
+.available-service-card__icon {
+  width: rem(40);
+  height: rem(40);
+  padding: rem(10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: $beige;
+
+  @include mq("md") {
+    width: rem(64);
+    height: rem(64);
+    padding: rem(16);
+  }
+}
+
+.available-service-card__title {
+  margin-top: rem(8);
+  @include font(14, 16.8, 60, $medium);
+
+  @include mq("md") {
+    margin-top: rem(16);
+    @include font(18, 21.6, 60, $medium);
+  }
+}
+
+.available-service-card__plus {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: rem(16);
+  height: rem(16);
+  display: block;
+
+  @include mq("md") {
+    width: rem(24);
+    height: rem(24);
+  }
+}
+
+// --------------------------------
+// Weegentの強み
+// --------------------------------
+.strength-section {
+  --wave-offset-y-sp: #{rem(-90)};
+  color: $beige;
+
+  @include mq("md") {
+    --wave-offset-y-pc: #{rem(-270)};
+  }
+}
+
+.strength-section__title {
+  font-family: $serif;
+
+  span {
+    display: block;
+    @include font(20, null, 60, $medium);
+  }
+
+  @include mq("md") {
+    span {
+      @include font(32, null, 60, $medium);
+    }
+  }
+}
+
+.strength-list {
+  margin-top: rem(40);
+  display: grid;
+  gap: rem(32);
+
+  @include mq("md") {
+    margin-top: rem(56);
+    gap: rem(24);
+  }
+}
+
+.strength-card {
+  @include mq("md") {
+    min-height: rem(270);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) rem(480);
+    grid-template-areas: "content image";
+    gap: rem(80);
+    align-items: center;
+  }
+}
+
+.strength-card__image {
+  overflow: hidden;
+  border-radius: rem(4);
+  aspect-ratio: 4 / 3;
+
+  @include mq("md") {
+    grid-area: image;
+  }
+}
+
+.strength-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.strength-card__content {
+  margin-top: rem(12);
+
+  @include mq("md") {
+    grid-area: content;
+    margin-top: 0;
+  }
+}
+
+.strength-card__number {
+  color: $camel;
+  font-family: $serif;
+  @include font(12, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(16, null, 60, $medium);
+  }
+}
+
+.strength-card__title {
+  margin-top: rem(12);
+  font-family: $serif;
+  @include font(20, null, 60, $medium);
+
+  @include mq("md") {
+    margin-top: rem(32);
+    @include font(32, null, 60, $medium);
+  }
+}
+
+.strength-card__description {
+  margin-top: rem(16);
+  @include font(14, 25.2, 60, $medium);
+
+  @include mq("md") {
+    margin-top: rem(24);
+    @include font(18, 32.4, 60, $medium);
+  }
+}
+
+// --------------------------------
+// お役立ち資料
+// --------------------------------
+.document-section {
+  --wave-offset-y-sp: #{rem(-75)};
+  color: $beige;
+
+  @include mq("md") {
+    --wave-offset-y-pc: #{rem(-270)};
+  }
+}
+
+.document-section__inner {
+  display: grid;
+  grid-template-areas:
+    "heading"
+    "slider"
+    "pagination"
+    "more";
+
+  @include mq("md") {
+    grid-template-columns: 1fr rem(303);
+    grid-template-areas:
+      "heading more"
+      "slider slider";
+    align-items: center;
+  }
+}
+
+.document-heading {
+  grid-area: heading;
+}
+
+
+
+.document-slider {
+  grid-area: slider;
+  margin-top: rem(40);
+  margin-right: calc(50% - 50vw);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-behavior: smooth;
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include mq("md") {
+    margin-top: rem(58);
+    margin-right: 0;
+    overflow: visible;
+  }
+}
+
+.document-list {
+  display: flex;
+  gap: rem(24);
+
+  @include mq("md") {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: rem(48);
+  }
+}
+
+.document-list__item {
+  width: calc(100vw - #{rem(110)});
+  flex: 0 0 calc(100vw - #{rem(110)});
+  scroll-snap-align: start;
+
+  @include mq("md") {
+    width: auto;
+  }
+}
+
+.document-card__image {
+  padding: rem(16);
+  border-radius: rem(4);
+  background-color: rgba($white, 0.12);
+  box-shadow: 8px 8px 12px 0 rgba(0, 0, 0, 0.04);
+
+  @include mq("md") {
+    padding: rem(24);
+  }
+}
+
+.document-card__image img {
+  width: 100%;
+  aspect-ratio: 212 / 119;
+  border-radius: rem(2);
+  object-fit: cover;
+
+  @include mq('md'){
+    aspect-ratio: 155 / 87;
+  }
+}
+
+.document-card__category {
+  margin-top: rem(16);
+  @include font(13, 13, 60, $bold);
+
+  @include mq("md") {
+    margin-top: rem(16);
+    @include font(14, 14, 60, $bold);
+  }
+}
+
+.document-card__title {
+  margin-top: rem(12);
+  font-family: $serif;
+  @include font(20, null, 60, $medium);
+
+  @include mq("md") {
+    margin-top: rem(12);
+    @include font(22, null, 60, $medium);
+  }
+}
+
+.document-card__description {
+  margin-top: rem(7);
+  @include font(12, 19.2, 40, $medium);
+
+  @include mq("md") {
+    margin-top: rem(16);
+    @include font(13, 20.8, 40, $medium);
+  }
+}
+
+.document-card__points {
+  margin-top: rem(7);
+  display: grid;
+  gap: rem(4);
+  @include font(12, 21.6, null, $medium);
+  margin-left: rem(-5);
+
+  @include mq("md") {
+    gap: rem(4);
+    @include font(13, 23.4, null, $medium);
+  }
+}
+
+.document-card__points li {
+  position: relative;
+  padding-left: rem(16);
+}
+
+.document-card__points li::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+  color: $brown;
+  font-size: rem(16);
+  line-height: 1.45;
+}
+
+.document-card__button {
+  min-height: rem(40);
+  margin-top: rem(12);
+  padding: rem(8) rem(12);
+
+  @include mq("md") {
+    position: relative;
+    margin-top: rem(16);
+    min-height: rem(48);
+    justify-content: center;
+  padding: rem(16);
+  }
+}
+
+.document-card__button > img {
+  @include mq("md") {
+    position: absolute;
+    top: 50%;
+    right: rem(12);
+    transform: translateY(-50%);
+  }
+}
+
+.document-pagination {
+  grid-area: pagination;
+  margin-top: rem(45);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: rem(8);
+
+  @include mq("md") {
+    display: none;
+  }
+}
+
+.document-pagination__bullet {
+  height: rem(3);
+  border-radius: 1px;
+  padding: 0;
+  border: 0;
+  background-color: rgba($white, 0.32);
+}
+
+.document-pagination__bullet.is-active {
+  background-color: $beige;
+}
+
+.document-section__more {
+  grid-area: more;
+  min-height: rem(48);
+  margin-top: rem(32);
+
+  @include mq("md") {
+    margin-top: 0;
+  }
+}
+
+// --------------------------------
+// メンバー
+// --------------------------------
+.member-section {
+  --wave-offset-y-sp: #{rem(-90)};
+  color: $beige;
+
+  @include mq("md") {
+    --wave-offset-y-pc: #{rem(-270)};
+  }
+}
+
+.member-section__title {
+  padding-bottom: rem(40);
+  font-family: $serif;
+  border-bottom: rem(1) solid rgba($beige, 0.1);
+
+  @include mq("md") {
+    padding-bottom: rem(56);
+  }
+}
+
+.member-list__item {
+  padding-top: rem(24);
+
+  @include mq("md") {
+    padding-top: rem(40);
+  }
+}
+
+.member-list__item:last-child {
+  padding-bottom: rem(40);
+}
+
+.member-list__item + .member-list__item {
+  margin-top: rem(24);
+  border-bottom: rem(1) solid rgba($beige, 0.1);
+
+  @include mq("md") {
+    margin-top: rem(40);
+  }
+}
+
+.member-card {
+  display: grid;
+  grid-template-columns: rem(120) minmax(0, 1fr);
+  grid-template-areas:
+    "image identity"
+    "profile profile"
+    "link link";
+  column-gap: rem(24);
+
+  @include mq("md") {
+    grid-template-columns: rem(240) minmax(0, 1fr);
+    grid-template-areas: "image content";
+    column-gap: rem(40);
+    align-items: center;
+  }
+}
+
+.member-card__content {
+  display: contents;
+
+  @include mq("md") {
+    grid-area: content;
+    display: block;
+    margin-top: 0;
+  }
+}
+
+.member-card__image {
+  grid-area: image;
+  overflow: hidden;
+  border-radius: rem(2);
+  aspect-ratio: 1 / 1;
+}
+
+.member-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-card__identity {
+  grid-area: identity;
+  align-self: center;
+
+  @include mq("md") {
+    display: flex;
+    align-items: baseline;
+    gap: rem(24);
+    align-self: start;
+    margin-top: 0;
+  }
+}
+
+.member-card__name {
+  font-family: $serif;
+  white-space: nowrap;
+  @include font(24, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(32, null, 60, $medium);
+  }
+}
+
+.member-card__name-en {
+  margin-top: rem(8);
+  color: $camel;
+  font-family: $serif;
+  white-space: nowrap;
+  @include font(14, null, 60, $medium);
+
+  @include mq("md") {
+    margin-top: 0;
+    @include font(18, null, 60, $medium);
+  }
+}
+
+.member-card__profile {
+  grid-area: profile;
+  margin-top: rem(16);
+  @include font(12, 19.2, null, $medium);
+
+  @include mq("md") {
+    margin-top: rem(16);
+    @include font(16, 25.6, null, $medium);
+  }
+}
+
+.member-card__link {
+  grid-area: link;
+  width: fit-content;
+  margin-top: rem(16);
+  padding-bottom: rem(11);
+  display: flex;
+  align-items: center;
+  gap: rem(8);
+  color: $beige;
+  border-bottom: rem(1) solid $beige;
+  @include font(14, 14, null, $bold);
+
+  img {
+    width: rem(16);
+    height: rem(16);
+  }
+
+  @include mq("md") {
+    margin-top: rem(16);
+    padding-bottom: rem(11);
+    gap: rem(8);
+    @include font(16, 16, null, $bold);
+  }
+}
+
+// --------------------------------
+// 競合比較
+// --------------------------------
+.comparison-section {
+  --wave-offset-y-sp: #{rem(-90)};
+  padding-bottom: rem(68);
+  color: $white;
+
+  @include mq("md") {
+    --wave-offset-y-pc: #{rem(-270)};
+    padding-bottom: rem(120);
+  }
+}
+
+
+.comparison-table-scroll {
+  margin-top: rem(40);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba($beige, 0.45) transparent;
+
+  @include mq("md") {
+    margin-top: rem(56);
+    overflow: visible;
+  }
+}
+
+.comparison-table-scroll:focus-visible {
+  outline: rem(2) solid $beige;
+  outline-offset: rem(4);
+}
+
+.comparison-table {
+  width: rem(888);
+  table-layout: fixed;
+  border-spacing: 0;
+  border-collapse: separate;
+  color: $white;
+
+  caption {
+    position: absolute;
+    width: rem(1);
+    height: rem(1);
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @include mq("md") {
+    width: 100%;
+  }
+}
+
+.comparison-table__heading-column {
+  width: rem(108);
+
+  @include mq("md") {
+    width: rem(125);
+  }
+}
+
+.comparison-table__service-column {
+  width: rem(220);
+
+  @include mq("md") {
+    width: rem(252);
+  }
+}
+
+.comparison-table__service-column--featured {
+  @include mq("md") {
+    width: rem(320);
+  }
+}
+
+.comparison-table th,
+.comparison-table td {
+  border-right: rem(1.5) solid #3c3e5a;
+  border-bottom: rem(1.5) solid #3c3e5a;
+}
+
+.comparison-table thead th {
+  border-top: rem(1.5) solid #3c3e5a;
+  border-right: 0;
+}
+
+.comparison-table thead th + th {
+  border-left: rem(1.5) solid #4f516a;
+}
+
+.comparison-table thead th:last-child {
+  border-right: rem(1.5) solid #4f516a;
+}
+
+.comparison-table tr > :first-child {
+  border-left: rem(1.5) solid #3c3e5a;
+}
+
+.comparison-table th {
+  padding: rem(8);
+}
+
+.comparison-table td {
+  padding: rem(16);
+  vertical-align: baseline;
+
+  @include mq('md'){
+    padding: rem(32);
+  }
+}
+
+.comparison-table thead th {
+  height: rem(48);
+  text-align: center;
+  vertical-align: middle;
+  background-color: #303250;
+  @include font(13, 13, null, $medium);
+
+  @include mq("md") {
+    height: rem(69);
+    @include font(16, 16, null, $medium);
+  }
+}
+
+.comparison-table__logo {
+  display: block;
+  width: rem(82);
+  height: auto;
+  margin-inline: auto;
+
+  @include mq('md'){
+    width: rem(98);
+  }
+}
+
+
+.comparison-table thead th:first-child {
+  position: sticky;
+  z-index: 3;
+  left: 0;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  background-color: $navy;
+}
+
+.comparison-table tbody th {
+  position: sticky;
+  z-index: 2;
+  left: 0;
+  padding-right: rem(8);
+  padding-left: rem(8);
+  text-align: center;
+  background-color: $navy;
+  @include font(13, 13, null, $medium);
+
+  @include mq("md") {
+    position: static;
+    @include font(16, 16, null, $medium);
+  }
+}
+
+.comparison-table tbody td {
+  height: rem(144);
+  @include font(11, 15.4, null, $medium);
+
+  @include mq("md") {
+    height: rem(172);
+    @include font(14, 19.6, null, $medium);
+  }
+}
+
+.comparison-table .comparison-table__featured {
+  color: $navy;
+  background-color: $beige;
+}
+
+.comparison-table tbody .comparison-table__featured {
+  border-color: #dcdbd9;
+}
+
+.comparison-table thead .comparison-table__featured {
+  background-color: #a9701b;
+}
+
+.comparison-table__mark {
+  display: block;
+  margin-bottom: rem(10);
+  text-align: center;
+}
+
+.comparison-table__mark-image {
+  display: block;
+  width: auto;
+  height: rem(20);
+  margin-inline: auto;
+
+  @include mq('md'){
+    height: rem(24);
+  }
+}
+
+// --------------------------------
+// 資料・お問い合わせ導線
+// --------------------------------
+.resource-section {
+  padding-top: rem(80);
+  padding-bottom: rem(48);
+  background: #616885;
+
+  @include mq("md") {
+    padding-top: rem(110);
+    padding-bottom: rem(64);
+  }
+}
+
+// --------------------------------
+// ご利用の流れ
+// --------------------------------
+.flow-section {
+  --wave-offset-y-sp: #{rem(-75)};
+  color: $beige;
+
+  @include mq("md") {
+    --wave-offset-y-pc: #{rem(-260)};
+  }
+}
+
+.flow-list {
+  margin-top: rem(40);
+  display: grid;
+  gap: rem(26);
+
+  @include mq("md") {
+    margin-top: rem(56);
+  }
+}
+
+.flow-list__item {
+  position: relative;
+}
+
+.flow-list__item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  bottom: rem(-18);
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-top: rem(10) solid #a9701b;
+  border-right: rem(7) solid transparent;
+  border-left: rem(7) solid transparent;
+  transform: translateX(-50%);
+
+  @include mq('md'){
+    border-right: rem(8) solid transparent;
+    border-left: rem(8) solid transparent;
+  }
+
+}
+
+.flow-card {
+  min-height: rem(184);
+  padding: rem(24);
+  color: $navy;
+  border-radius: rem(4);
+  background-color: $beige;
+
+  @include mq("md") {
+    min-height: rem(132);
+    padding: rem(32);
+    display: grid;
+    grid-template-columns: rem(208) minmax(0, 1fr);
+    align-items: center;
+    gap: rem(28);
+  }
+}
+
+.flow-card__header {
+  display: flex;
+  align-items: center;
+  gap: rem(12);
+
+  @include mq("md") {
+    gap: rem(16);
+  }
+}
+
+.flow-card__number {
+  min-width: rem(32);
+  min-height: rem(32);
+  padding: rem(4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  font-family: $serif;
+  background-color: $navy;
+  border-radius: rem(2);
+  @include font(14, 14, 60, $medium);
+
+  @include mq("md") {
+    min-width: rem(40);
+    min-height: rem(40);
+    @include font(18, 18, 60, $medium);
+  }
+}
+
+.flow-card__title {
+  font-family: $serif;
+  @include font(20, 20, 60, $medium);
+
+  @include mq("md") {
+    @include font(24, 24, 60, $medium);
+  }
+}
+
+.flow-card__description {
+  margin-top: rem(16);
+  @include font(14, 22.4, null, $medium);
+
+  @include mq("md") {
+    margin-top: 0;
+    @include font(16, 25.6, null, $medium);
+  }
+}
+
+// --------------------------------
+// よくある質問
+// --------------------------------
+.faq-section {
+  --wave-offset-y-sp: #{rem(-83)};
+  padding-bottom: rem(96);
+  color: $white;
+
+  @include mq("md") {
+    padding-bottom: rem(120);
+
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.faq-section__inner {
+  display: grid;
+  grid-template-areas:
+    "heading"
+    "list"
+    "more";
+
+  @include mq("md") {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: "heading list";
+    gap: rem(97);
+    align-items: start;
+  }
+}
+
+.faq-section__heading {
+  grid-area: heading;
+  display: contents;
+
+  @include mq("md") {
+    grid-column: 1;
+    display: block;
+  }
+}
+
+.faq-section__title {
+  grid-area: heading;
+
+
+  @include mq("md") {
+    grid-area: auto;
+    margin-top: rem(8);
+  }
+}
+
+.faq-section__more {
+  grid-area: more;
+  min-height: rem(48);
+  margin-top: rem(40);
+
+  @include mq("md") {
+    grid-area: auto;
+    width: rem(303);
+    min-height: rem(64);
+    margin-top: rem(64);
+  }
+}
+
+.faq-list {
+  grid-area: list;
+  margin-top: rem(40);
+  border-top: rem(1) solid $beige;
+
+  @include mq("md") {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 0;
+  }
+}
+
+.faq-list__item {
+  border-bottom: rem(1) solid $beige;
+}
+
+.faq-item__trigger {
+  width: 100%;
+  min-height: rem(76);
+  padding: rem(16) rem(8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem(16);
+  color: $beige;
+  text-align: left;
+
+  @include mq("md") {
+    padding: rem(24) rem(36) rem(24) rem(16);
+  }
+}
+
+.faq-item__question {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: rem(8);
+  align-items: baseline;
+  font-family: $serif;
+  @include font(16, 22.4, 60, $medium);
+
+  @include mq("md") {
+    gap: rem(16);
+    @include font(20, 28, 60, $medium);
+  }
+}
+
+.faq-item__initial {
+  font-family: $serif;
+  @include font(16, 22.4, 60, $medium);
+  @include mq("md") {
+    @include font(28, 28, 60, $medium);
+  }
+}
+
+.faq-item__icon {
+  position: relative;
+  width: rem(16);
+  height: rem(16);
+  flex-shrink: 0;
+  border-radius: rem(2);
+  background-color: $beige;
+}
+
+.faq-item__icon::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-top: rem(4) solid $navy;
+  border-right: rem(3) solid transparent;
+  border-left: rem(3) solid transparent;
+  transform: translate(-50%, -35%);
+
+  @include mq("md") {
+    border-top-width: rem(4);
+    border-right-width: rem(3);
+    border-left-width: rem(3);
+  }
+}
+
+.faq-item.is-open .faq-item__icon::before {
+  border-top: 0;
+  border-right: rem(3) solid transparent;
+  border-bottom: rem(4) solid $navy;
+  border-left: rem(3) solid transparent;
+  transform: translate(-50%, -65%);
+
+  @include mq("md") {
+    border-right-width: rem(3);
+    border-bottom-width: rem(4);
+    border-left-width: rem(3);
+  }
+}
+
+.faq-item__answer {
+  padding: rem(16) rem(8);
+  border-top: rem(1) solid rgba($beige, 0.1);
+
+  @include mq("md") {
+    padding: rem(24) rem(36) rem(24) rem(16);
+  }
+}
+
+.faq-item__answer p {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: rem(8);
+  align-items: start;
+  @include font(14, 25.2, null, $medium);
+
+  @include mq("md") {
+    gap: rem(16);
+    @include font(16, 28.8, null, $medium);
+  }
+}
+
+.faq-item__answer .faq-item__initial {
+  color: $brown;
+  @include font(20, 20, 60, $medium);
+
+  @include mq('md'){
+    @include font(28,28);
+  }
+}
