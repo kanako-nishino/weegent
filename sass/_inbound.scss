@@ -1,0 +1,10 @@
+@use "global" as *;
+
+// ==============================
+// インバウンド対応ページ固有スタイル
+// ==============================
+
+.fv--inbound {
+  --fv-image-sp: url("../img/sub-inbound/fv-inbound-sp.jpg");
+  --fv-image-pc: url("../img/sub-inbound/fv-inbound.jpg");
+}

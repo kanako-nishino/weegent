@@ -1,0 +1,10 @@
+@use "global" as *;
+
+// ==============================
+// テストマーケティングページ固有スタイル
+// ==============================
+
+.fv--test-marketing {
+  --fv-image-sp: url("../img/sub-test-marketing/fv-test-marketing-sp.jpg");
+  --fv-image-pc: url("../img/sub-test-marketing/fv-test-marketing.jpg");
+}

@@ -1,0 +1,10 @@
+@use "global" as *;
+
+// ==============================
+// アウトバウンド営業（SMB・SME開拓）ページ固有スタイル
+// ==============================
+
+.fv--out-bound-smb {
+  --fv-image-sp: url("../img/sub-out-bound-smb/fv-out-bound-smb-sp.jpg");
+  --fv-image-pc: url("../img/sub-out-bound-smb/fv-out-bound-smb.jpg");
+}

@@ -1,0 +1,10 @@
+@use "global" as *;
+
+// ==============================
+// アウトバウンド営業（ABM・エンプラ開拓）ページ固有スタイル
+// ==============================
+
+.fv--out-bound-enterprise {
+  --fv-image-sp: url("../img/sub-out-bound-enterprise/fv-out-bound-enterprise-sp.jpg");
+  --fv-image-pc: url("../img/sub-out-bound-enterprise/fv-out-bound-enterprise.jpg");
+}

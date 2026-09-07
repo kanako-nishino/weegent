@@ -3856,4 +3856,24 @@ html.is-fixed {
   --fv-image-pc: url("../img/top/fv-top.jpg");
 }
 
+.fv--out-bound-enterprise {
+  --fv-image-sp: url("../img/sub-out-bound-enterprise/fv-out-bound-enterprise-sp.jpg");
+  --fv-image-pc: url("../img/sub-out-bound-enterprise/fv-out-bound-enterprise.jpg");
+}
+
+.fv--inbound {
+  --fv-image-sp: url("../img/sub-inbound/fv-inbound-sp.jpg");
+  --fv-image-pc: url("../img/sub-inbound/fv-inbound.jpg");
+}
+
+.fv--test-marketing {
+  --fv-image-sp: url("../img/sub-test-marketing/fv-test-marketing-sp.jpg");
+  --fv-image-pc: url("../img/sub-test-marketing/fv-test-marketing.jpg");
+}
+
+.fv--out-bound-smb {
+  --fv-image-sp: url("../img/sub-out-bound-smb/fv-out-bound-smb-sp.jpg");
+  --fv-image-pc: url("../img/sub-out-bound-smb/fv-out-bound-smb.jpg");
+}
+
 /*# sourceMappingURL=style.css.map */
