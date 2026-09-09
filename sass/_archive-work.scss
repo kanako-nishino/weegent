@@ -1,0 +1,107 @@
+@use "global" as *;
+
+// ==============================
+// 事例一覧ページ固有スタイル
+// ==============================
+
+// --------------------------------
+// 事例一覧ページ ヒーロー
+// --------------------------------
+.work-hero {
+  color: $beige;
+}
+
+// パンくずは画面幅に関わらずロゴと同じ「左から40px」の位置に揃えたいため、
+// inner--content（最大幅で中央寄せされる）の外に出し、
+// header__inner と同じ考え方（幅100% + 左右パディング）で配置する。
+.work-hero__breadcrumb-area {
+  width: 100%;
+  padding: rem(112) rem(24) 0;
+
+  @include mq("md") {
+    padding: rem(160) rem(40) 0;
+  }
+}
+
+.work-hero__inner {
+  padding-top: rem(24);
+
+  @include mq("md") {
+    padding-top: rem(32);
+  }
+}
+
+.work-hero__title {
+  font-family: $serif;
+  @include font(36, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(56, null, 60, $medium);
+  }
+}
+
+.work-hero__actions {
+  margin-top: rem(32);
+  padding: rem(24) rem(16);
+  display: grid;
+  gap: rem(12);
+  border-radius: rem(4);
+  background-color: rgba($beige, 0.1);
+
+  @include mq("md") {
+    margin-top: rem(40);
+    grid-template-columns: repeat(2, minmax(0, rem(359)));
+    justify-content: center;
+    gap: rem(16);
+    padding: rem(32) rem(40);
+  }
+}
+
+.work-hero__action {
+  width: 100%;
+}
+
+// --------------------------------
+// 事例一覧セクション
+// トップページの導入事例セクション（.case-list / .case-card）をそのまま流用
+// --------------------------------
+.work-archive-section {
+  padding-top: rem(64);
+  padding-bottom: rem(96);
+  color: $beige;
+  background-color: $navy;
+
+  @include mq("md") {
+    padding-top: rem(80);
+    padding-bottom: rem(120);
+  }
+}
+
+.work-archive-list {
+  margin-top: 0;
+}
+
+// トップページ側は1行（3件）分の表示しか想定していないため、
+// 共通コンポーネント側では md 以降 row-gap: 0（カード内の4行がsubgridで
+// 同じ行トラックを共有するため、row-gapを入れるとカード内の余白まで
+// 広がってしまう）。このページは4行×3列で行が複数になるので、
+// カード内の余白（.case-card__title 等のmargin）はそのままに、
+// 2行目以降の先頭カードにだけ margin-top を足して行間を空ける。
+@include mq("md") {
+  .work-archive-list .case-list__item:nth-child(n + 4) {
+    margin-top: rem(64);
+  }
+}
+
+// --------------------------------
+// ページネーション（このページでの余白）
+// .pagination 自体には margin を持たせず、ページごとに異なりうる
+// 外側の余白だけをこのクラスで指定する。
+// --------------------------------
+.work-archive-pagination {
+  margin-top: rem(48);
+
+  @include mq("md") {
+    margin-top: rem(80);
+  }
+}

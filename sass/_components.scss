@@ -2426,3 +2426,88 @@ padding-block: rem(110);
     @include font(28,28);
   }
 }
+
+// --------------------------------
+// パンくずリスト
+// --------------------------------
+.breadcrumb {
+  color: $beige;
+}
+
+.breadcrumb__list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  @include font(12, 12, null, $medium);
+
+  @include mq("md") {
+    @include font(14, 14, null, $medium);
+  }
+}
+
+.breadcrumb__item {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb__item + .breadcrumb__item::before {
+  content: "/";
+  margin: 0 rem(8);
+  opacity: 0.6;
+}
+
+.breadcrumb__item a {
+  color: $beige;
+  text-decoration: underline;
+  text-underline-offset: rem(3);
+}
+
+// --------------------------------
+// ページネーション
+// --------------------------------
+// margin-topなど外側の余白はページごとに異なるため、
+// .pagination自体には持たせず、各ページ側で当てる専用クラス
+// （例: .case-archive-pagination）に記述する。
+
+.pagination__list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: rem(8);
+}
+
+.pagination__link {
+  width: rem(40);
+  height: rem(40);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $beige;
+  border: rem(1) solid rgba($beige, 0.4);
+  border-radius: rem(4);
+  @include font(14, 14, null, $medium);
+
+  @include mq("md") {
+    width: rem(48);
+    height: rem(48);
+    @include font(14, 14, null, $medium);
+  }
+}
+
+.pagination__link.is-current {
+  color: $navy;
+  border-color: $beige;
+  background-color: $beige;
+}
+
+.pagination__link--prev img,
+.pagination__link--next img {
+  width: rem(5);
+  height: rem(8);
+}
+
+.pagination__link.is-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
