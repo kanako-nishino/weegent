@@ -226,4 +226,20 @@ jQuery(function ($) { // この中であればWordPressでも「$」が使用可
     $answer.prop("hidden", isOpen);
     $faqItem.toggleClass("is-open", !isOpen);
   });
+
+  // 事例詳細ページ：目次の開閉
+  $(".js-toc-toggle").on("click", function () {
+    var $trigger = $(this);
+    var listId = $trigger.attr("aria-controls");
+    var $list = listId ? $("#" + listId) : $();
+    var $toc = $trigger.closest(".js-toc");
+
+    if (!$list.length || !$toc.length) return;
+
+    var isOpen = $trigger.attr("aria-expanded") === "true";
+    $trigger.attr("aria-expanded", String(!isOpen));
+    $list.prop("hidden", isOpen);
+    $trigger.find("span").text(isOpen ? "開く" : "閉じる");
+    $toc.toggleClass("is-open", !isOpen);
+  });
 });

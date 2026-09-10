@@ -1,0 +1,125 @@
+@use "global" as *;
+
+// ==============================
+// ホバーアニメーション
+// トランジションは全て 0.3s に統一する
+// ==============================
+
+// --------------------------------
+// テキスト関係・アイコン単体リンク → opacity 0.6
+// --------------------------------
+.footer-nav__link,
+.member-card__link,
+.header__tel,
+.drawer-contact__tel,
+.footer-contact__tel,
+.drawer-nav__link,
+.breadcrumb__item a,
+.header__logo,
+.footer__logo,
+.drawer__logo,
+.header__hamburger,
+.drawer__close,
+.footer-social__item a,
+.faq-item__trigger,
+.primary-service-card {
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+// --------------------------------
+// グロナビ → 下線が左から右に伸び、離すと戻って消える
+// --------------------------------
+.header__nav a {
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: rem(-6);
+    left: 0;
+    width: 100%;
+    height: rem(1);
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+// --------------------------------
+// サムネイルがあるカード → opacity 0.6 + サムネイル1.1倍
+// （画像の親要素は既に overflow: hidden のため、はみ出しはクリップされる）
+// --------------------------------
+.case-card__image img,
+.video-card__thumbnail img {
+  transition: transform 0.3s;
+}
+
+.case-card__link,
+.video-card__link {
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.case-card__link:hover .case-card__image img,
+.video-card__link:hover .video-card__thumbnail img {
+  transform: scale(1.1);
+}
+
+// --------------------------------
+// ボタン → 背景色を入れ替え
+// 枠線は元の背景色と同じ色を常時つけておく（通常時は見た目が変わらず、
+// ホバーで背景色が変わった時だけ縁として見えるようにし、
+// 「ホバーするとボタンに見えなくなる」のを防ぐ）
+// --------------------------------
+.c-button,
+.header__button {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+// ベージュ（デフォルト）↔ 白
+.c-button:not(.c-button--white):not(.c-button--brown) {
+  border: rem(1) solid $beige;
+
+  &:hover {
+    background-color: $white;
+  }
+}
+
+// 白 ↔ ベージュ
+.c-button--white,
+.header__button--white {
+  border: rem(1) solid $white;
+
+  &:hover {
+    background-color: $beige;
+  }
+}
+
+// 茶 ↔ ベージュ（文字色も読みやすいように反転させる）
+.c-button--brown,
+.header__button--brown {
+  border: rem(1) solid $brown;
+
+  &:hover {
+    color: $navy;
+    background-color: $beige;
+  }
+}
+
+.c-button--brown > img {
+  transition: filter 0.3s;
+}
+
+.c-button--brown:hover > img {
+  filter: invert(1);
+}
