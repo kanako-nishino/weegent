@@ -13,11 +13,18 @@
   @include font(14, 25.2, 40, $medium);
 
   @include mq("md") {
+    margin-top: rem(24);
     @include font(18, 32.4, 40, $regular);
   }
 }
 
 .work-hero__action--document .work-hero__action-content {
+  display: flex;
+  align-items: center;
+  gap: rem(8);
+}
+
+.work-hero__action-text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -26,13 +33,12 @@
 
 .work-hero__action-caption {
   @include font(12, 12, null, $medium);
-  opacity: 0.7;
+  @include mq('md'){
+    @include f(14,140,0,$bold);
+  }
 }
 
 .work-hero__action-title {
-  display: flex;
-  align-items: center;
-  gap: rem(8);
   @include font(14, 14, null, $bold);
 
   @include mq("md") {
@@ -58,7 +64,7 @@
   }
 }
 
-.page-anchor-nav__item:not(:last-child) .page-anchor-nav__link {
+.page-anchor-nav__item .page-anchor-nav__link {
   border-bottom: rem(1) solid rgba($beige, 0.2);
 }
 
@@ -69,33 +75,37 @@
   justify-content: space-between;
   gap: rem(16);
   color: $beige;
-  @include font(15, 15, null, $bold);
+  @include f(16, 100, null, $medium);
 
   @include mq("md") {
-    padding: 0 0 rem(16);
+    padding: rem(24) 0;
     border-bottom: rem(1) solid rgba($beige, 0.2) !important;
     @include font(16, 16, null, $bold);
   }
 }
 
 .page-anchor-nav__icon {
-  width: rem(32);
-  height: rem(32);
-  flex-shrink: 0;
+width: rem(16);
+height: rem(16);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: rem(4);
-  background-color: $beige;
+  background-color: #fff;
+  border-radius: rem(2);
+  position: relative;
 }
 
 .page-anchor-nav__icon::before {
   content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 0;
   height: 0;
-  border-left: rem(4) solid transparent;
-  border-right: rem(4) solid transparent;
-  border-top: rem(5) solid $navy;
+  border-top: rem(4) solid $navy;
+  border-right: rem(3) solid transparent;
+  border-left: rem(3) solid transparent;
+  transform: translate(-50%, -35%);
 }
 
 // --------------------------------
@@ -117,25 +127,37 @@
     margin-top: rem(40);
     display: grid;
     grid-template-columns: minmax(0, 1fr) rem(300);
-    column-gap: rem(80);
-    align-items: start;
+    column-gap: rem(47);
+    align-items: flex-end;
   }
+}
+
+.company-about__sub-title{
+    @include f(18,220,6,$medium);
+    font-family: $serif;
+    @include mq('md'){
+        @include f(24,220,6,$medium);
+    }
 }
 
 .company-about__text {
   @include font(14, 25.2, 40, $medium);
-
-  @include mq("md") {
-    @include font(16, 30.4, 40, $regular);
-  }
+    font-family: $serif;
+    @include mq("md") {
+        @include font(16, 30.4, 40, $regular);
+    }
 }
 
-.company-about__text p + p {
+.company-about__text p {
   margin-top: rem(16);
 }
 
+.company-about__text p + p {
+  margin-top: rem(12);
+}
+
 .company-kpi-list {
-  margin-top: rem(24);
+  margin-top: rem(32);
   display: flex;
 
   @include mq("md") {
@@ -175,7 +197,7 @@
 }
 
 .company-kpi-list__label {
-  @include font(13, 13, null, $bold);
+  @include font(13, 13, 60, $bold);
 
   @include mq("md") {
     @include font(16, 16, null, $bold);
@@ -184,7 +206,7 @@
 
 .company-kpi-list__value {
   font-family: $serif;
-  @include font(26, 26, 60, $medium);
+  @include font(32, 32, 60, $medium);
 
   @include mq("md") {
     @include font(40, 40, 60, $medium);
@@ -193,7 +215,7 @@
 
 .company-kpi-list__value small {
   margin-left: rem(2);
-  font-size: 0.5em;
+  font-size: 0.75em;
 }
 
 // --------------------------------
@@ -216,8 +238,7 @@
 .member-card__role {
   grid-area: role;
   align-self: end;
-  color: $camel;
-  @include font(12, 12, null, $bold);
+  @include font(14, 14, null, $medium);
 
   @include mq("md") {
     align-self: auto;
@@ -289,8 +310,7 @@
 .manager-card__role {
   grid-area: role;
   align-self: end;
-  opacity: 0.7;
-  @include font(12, 12, null, $medium);
+  @include f(12, 160, null, $medium);
 
   @include mq("md") {
     margin-top: rem(16);
@@ -301,7 +321,7 @@
   grid-area: name;
   margin-top: rem(4);
   font-family: $serif;
-  @include font(18, null, 60, $medium);
+  @include font(20, 29, 60, $medium);
 
   @include mq("md") {
     margin-top: rem(8);
@@ -313,7 +333,7 @@
   grid-area: profile;
   margin-top: rem(16);
   opacity: 0.9;
-  @include font(13, 22.4, null, $medium);
+  @include f(14, 160, null, $medium);
 
   @include mq("md") {
     margin-top: rem(12);
@@ -344,12 +364,12 @@
 
 .overview-table__row {
   display: grid;
-  grid-template-columns: rem(88) minmax(0, 1fr);
-  gap: rem(8) rem(16);
+  grid-template-columns: rem(80) minmax(0, 1fr);
+column-gap: rem(4);
 
   @include mq("md") {
     grid-template-columns: rem(160) minmax(0, 1fr);
-    gap: rem(16) rem(40);
+
   }
 }
 
@@ -357,7 +377,7 @@
 // dt側の罫線だけ濃く・太く見えるようにする（デザイン準拠）
 .overview-table__row dt,
 .overview-table__row dd {
-  padding: rem(20) 0;
+  padding: rem(12) rem(8);
   border-bottom: rem(1) solid rgba($beige, 0.3);
 
   @include mq("md") {

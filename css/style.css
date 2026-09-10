@@ -289,16 +289,8 @@ html {
 }
 
 .section-wave::before {
-  --wave-size-sp: clamp(
-    38.0625rem,
-    calc(27.875rem + 41.9vw),
-    47.9375rem
-  );
-  --wave-position-x-sp: clamp(
-    0rem,
-    calc(11.4375rem - 23.9vw),
-    5.625rem
-  );
+  --wave-size-sp: clamp(38.0625rem, calc(27.875rem + 41.9vw), 47.9375rem);
+  --wave-position-x-sp: clamp(0rem, calc(11.4375rem - 23.9vw), 5.625rem);
   content: "";
   position: absolute;
   z-index: 0;
@@ -3103,7 +3095,7 @@ html.is-fixed {
 }
 
 .member-section__title {
-  padding-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
   font-family: "Noto Serif JP", sans-serif;
   border-bottom: 0.0625rem solid rgba(241, 240, 234, 0.1);
 }
@@ -3115,6 +3107,7 @@ html.is-fixed {
 
 .member-list__item {
   padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 @media screen and (min-width: 768px) {
   .member-list__item {
@@ -3122,16 +3115,12 @@ html.is-fixed {
   }
 }
 
-.member-list__item:last-child {
-  padding-bottom: 2.5rem;
-}
-
-.member-list__item + .member-list__item {
+.member-list__item {
   margin-top: 1.5rem;
   border-bottom: 0.0625rem solid rgba(241, 240, 234, 0.1);
 }
 @media screen and (min-width: 768px) {
-  .member-list__item + .member-list__item {
+  .member-list__item {
     margin-top: 2.5rem;
   }
 }
@@ -4001,6 +3990,16 @@ html.is-fixed {
   color: #F1F0EA;
 }
 
+@media screen and (min-width: 768px) {
+  .work-hero::before {
+    top: -16.375rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 109.7916666667vw;
+    aspect-ratio: 1581/763.48;
+  }
+}
+
 .work-hero__breadcrumb-area {
   width: 100%;
   padding: 7rem 1.5rem 0;
@@ -4016,7 +4015,7 @@ html.is-fixed {
 }
 @media screen and (min-width: 768px) {
   .work-hero__inner {
-    padding-top: 2rem;
+    padding-top: 4rem;
   }
 }
 
@@ -4044,7 +4043,7 @@ html.is-fixed {
 }
 @media screen and (min-width: 768px) {
   .work-hero__actions {
-    margin-top: 2.5rem;
+    margin-top: 1.5rem;
     grid-template-columns: repeat(2, minmax(0, 22.4375rem));
     justify-content: center;
     gap: 1rem;
@@ -4054,6 +4053,12 @@ html.is-fixed {
 
 .work-hero__action {
   width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .work-hero__action {
+    padding: 1rem 0.9375rem 1rem 1.1875rem;
+    min-height: 5rem;
+  }
 }
 
 .work-archive-section {
@@ -4096,6 +4101,7 @@ html.is-fixed {
 }
 @media screen and (min-width: 768px) {
   .work-hero__lead {
+    margin-top: 1.5rem;
     font-size: 1.125rem;
     line-height: 1.8;
     letter-spacing: 0.04em;
@@ -4104,6 +4110,12 @@ html.is-fixed {
 }
 
 .work-hero__action--document .work-hero__action-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.work-hero__action-text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -4114,13 +4126,17 @@ html.is-fixed {
   font-size: 0.75rem;
   line-height: 1;
   font-weight: 500;
-  opacity: 0.7;
+}
+@media screen and (min-width: 768px) {
+  .work-hero__action-caption {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    letter-spacing: 0em;
+    font-weight: 700;
+  }
 }
 
 .work-hero__action-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   font-size: 0.875rem;
   line-height: 1;
   font-weight: 700;
@@ -4154,7 +4170,7 @@ html.is-fixed {
   }
 }
 
-.page-anchor-nav__item:not(:last-child) .page-anchor-nav__link {
+.page-anchor-nav__item .page-anchor-nav__link {
   border-bottom: 0.0625rem solid rgba(241, 240, 234, 0.2);
 }
 
@@ -4165,13 +4181,13 @@ html.is-fixed {
   justify-content: space-between;
   gap: 1rem;
   color: #F1F0EA;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1;
-  font-weight: 700;
+  font-weight: 500;
 }
 @media screen and (min-width: 768px) {
   .page-anchor-nav__link {
-    padding: 0 0 1rem;
+    padding: 1.5rem 0;
     border-bottom: 0.0625rem solid rgba(241, 240, 234, 0.2) !important;
     font-size: 1rem;
     line-height: 1;
@@ -4180,23 +4196,27 @@ html.is-fixed {
 }
 
 .page-anchor-nav__icon {
-  width: 2rem;
-  height: 2rem;
-  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.25rem;
-  background-color: #F1F0EA;
+  background-color: #fff;
+  border-radius: 0.125rem;
+  position: relative;
 }
 
 .page-anchor-nav__icon::before {
   content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 0;
   height: 0;
-  border-left: 0.25rem solid transparent;
-  border-right: 0.25rem solid transparent;
-  border-top: 0.3125rem solid #1A1C3D;
+  border-top: 0.25rem solid #1A1C3D;
+  border-right: 0.1875rem solid transparent;
+  border-left: 0.1875rem solid transparent;
+  transform: translate(-50%, -35%);
 }
 
 .company-about-section {
@@ -4217,8 +4237,24 @@ html.is-fixed {
     margin-top: 2.5rem;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 18.75rem;
-    column-gap: 5rem;
-    align-items: start;
+    column-gap: 2.9375rem;
+    align-items: flex-end;
+  }
+}
+
+.company-about__sub-title {
+  font-size: 1.125rem;
+  line-height: 2.2;
+  letter-spacing: 0.006em;
+  font-weight: 500;
+  font-family: "Noto Serif JP", sans-serif;
+}
+@media screen and (min-width: 768px) {
+  .company-about__sub-title {
+    font-size: 1.5rem;
+    line-height: 2.2;
+    letter-spacing: 0.006em;
+    font-weight: 500;
   }
 }
 
@@ -4227,6 +4263,7 @@ html.is-fixed {
   line-height: 1.8;
   letter-spacing: 0.04em;
   font-weight: 500;
+  font-family: "Noto Serif JP", sans-serif;
 }
 @media screen and (min-width: 768px) {
   .company-about__text {
@@ -4237,12 +4274,16 @@ html.is-fixed {
   }
 }
 
-.company-about__text p + p {
+.company-about__text p {
   margin-top: 1rem;
 }
 
+.company-about__text p + p {
+  margin-top: 0.75rem;
+}
+
 .company-kpi-list {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   display: flex;
 }
 @media screen and (min-width: 768px) {
@@ -4287,6 +4328,7 @@ html.is-fixed {
 .company-kpi-list__label {
   font-size: 0.8125rem;
   line-height: 1;
+  letter-spacing: 0.06em;
   font-weight: 700;
 }
 @media screen and (min-width: 768px) {
@@ -4299,7 +4341,7 @@ html.is-fixed {
 
 .company-kpi-list__value {
   font-family: "Noto Serif JP", sans-serif;
-  font-size: 1.625rem;
+  font-size: 2rem;
   line-height: 1;
   letter-spacing: 0.06em;
   font-weight: 500;
@@ -4315,7 +4357,7 @@ html.is-fixed {
 
 .company-kpi-list__value small {
   margin-left: 0.125rem;
-  font-size: 0.5em;
+  font-size: 0.75em;
 }
 
 #officer .member-card {
@@ -4330,10 +4372,9 @@ html.is-fixed {
 .member-card__role {
   grid-area: role;
   align-self: end;
-  color: #9B6A22;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   line-height: 1;
-  font-weight: 700;
+  font-weight: 500;
 }
 @media screen and (min-width: 768px) {
   .member-card__role {
@@ -4402,9 +4443,8 @@ html.is-fixed {
 .manager-card__role {
   grid-area: role;
   align-self: end;
-  opacity: 0.7;
   font-size: 0.75rem;
-  line-height: 1;
+  line-height: 1.6;
   font-weight: 500;
 }
 @media screen and (min-width: 768px) {
@@ -4417,7 +4457,8 @@ html.is-fixed {
   grid-area: name;
   margin-top: 0.25rem;
   font-family: "Noto Serif JP", sans-serif;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
+  line-height: 1.45;
   letter-spacing: 0.06em;
   font-weight: 500;
 }
@@ -4432,8 +4473,8 @@ html.is-fixed {
   grid-area: profile;
   margin-top: 1rem;
   opacity: 0.9;
-  font-size: 0.8125rem;
-  line-height: 1.7230769231;
+  font-size: 0.875rem;
+  line-height: 1.6;
   font-weight: 500;
 }
 @media screen and (min-width: 768px) {
@@ -4465,19 +4506,18 @@ html.is-fixed {
 
 .overview-table__row {
   display: grid;
-  grid-template-columns: 5.5rem minmax(0, 1fr);
-  gap: 0.5rem 1rem;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  column-gap: 0.25rem;
 }
 @media screen and (min-width: 768px) {
   .overview-table__row {
     grid-template-columns: 10rem minmax(0, 1fr);
-    gap: 1rem 2.5rem;
   }
 }
 
 .overview-table__row dt,
 .overview-table__row dd {
-  padding: 1.25rem 0;
+  padding: 0.75rem 0.5rem;
   border-bottom: 0.0625rem solid rgba(241, 240, 234, 0.3);
 }
 @media screen and (min-width: 768px) {
@@ -5432,6 +5472,10 @@ html.is-fixed {
 .c-button--white:hover,
 .header__button--white:hover {
   background-color: #F1F0EA;
+}
+
+.c-button--white {
+  border-color: #1A1C3D;
 }
 
 .c-button--brown,

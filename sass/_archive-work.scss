@@ -11,6 +11,16 @@
   color: $beige;
 }
 
+.work-hero::before{
+    @include mq('md'){
+        top: rem(-262);
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(1581 / 1440 * 100vw);
+        aspect-ratio: 1581 / 763.48;
+    }
+}
+
 // パンくずは画面幅に関わらずロゴと同じ「左から40px」の位置に揃えたいため、
 // inner--content（最大幅で中央寄せされる）の外に出し、
 // header__inner と同じ考え方（幅100% + 左右パディング）で配置する。
@@ -27,7 +37,7 @@
   padding-top: rem(24);
 
   @include mq("md") {
-    padding-top: rem(32);
+    padding-top: rem(64);
   }
 }
 
@@ -49,7 +59,7 @@
   background-color: rgba($beige, 0.1);
 
   @include mq("md") {
-    margin-top: rem(40);
+    margin-top: rem(24);
     grid-template-columns: repeat(2, minmax(0, rem(359)));
     justify-content: center;
     gap: rem(16);
@@ -59,6 +69,10 @@
 
 .work-hero__action {
   width: 100%;
+  @include mq('md'){
+    padding: rem(16) rem(15) rem(16) rem(19);
+    min-height: rem(80);
+  }
 }
 
 // --------------------------------

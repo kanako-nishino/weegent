@@ -1763,7 +1763,7 @@ padding-block: rem(110);
 }
 
 .member-section__title {
-  padding-bottom: rem(40);
+  padding-bottom: rem(24);
   font-family: $serif;
   border-bottom: rem(1) solid rgba($beige, 0.1);
 
@@ -1774,17 +1774,17 @@ padding-block: rem(110);
 
 .member-list__item {
   padding-top: rem(24);
-
+padding-bottom: rem(24);
   @include mq("md") {
     padding-top: rem(40);
   }
 }
 
-.member-list__item:last-child {
-  padding-bottom: rem(40);
-}
+// .member-list__item:last-child {
+//   padding-bottom: rem(40);
+// }
 
-.member-list__item + .member-list__item {
+.member-list__item {
   margin-top: rem(24);
   border-bottom: rem(1) solid rgba($beige, 0.1);
 

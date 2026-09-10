@@ -4,10 +4,10 @@
 // 全ページ共通のパーツ
 // ==============================
 
-.br-lg{
+.br-lg {
   display: none;
 
-  @include mq('lg'){
+  @include mq("lg") {
     display: block;
   }
 }
@@ -130,16 +130,8 @@
 }
 
 .section-wave::before {
-  --wave-size-sp: clamp(
-    #{rem(609)},
-    calc(#{rem(446)} + 41.9vw),
-    #{rem(767)}
-  );
-  --wave-position-x-sp: clamp(
-    0rem,
-    calc(#{rem(183)} - 23.9vw),
-    #{rem(90)}
-  );
+  --wave-size-sp: clamp(#{rem(609)}, calc(#{rem(446)} + 41.9vw), #{rem(767)});
+  --wave-position-x-sp: clamp(0rem, calc(#{rem(183)} - 23.9vw), #{rem(90)});
   content: "";
   position: absolute;
   z-index: 0;
@@ -147,11 +139,13 @@
   background-color: #4050b2;
   -webkit-mask-image: url("../img/common/deco-wave.png");
   -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: calc(50% + var(--wave-position-x-sp)) var(--wave-offset-y-sp, top);
+  -webkit-mask-position: calc(50% + var(--wave-position-x-sp))
+    var(--wave-offset-y-sp, top);
   -webkit-mask-size: var(--wave-size-sp) auto;
   mask-image: url("../img/common/deco-wave.png");
   mask-repeat: no-repeat;
-  mask-position: calc(50% + var(--wave-position-x-sp)) var(--wave-offset-y-sp, top);
+  mask-position: calc(50% + var(--wave-position-x-sp))
+    var(--wave-offset-y-sp, top);
   mask-size: var(--wave-size-sp) auto;
   opacity: 0.4;
   pointer-events: none;
@@ -168,5 +162,3 @@
   position: relative;
   z-index: 1;
 }
-
-

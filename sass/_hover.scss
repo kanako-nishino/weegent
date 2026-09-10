@@ -104,6 +104,9 @@
     background-color: $beige;
   }
 }
+.c-button--white{
+    border-color: $navy;
+}
 
 // 茶 ↔ ベージュ（文字色も読みやすいように反転させる）
 .c-button--brown,
