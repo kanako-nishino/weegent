@@ -1,4 +1,21 @@
 jQuery(function ($) { // この中であればWordPressでも「$」が使用可能になる
+  // SHAREボタン：現在ページのURL・タイトルで各SNSのシェアURLを組み立てる
+  $(".js-share").each(function () {
+    var pageUrl = encodeURIComponent(window.location.href);
+    var pageTitle = encodeURIComponent(document.title);
+    var shareUrls = {
+      x: "https://twitter.com/intent/tweet?url=" + pageUrl + "&text=" + pageTitle,
+      facebook: "https://www.facebook.com/sharer/sharer.php?u=" + pageUrl,
+      hatena: "https://b.hatena.ne.jp/entry/panel/?url=" + pageUrl + "&title=" + pageTitle,
+      line: "https://social-plugins.line.me/lineit/share?url=" + pageUrl
+    };
+    var network = $(this).data("share");
+
+    if (shareUrls[network]) {
+      $(this).attr("href", shareUrls[network]);
+    }
+  });
+
   // 導入企業ロゴの無限ループ用複製
   $(".js-logo-track").each(function () {
     var $track = $(this);
@@ -228,18 +245,16 @@ jQuery(function ($) { // この中であればWordPressでも「$」が使用可
   });
 
   // 事例詳細ページ：目次の開閉
-  $(".js-toc-toggle").on("click", function () {
-    var $trigger = $(this);
-    var listId = $trigger.attr("aria-controls");
-    var $list = listId ? $("#" + listId) : $();
-    var $toc = $trigger.closest(".js-toc");
+  // ※Table of Contents Plus導入後は本体のfront.jsが同じ処理を行うため、
+  //   プラグイン差し替え時にこのハンドラは削除すること。
+  $("#toc_container .toc_toggle a").on("click", function (event) {
+    event.preventDefault();
+    var $toggle = $(this);
+    var $container = $toggle.closest("#toc_container");
+    var willContract = !$container.hasClass("contracted");
 
-    if (!$list.length || !$toc.length) return;
-
-    var isOpen = $trigger.attr("aria-expanded") === "true";
-    $trigger.attr("aria-expanded", String(!isOpen));
-    $list.prop("hidden", isOpen);
-    $trigger.find("span").text(isOpen ? "開く" : "閉じる");
-    $toc.toggleClass("is-open", !isOpen);
+    $toggle.attr("aria-label", willContract ? "show" : "hide");
+    $container.toggleClass("contracted", willContract);
+    $container.find(".toc_list").toggle(!willContract);
   });
 });
