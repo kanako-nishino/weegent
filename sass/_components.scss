@@ -990,6 +990,17 @@ padding-block: rem(110);
   }
 }
 
+// inbound / out-bound-enterprise / out-bound-smb / test-marketing の4ページでは
+// margin-topを持たせない（.section-spaceのpadding-topのみで上余白を確保する）。
+// トップページ（モディファイアなしの.support-section）の余白はそのまま。
+// 4ページとも同じ値のため、ページ別partialに分散させず、ここに1つにまとめて当てる。
+.support-section--inbound,
+.support-section--out-bound-enterprise,
+.support-section--out-bound-smb,
+.support-section--test-marketing {
+  margin-top: 0;
+}
+
 .resource-background {
   position: relative;
   overflow: hidden;
@@ -1528,11 +1539,11 @@ padding-block: rem(110);
 
 .strength-card__description {
   margin-top: rem(16);
-  @include font(14, 25.2, 60, $medium);
+  @include font(14, 25.2, 40, $medium);
 
   @include mq("md") {
     margin-top: rem(24);
-    @include font(18, 32.4, 60, $medium);
+    @include font(18, 32.4, 40, $medium);
   }
 }
 

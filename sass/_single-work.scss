@@ -141,6 +141,11 @@
 // プラグイン側のCSS/JS（screen.css・front.js）は「TOCのCSS/JSを出力しない」設定を
 // 前提としており、開閉インタラクションも front.js と同じ「#toc_containerに
 // .contractedクラスを付け外しする」方式に合わせてある。
+//
+// 見出し番号（1. / 2.1. など）は、プラグイン設定画面（TOC+の設定）内
+// 「Number list items」のチェックを外せば .toc_number 自体が出力されなくなる。
+// 万一チェックが入ったまま運用された場合の保険として、.toc_number は
+// 念のためCSS側でも非表示にしている（下記参照）。
 #toc_container {
     margin-top: rem(32);
     padding: rem(20) rem(20) rem(24);
@@ -174,6 +179,19 @@
 }
 
 .toc_toggle a {
+    display: inline-flex;
+    align-items: center;
+    gap: rem(6);
+}
+
+.toc_toggle_label {
+    color: rgba($beige, 0.7);
+    text-decoration: underline;
+    text-underline-offset: rem(3);
+    @include font(13, null, 60, $medium);
+}
+
+.toc_toggle_box {
     position: relative;
     display: flex;
     align-items: center;
@@ -185,51 +203,38 @@
 }
 
 .toc_toggle_indicator {
-    position: relative;
-    width: rem(8);
-    height: rem(8);
+    width: 0;
+    height: 0;
+    border-left: rem(4) solid transparent;
+    border-right: rem(4) solid transparent;
+    border-bottom: rem(5) solid $navy;
+    transition: transform 0.2s ease;
 }
 
-.toc_toggle_indicator::before,
-.toc_toggle_indicator::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background-color: $navy;
-    transform: translate(-50%, -50%);
-}
-
-.toc_toggle_indicator::before {
-    width: rem(8);
-    height: rem(1.5);
-}
-
-.toc_toggle_indicator::after {
-    width: rem(1.5);
-    height: rem(8);
-    opacity: 0;
-}
-
-#toc_container.contracted .toc_toggle_indicator::after {
-    opacity: 1;
+#toc_container.contracted .toc_toggle_indicator {
+    transform: rotate(180deg);
 }
 
 .toc_list {
     margin-top: rem(20);
-    padding-left: 0;
+    padding-left: rem(18);
     display: grid;
     gap: rem(16);
-    list-style: none;
+    list-style: disc;
 
     @include mq("md") {
         gap: rem(20);
     }
 }
 
-.toc_number {
-    margin-right: rem(2);
+.toc_list>li::marker {
     color: rgba($beige, 0.5);
+}
+
+// プラグインの「Number list items」設定を外していれば出力されない想定だが、
+// 万一出力された場合に備えた保険。
+.toc_number {
+    display: none;
 }
 
 .toc_list>li>a {
@@ -341,7 +346,7 @@
     background-color: $beige;
     border-radius: rem(2);
     @include font(15, 15, null, $medium);
-    border: 1px solid #000;
+    border: rem(1) solid $beige;
 
     @include mq('md') {
         padding: rem(23);
@@ -743,7 +748,7 @@
     gap: rem(8);
     color: $navy;
     background-color: $beige;
-    border: 1px solid #000;
+    border: rem(1) solid $beige;
     border-radius: rem(2);
     @include font(15, 15, null, $medium);
 

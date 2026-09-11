@@ -23,7 +23,12 @@
 .footer-social__item a,
 .faq-item__trigger,
 .primary-service-card,
-.page-anchor-nav__link {
+.page-anchor-nav__link,
+.toc_list a,
+.toc_toggle a,
+.work-share__list a,
+.work-carousel__item a,
+.work-quicklinks__item a {
   transition: opacity 0.3s;
 
   &:hover {
@@ -58,12 +63,14 @@
 // （画像の親要素は既に overflow: hidden のため、はみ出しはクリップされる）
 // --------------------------------
 .case-card__image img,
-.video-card__thumbnail img {
+.video-card__thumbnail img,
+.work-related__thumb img {
   transition: transform 0.3s;
 }
 
 .case-card__link,
-.video-card__link {
+.video-card__link,
+.work-related__item a {
   transition: opacity 0.3s;
 
   &:hover {
@@ -72,41 +79,80 @@
 }
 
 .case-card__link:hover .case-card__image img,
-.video-card__link:hover .video-card__thumbnail img {
+.video-card__link:hover .video-card__thumbnail img,
+.work-related__item a:hover .work-related__thumb img {
   transform: scale(1.1);
 }
 
 // --------------------------------
 // ボタン → 背景色を入れ替え
-// 枠線は元の背景色と同じ色を常時つけておく（通常時は見た目が変わらず、
+// 枠線は「そのボタン本来の背景色」を常時つけておく（通常時は見た目が変わらず、
 // ホバーで背景色が変わった時だけ縁として見えるようにし、
-// 「ホバーするとボタンに見えなくなる」のを防ぐ）
+// 「ホバーするとボタンに見えなくなる」のを防ぐ）。
+// ホバー後の色（ネイビー）や、ページの背景色（サイト全体で多用されるネイビー）
+// と同じ色を枠線に使うと、その場面で枠線ごと埋もれてしまうため使わない。
 // --------------------------------
 .c-button,
 .header__button {
   transition: background-color 0.3s, color 0.3s;
 }
 
-// ベージュ（デフォルト）↔ 白
+// ベージュ（デフォルト）↔ ネイビー
+// ベージュは白に近い色のため、白ボタンと同じくフル反転にして変化を分かりやすくする
 .c-button:not(.c-button--white):not(.c-button--brown) {
   border: rem(1) solid $beige;
 
   &:hover {
-    background-color: $white;
+    color: $beige;
+    background-color: $navy;
+  }
+
+  > img {
+    transition: filter 0.3s;
+  }
+
+  &:hover > img {
+    filter: invert(1);
   }
 }
 
-// 白 ↔ ベージュ
+// ベージュボタンと同じ見た目の独自クラス（事例詳細ページ）も同様に反応させる
+// 枠線は各ページの定義側（_single-work.scss）で $beige に設定済み
+.work-related__button,
+.work-carousel__more {
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    color: $beige;
+    background-color: $navy;
+  }
+
+  img {
+    transition: filter 0.3s;
+  }
+
+  &:hover img {
+    filter: invert(1);
+  }
+}
+
+// 白 ↔ ネイビー（文字色も読みやすいように反転させる）
 .c-button--white,
 .header__button--white {
   border: rem(1) solid $white;
 
   &:hover {
-    background-color: $beige;
+    color: $white;
+    background-color: $navy;
   }
 }
-.c-button--white{
-    border-color: $navy;
+
+.c-button--white > img {
+  transition: filter 0.3s;
+}
+
+.c-button--white:hover > img {
+  filter: invert(1);
 }
 
 // 茶 ↔ ベージュ（文字色も読みやすいように反転させる）

@@ -254,6 +254,7 @@ jQuery(function ($) { // この中であればWordPressでも「$」が使用可
     var willContract = !$container.hasClass("contracted");
 
     $toggle.attr("aria-label", willContract ? "show" : "hide");
+    $toggle.find(".toc_toggle_label").text(willContract ? "開く" : "閉じる");
     $container.toggleClass("contracted", willContract);
     $container.find(".toc_list").toggle(!willContract);
   });
