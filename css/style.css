@@ -3112,6 +3112,7 @@ html.is-fixed {
 @media screen and (min-width: 768px) {
   .member-list__item {
     padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
   }
 }
 
@@ -3121,7 +3122,7 @@ html.is-fixed {
 }
 @media screen and (min-width: 768px) {
   .member-list__item {
-    margin-top: 2.5rem;
+    margin-top: 0;
   }
 }
 
@@ -4277,6 +4278,11 @@ html.is-fixed {
 .company-about__text p {
   margin-top: 1rem;
 }
+@media screen and (min-width: 768px) {
+  .company-about__text p {
+    max-width: 45rem;
+  }
+}
 
 .company-about__text p + p {
   margin-top: 0.75rem;
@@ -4308,7 +4314,7 @@ html.is-fixed {
     align-items: baseline;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1.25rem 0;
+    padding: 0.9375rem 0 1.25rem;
     border-left: 0;
     border-bottom: 0.0625rem solid rgba(241, 240, 234, 0.2);
   }
@@ -4321,7 +4327,6 @@ html.is-fixed {
 @media screen and (min-width: 768px) {
   .company-kpi-list__item:first-child {
     padding-top: 0;
-    border-top: 0.0625rem solid rgba(241, 240, 234, 0.2);
   }
 }
 
@@ -4348,7 +4353,7 @@ html.is-fixed {
 }
 @media screen and (min-width: 768px) {
   .company-kpi-list__value {
-    font-size: 2.5rem;
+    font-size: 3rem;
     line-height: 1;
     letter-spacing: 0.06em;
     font-weight: 500;
@@ -4358,6 +4363,12 @@ html.is-fixed {
 .company-kpi-list__value small {
   margin-left: 0.125rem;
   font-size: 0.75em;
+}
+@media screen and (min-width: 768px) {
+  .company-kpi-list__value small {
+    font-size: 2.125rem;
+    line-height: 1;
+  }
 }
 
 #officer .member-card {
@@ -4410,8 +4421,8 @@ html.is-fixed {
 }
 @media screen and (min-width: 768px) {
   .manager-list {
-    margin-top: 3rem;
-    grid-template-columns: repeat(2, minmax(0, 22.5rem));
+    margin-top: 3.5rem;
+    grid-template-columns: repeat(2, minmax(0, 15rem));
     column-gap: 2.5rem;
   }
 }
@@ -4450,6 +4461,8 @@ html.is-fixed {
 @media screen and (min-width: 768px) {
   .manager-card__role {
     margin-top: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
   }
 }
 
@@ -4464,8 +4477,9 @@ html.is-fixed {
 }
 @media screen and (min-width: 768px) {
   .manager-card__name {
-    margin-top: 0.5rem;
-    font-size: 1.25rem;
+    margin-top: 0.25rem;
+    font-size: 1.5rem;
+    line-height: 1.4166666667;
   }
 }
 
@@ -4480,6 +4494,8 @@ html.is-fixed {
 @media screen and (min-width: 768px) {
   .manager-card__profile {
     margin-top: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.6;
   }
 }
 
@@ -4523,7 +4539,7 @@ html.is-fixed {
 @media screen and (min-width: 768px) {
   .overview-table__row dt,
   .overview-table__row dd {
-    padding: 1.75rem 0;
+    padding: 1.5rem 0.5rem;
   }
 }
 
@@ -5397,7 +5413,8 @@ html.is-fixed {
 .drawer__close,
 .footer-social__item a,
 .faq-item__trigger,
-.primary-service-card {
+.primary-service-card,
+.page-anchor-nav__link {
   transition: opacity 0.3s;
 }
 .footer-nav__link:hover,
@@ -5414,7 +5431,8 @@ html.is-fixed {
 .drawer__close:hover,
 .footer-social__item a:hover,
 .faq-item__trigger:hover,
-.primary-service-card:hover {
+.primary-service-card:hover,
+.page-anchor-nav__link:hover {
   opacity: 0.6;
 }
 
