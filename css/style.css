@@ -3368,6 +3368,8 @@ html.is-fixed {
 
 .document-card__image {
   padding: 1rem;
+  aspect-ratio: 212/119;
+  overflow: hidden;
   border-radius: 0.25rem;
   background-color: rgba(255, 255, 255, 0.12);
   box-shadow: 8px 8px 12px 0 rgba(0, 0, 0, 0.04);
@@ -3375,19 +3377,16 @@ html.is-fixed {
 @media screen and (min-width: 768px) {
   .document-card__image {
     padding: 1.5rem;
+    aspect-ratio: 155/87;
   }
 }
 
 .document-card__image img {
+  display: block;
   width: 100%;
-  aspect-ratio: 212/119;
+  height: 100%;
   border-radius: 0.125rem;
   object-fit: cover;
-}
-@media screen and (min-width: 768px) {
-  .document-card__image img {
-    aspect-ratio: 155/87;
-  }
 }
 
 .document-card__category {
@@ -3719,6 +3718,7 @@ html.is-fixed {
 
 .comparison-table-scroll {
   margin-top: 2.5rem;
+  margin-right: calc(50% - 50vw);
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   scrollbar-width: thin;
@@ -3727,6 +3727,7 @@ html.is-fixed {
 @media screen and (min-width: 768px) {
   .comparison-table-scroll {
     margin-top: 3.5rem;
+    margin-right: 0;
     overflow-x: visible;
   }
 }
