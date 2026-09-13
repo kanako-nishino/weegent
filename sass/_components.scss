@@ -636,10 +636,11 @@ backdrop-filter: blur(12px);
 }
 
 .video-card__thumbnail {
+  // paddingと同じ要素にaspect-ratioを置くと、実機Safari等で内側の
+  // height:100%指定が正しく解決されず、下方向にはみ出すことがあるため、
+  // 「paddingを持つ枠」と「aspect-ratioを持つ内側の箱」を別要素に分離している。
   position: relative;
   padding: rem(8);
-  overflow: hidden;
-  aspect-ratio: 16 / 9;
   background: #5F6077;
   border-radius: rem(4);
 
@@ -648,11 +649,17 @@ backdrop-filter: blur(12px);
   }
 }
 
-.video-card__thumbnail img {
+.video-card__thumbnail-inner {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: rem(2);
+}
+
+.video-card__thumbnail-inner img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: rem(2);
 }
 
 .video-card__play {
@@ -1900,25 +1907,34 @@ padding-block: rem(110);
 }
 
 .document-card__image {
+  // paddingと同じ要素にaspect-ratioを置くと、実機Safari等で内側の
+  // height:100%指定が正しく解決されず、下方向にはみ出すことがあるため、
+  // 「paddingを持つ枠」と「aspect-ratioを持つ内側の箱」を別要素に分離している。
   padding: rem(16);
-  // 画像未読み込み・未設定でも枠が潰れないよう、比率は親側で保証する。
-  aspect-ratio: 212 / 119;
-  overflow: hidden;
   border-radius: rem(4);
   background-color: rgba($white, 0.12);
   box-shadow: 8px 8px 12px 0 rgba(0, 0, 0, 0.04);
 
   @include mq("md") {
     padding: rem(24);
+  }
+}
+
+.document-card__image-inner {
+  // 画像未読み込み・未設定でも枠が潰れないよう、比率はこちらで保証する。
+  aspect-ratio: 212 / 119;
+  overflow: hidden;
+  border-radius: rem(2);
+
+  @include mq("md") {
     aspect-ratio: 155 / 87;
   }
 }
 
-.document-card__image img {
+.document-card__image-inner img {
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: rem(2);
   object-fit: cover;
 }
 
