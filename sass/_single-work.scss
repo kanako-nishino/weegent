@@ -16,13 +16,20 @@
 }
 
 .single-work-breadcrumb__current {
+    display: block;
+    // 固定の文字数ではなく、そのパンくずの行の残り幅いっぱいまで伸ばし、
+    // 折り返さずに画面（コンテナ）端で「...」にする。
+    flex: 1 1 0%;
+    min-width: 0;
     overflow: hidden;
-    max-width: rem(220);
     white-space: nowrap;
     text-overflow: ellipsis;
 
     @include mq("md") {
-        max-width: none;
+        flex: initial;
+        min-width: auto;
+        overflow: visible;
+        white-space: normal;
     }
 }
 
@@ -84,6 +91,15 @@
 
 .work-layout__aside {
     min-width: 0;
+
+    // 固定ヘッダーの高さ分オフセットして追従させる。
+    // 関連事例は5件までの表示想定だが、念のため画面をはみ出す分はスクロールさせる。
+    @include mq("md") {
+        position: sticky;
+        top: rem(145);
+        max-height: calc(100vh - #{rem(145)});
+        overflow-y: auto;
+    }
 }
 
 // --------------------------------
@@ -165,7 +181,6 @@
     justify-content: space-between;
     gap: rem(16);
     border-bottom: rem(1) solid rgba($beige, 0.15);
-    font-family: $serif;
     @include font(18, null, 60, $medium);
 
     @include mq("md") {
@@ -185,7 +200,7 @@
 }
 
 .toc_toggle_label {
-    color: rgba($beige, 0.7);
+    color: $beige;
     text-decoration: underline;
     text-underline-offset: rem(3);
     @include font(13, null, 60, $medium);
@@ -257,7 +272,7 @@
 }
 
 .toc_list li li a {
-    color: rgba($beige, 0.85);
+    color: $beige;
     @include font(13, 19.5, null, $medium);
 
     @include mq("md") {
@@ -468,7 +483,11 @@
 .work-layout__cta {
     margin-top: rem(48);
     background-color: rgba($beige, 0.1);
-    padding: rem(32);
+    padding: rem(24);
+
+    @include mq('md'){
+        padding: rem(32);
+    }
 }
 
 .work-cta {
@@ -589,13 +608,14 @@
 // SHARE
 // --------------------------------
 .work-layout__share {
-    margin-top: rem(56);
+    margin-top: rem(72);
     padding: rem(12) rem(16.5);
-    border-radius: rem(4);
+    border-radius: rem(2);
     background-color: $beige;
 
     @include mq('md') {
         padding: rem(16) rem(32);
+        min-height: rem(80);
     }
 
 }
@@ -685,6 +705,7 @@
 }
 
 .work-carousel__item a {
+    font-family: $serif;
     display: flex;
     flex-direction: column;
     color: $beige;
@@ -696,7 +717,7 @@
         align-items: center;
         padding: rem(24);
         gap: rem(24);
-        @include font(14, 21, null, $medium);
+        @include font(17, null, 60, $medium);
     }
 }
 

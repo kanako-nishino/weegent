@@ -94,7 +94,7 @@
 
   @include mq("md") {
     min-height: rem(64);
-    padding: rem(24);
+    padding: rem(18) rem(24);
     @include font(16, 16, 0, $medium);
   }
 }
@@ -125,7 +125,7 @@
 // --------------------------------
 .section-wave {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   background-color: $navy;
 }
 
@@ -134,31 +134,147 @@
   --wave-position-x-sp: clamp(0rem, calc(#{rem(183)} - 23.9vw), #{rem(90)});
   content: "";
   position: absolute;
-  z-index: 0;
-  inset: 0;
+  z-index: 1;
+  top: var(--wave-offset-y-sp, 0rem);
+  right: 0;
+  left: 0;
+  height: rem(400);
   background-color: #4050b2;
   -webkit-mask-image: url("../img/common/deco-wave.png");
   -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: calc(50% + var(--wave-position-x-sp))
-    var(--wave-offset-y-sp, top);
+  -webkit-mask-position: calc(50% + var(--wave-position-x-sp)) top;
   -webkit-mask-size: var(--wave-size-sp) auto;
   mask-image: url("../img/common/deco-wave.png");
   mask-repeat: no-repeat;
-  mask-position: calc(50% + var(--wave-position-x-sp))
-    var(--wave-offset-y-sp, top);
+  mask-position: calc(50% + var(--wave-position-x-sp)) top;
   mask-size: var(--wave-size-sp) auto;
   opacity: 0.4;
   pointer-events: none;
 
   @include mq("md") {
-    -webkit-mask-position: center var(--wave-offset-y-pc, top);
+    top: var(--wave-offset-y-pc, 0rem);
+    height: rem(994);
+    -webkit-mask-position: center top;
     -webkit-mask-size: clamp(#{rem(1440)}, 100vw, #{rem(1920)}) auto;
-    mask-position: center var(--wave-offset-y-pc, top);
+    mask-position: center top;
     mask-size: clamp(#{rem(1440)}, 100vw, #{rem(1920)}) auto;
   }
 }
 
 .section-wave > * {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+}
+
+.sub-hero {
+  color: $beige;
+  --wave-offset-y-sp: #{rem(-90)};
+
+  @include mq('md'){
+    --wave-offset-y-pc: #{rem(-270)};
+  }
+
+}
+
+// パンくずは画面幅に関わらずロゴと同じ「左から40px」の位置に揃えたいため、
+// inner--content（最大幅で中央寄せされる）の外に出し、
+// header__inner と同じ考え方（幅100% + 左右パディング）で配置する。
+.sub-hero__breadcrumb-area {
+  width: 100%;
+  padding: rem(112) rem(24) 0;
+
+  @include mq("md") {
+    padding: rem(160) rem(40) 0;
+  }
+}
+
+.sub-hero__inner {
+  padding-top: rem(24);
+
+  @include mq("md") {
+    padding-top: rem(64);
+  }
+}
+
+.sub-hero__title {
+  font-family: $serif;
+  @include font(32, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(56, null, 60, $medium);
+  }
+}
+
+.sub-hero__actions {
+  // 親要素（.inner）のパディングを無視して画面幅いっぱいに広げる。
+  // 最大幅は.innerのSP時と同じ500pxで頭打ちにする。
+  width: 100vw;
+  max-width: 500px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: rem(32);
+  padding: rem(24) rem(16);
+  display: grid;
+  gap: rem(12);
+  border-radius: 0;
+  background-color: rgba($beige, 0.1);
+
+  @include mq("md") {
+    width: auto;
+    max-width: none;
+    margin-left: 0;
+    transform: none;
+    margin-top: rem(24);
+    grid-template-columns: repeat(2, minmax(0, rem(359)));
+    justify-content: center;
+    gap: rem(16);
+    padding: rem(32) rem(40);
+    border-radius: rem(4);
+  }
+}
+
+.sub-hero__action {
+  width: 100%;
+  @include mq('md'){
+    padding: rem(16) rem(15) rem(16) rem(19);
+  }
+}
+
+
+.sub-hero__lead {
+  margin-top: rem(16);
+  @include font(14, 25.2, 40, $medium);
+
+  @include mq("md") {
+    margin-top: rem(24);
+    @include font(18, 32.4, 40, $regular);
+  }
+}
+
+.sub-hero__action--document .sub-hero__action-content {
+  display: flex;
+  align-items: center;
+  gap: rem(8);
+}
+
+.sub-hero__action-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: rem(4);
+}
+
+.sub-hero__action-caption {
+  @include font(12, 12, null, $medium);
+  @include mq('md'){
+    @include f(14,140,0,$bold);
+  }
+}
+
+.sub-hero__action-title {
+  @include font(14, 14, null, $bold);
+
+  @include mq("md") {
+    @include font(16, 16, 0, $bold);
+  }
 }

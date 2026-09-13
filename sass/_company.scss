@@ -4,46 +4,8 @@
 // 会社情報ページ固有スタイル
 // ==============================
 
-// --------------------------------
-// ヒーロー（リード文・CTA・ページ内アンカーナビ）
-// 波背景・パンくず・タイトル・CTAボタンは .work-hero 系（archive-work.htmlと共通）を流用
-// --------------------------------
-.work-hero__lead {
-  margin-top: rem(16);
-  @include font(14, 25.2, 40, $medium);
-
-  @include mq("md") {
-    margin-top: rem(24);
-    @include font(18, 32.4, 40, $regular);
-  }
-}
-
-.work-hero__action--document .work-hero__action-content {
-  display: flex;
-  align-items: center;
-  gap: rem(8);
-}
-
-.work-hero__action-text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: rem(4);
-}
-
-.work-hero__action-caption {
-  @include font(12, 12, null, $medium);
-  @include mq('md'){
-    @include f(14,140,0,$bold);
-  }
-}
-
-.work-hero__action-title {
-  @include font(14, 14, null, $bold);
-
-  @include mq("md") {
-    @include font(16, 16, 0, $bold);
-  }
+.page-company .member-section:before{
+  
 }
 
 .page-anchor-nav {
@@ -126,7 +88,7 @@ height: rem(16);
   @include mq("md") {
     margin-top: rem(40);
     display: grid;
-    grid-template-columns: minmax(0, 1fr) rem(300);
+    grid-template-columns: minmax(0, 1fr) rem(280);
     column-gap: rem(47);
     align-items: flex-end;
   }
@@ -151,7 +113,7 @@ height: rem(16);
 .company-about__text p {
   margin-top: rem(16);
   @include mq('md'){
-    max-width: rem(720);
+    max-width: rem(760);
   }
 }
 
@@ -203,7 +165,7 @@ height: rem(16);
   @include font(13, 13, 60, $bold);
 
   @include mq("md") {
-    @include font(16, 16, null, $bold);
+    @include font(16, 16, 200, $bold);
   }
 }
 

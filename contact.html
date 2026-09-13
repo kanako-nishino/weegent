@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Weegentへのご相談・お問い合わせはこちらから承ります。">
+  <meta name="robots" content="index, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400&amp;family=Noto+Sans+JP:wght@400;500;600;700&amp;family=Noto+Serif+JP:wght@500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>ご相談・お問い合わせ｜営業代行・インサイドセールスのWeegent</title>
+</head>
+
+<body class="page-form">
+  <main class="form-page form-page--contact section-wave">
+    <div class="form-page__inner inner inner--content">
+      <a class="form-page__logo" href="./" aria-label="Weegent トップページへ">
+        <img src="./img/common/logo.png" alt="Weegent">
+      </a>
+
+      <div class="form-page__layout">
+        <section class="form-intro" aria-labelledby="form-page-title">
+          <h1 class="form-intro__title" id="form-page-title">ご相談・お問い合わせ<br>フォーム</h1>
+          <div class="form-trust">
+            <p class="form-trust__lead">業界を問わず1500社以上にご利用いただいています。</p>
+            <ul class="form-trust__logos" aria-label="導入企業例">
+              <li><img src="./img/common/client-logo-hinomori.png" alt="株式会社ヒノモリ"></li>
+              <li><img src="./img/common/client-logo-avepoint.png" alt="AvePoint"></li>
+              <li><img src="./img/common/client-logo-asahi.png" alt="アサヒグループ"></li>
+              <li><img src="./img/common/client-logo-gcstory.png" alt="GCストーリー株式会社"></li>
+              <li><img src="./img/common/client-logo-tep.png" alt="TeP."></li>
+              <li><img src="./img/common/client-logo-macromill.png" alt="MACROMILL"></li>
+              <li><img src="./img/common/client-logo-shikoku-kasei.png" alt="四国化成"></li>
+              <li><img src="./img/common/client-logo-nextpro.png" alt="ネクプロ"></li>
+            </ul>
+          </div>
+        </section>
+
+        <form class="form-panel" action="./contact-thanks.html" method="post">
+          <div class="form-field">
+            <label for="contact-company"><span class="form-field__required">必須</span>会社名</label>
+            <input id="contact-company" name="company" type="text" autocomplete="organization" placeholder="例）株式会社〇〇" required>
+          </div>
+          <div class="form-field">
+            <label for="contact-name"><span class="form-field__required">必須</span>お名前</label>
+            <input id="contact-name" name="name" type="text" autocomplete="name" placeholder="例）〇〇 〇〇" required>
+          </div>
+          <div class="form-field">
+            <label for="contact-tel"><span class="form-field__required">必須</span>電話番号</label>
+            <input id="contact-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="例）0312345678" required>
+          </div>
+          <div class="form-field">
+            <label for="contact-email"><span class="form-field__required">必須</span>メールアドレス</label>
+            <input id="contact-email" name="email" type="email" autocomplete="email" placeholder="例）info@example.com" required>
+          </div>
+          <div class="form-field">
+            <label for="contact-message"><span class="form-field__required">必須</span>ご相談・お問い合わせ内容</label>
+            <textarea id="contact-message" name="message" placeholder="例）導入を検討しています。他社との違いやオンボーディングのサポートについて伺いたいです。" required></textarea>
+          </div>
+          <p class="form-panel__agreement"><a href="./privacy-poricy.html" target="_blank" rel="noopener noreferrer">個人情報保護方針</a>に同意したものとします。</p>
+          <button class="c-button c-button--brown form-panel__submit" type="submit">
+            <span>問い合わせる <small>無料</small></span>
+            <img src="./img/common/button-icon-white.svg" alt="">
+          </button>
+        </form>
+      </div>
+
+      <section class="form-call" aria-label="電話でのお問い合わせ">
+        <div class="form-call__message">
+          <img src="./img/common/icon-tel-white.svg" alt="">
+          <p>お電話からも承っておりますのでご連絡ください。</p>
+        </div>
+        <div class="form-call__tel-wrapper">
+        <a class="form-call__tel" href="tel:0368247902">
+          <span><span class="form-call__tel--en">Tel.</span> 03-6824-7902</span>
+        </a>
+        <p class="form-call__note">24時間365日対応します</p>
+      </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="form-footer">
+    <div class="form-footer__inner inner inner--content">
+      <a class="form-footer__logo" href="./" aria-label="Weegent トップページへ"><img src="./img/common/logo.png" alt="Weegent"></a>
+      <small>&copy; <time datetime="2026">2026</time> Weegent Inc.</small>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="./js/script.js?v=6"></script>
+</body>
+
+</html>

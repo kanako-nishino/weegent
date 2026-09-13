@@ -4,12 +4,20 @@
 // ヘッダー
 // --------------------------------
 .header {
-  position: absolute;
+  position: fixed;
   z-index: 10;
   top: 0;
   left: 0;
   width: 100%;
   color: $white;
+  background-color: transparent;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+// スクロールして中身のセクションに重なったら背景を付けて視認性を確保する（js/script.jsで付与）
+.header.is-scrolled {
+  background-color: rgba($navy, 0.92);
+  box-shadow: 0 rem(2) rem(12) rgba(#000, 0.15);
 }
 
 .header__inner {
@@ -23,7 +31,6 @@
   @include mq("md") {
     min-height: rem(121);
     padding: rem(16) rem(40);
-    align-items: flex-start;
   }
 }
 
@@ -54,6 +61,7 @@
 .header__tel-number,
 .header__tel-hours {
   display: block;
+  margin-right: rem(18);
 }
 
 .header__tel-number {

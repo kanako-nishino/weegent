@@ -1,0 +1,258 @@
+@use "global" as *;
+
+// ==============================
+// お役立ち資料一覧ページ
+// ==============================
+
+.page-document {
+  background-color: $navy;
+}
+
+.sub-document {
+  padding-top: rem(48);
+  color: $beige;
+  background-color: $navy;
+
+  @include mq("md") {
+    padding-top: rem(120);
+  }
+}
+
+// SPではカード背景を画面幅いっぱいに見せ、カード自身のpaddingで
+// sub-heroと同じ左右余白を確保する。
+.sub-document__inner {
+  padding-right: 0;
+  padding-left: 0;
+
+  @include mq("md") {
+    padding-right: rem(40);
+    padding-left: rem(40);
+  }
+}
+
+.document-download-list {
+  display: grid;
+  gap: rem(4);
+
+  @include mq("md") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: rem(8);
+  }
+}
+
+.document-download-list__item--wide {
+  @include mq("md") {
+    grid-column: 1 / -1;
+  }
+}
+
+.document-download-card {
+  min-height: rem(204);
+  height: 100%;
+  padding: rem(32) rem(24);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(241, 240, 234, 0.10);
+
+  @include mq("md") {
+    min-height: rem(381);
+    padding: rem(32) rem(20);
+    align-items: center;
+  }
+}
+
+.document-download-card__body {
+  width: 100%;
+  display: grid;
+  grid-template-columns: rem(100) minmax(0, 1fr);
+  align-items: center;
+  gap: rem(16);
+
+  @include mq("md") {
+    display: flex;
+    flex-direction: column;
+    gap: rem(31);
+  }
+}
+
+// resource-card__previewの重なり表現を再利用しつつ、
+// 一覧ページではカード内の通常フローに配置する。
+.resource-card__preview.document-download-card__preview {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: rem(93);
+  height: rem(62);
+  display: grid;
+  place-items: center;
+  transform: none;
+
+  @include mq("md") {
+    width: rem(240);
+    height: rem(160);
+  }
+}
+
+// SPのみ2枚目・3枚目の重なり幅を狭める（PCは.resource-card__preview--stackedのまま）
+.resource-card__preview--stacked.document-download-card__preview {
+  box-shadow:
+    rem(1.563) rem(1.563) rem(6.25) rgba(0, 0, 0, 0.04),
+    rem(4) rem(4) 0 $white,
+    rem(4) rem(7) rem(6) rgba($navy, 0.08),
+    rem(8) rem(8) 0 $white,
+    rem(8) rem(11) rem(6) rgba($navy, 0.08);
+
+  @include mq("md") {
+    box-shadow:
+      rem(1.563) rem(1.563) rem(6.25) rgba(0, 0, 0, 0.04),
+      rem(6) rem(6) 0 $white,
+      rem(6) rem(9) rem(6) rgba($navy, 0.08),
+      rem(12) rem(12) 0 $white,
+      rem(12) rem(15) rem(6) rgba($navy, 0.08);
+  }
+}
+
+.document-download-card__preview p {
+  position: relative;
+  z-index: 2;
+  padding: rem(8);
+  color: rgba($navy, 0.45);
+  text-align: center;
+  @include font(6, 10, 20, $regular);
+
+  @include mq("md") {
+    padding: rem(16);
+    @include font(10, 18, 20, $regular);
+  }
+}
+
+.document-download-card__title {
+  font-family: $serif;
+  @include font(22, null, 60, $medium);
+
+  @include mq("md") {
+    text-align: center;
+    @include font(32, null, 60, $medium);
+  }
+}
+
+.document-download-card__button {
+  min-height: rem(56);
+  margin-top: rem(16);
+  @include font(15, 15, null, $bold);
+  border: 1px solid #1A1C3D;
+
+  @include mq("md") {
+    width: auto;
+    min-width: rem(274);
+    min-height: rem(64);
+    margin-top: rem(16);
+    justify-content: center;
+    padding-right: rem(16);
+    padding-left: rem(24);
+    @include font(18, 18, null, $bold);
+  }
+}
+
+.document-download-card__button img {
+  @include mq("md") {
+    margin-left: rem(16);
+  }
+}
+
+.document-download-card--case {
+  min-height: rem(168);
+
+  @include mq("md") {
+    min-height: rem(190);
+  }
+}
+
+.document-download-card--case .document-download-card__body {
+  display: block;
+}
+
+.document-download-card--case .document-download-card__title {
+  text-align: left;
+
+  @include mq("md") {
+    text-align: center;
+  }
+}
+
+.document-download-card--case .document-download-card__button {
+  @include mq("md") {
+    min-width: rem(398);
+  }
+}
+
+.document-download-card--case .document-download-card__button small {
+  padding: rem(2) rem(8);
+  @include font(10, 10, null, $medium);
+
+  @include mq('md'){
+    @include font(12,12);
+    padding: rem(4) rem(9);
+  }
+}
+
+// --------------------------------
+// お役立ち資料一覧
+// --------------------------------
+.document-archive {
+    padding-top: rem(56);
+  padding-bottom: rem(96);
+  color: $beige;
+  background-color: $navy;
+
+  @include mq("md") {
+    padding-top: rem(120);
+    padding-bottom: rem(120);
+  }
+}
+
+
+
+// TOP等のSwiperで使う既存document-listを基準にしながら、
+// 一覧ページではSPも通常の縦並びにする。
+.document-list--archive {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: rem(48);
+
+  @include mq("md") {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: rem(64) rem(48);
+  }
+}
+
+.document-list--archive .document-list__item {
+  width: auto;
+  min-width: 0;
+  flex: none;
+  scroll-snap-align: none;
+}
+
+.document-list--archive .document-card {
+  @include mq("md") {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.document-list--archive .document-card__image {
+  padding: rem(24);
+}
+
+.document-list--archive .document-card__category{
+    font-size: rem(12);
+
+    @include mq('md'){
+        font-size: rem(14);
+    }
+}
+.document-list--archive .document-card__button{
+    min-height: rem(48);
+}
