@@ -1901,24 +1901,25 @@ padding-block: rem(110);
 
 .document-card__image {
   padding: rem(16);
+  // 画像未読み込み・未設定でも枠が潰れないよう、比率は親側で保証する。
+  aspect-ratio: 212 / 119;
+  overflow: hidden;
   border-radius: rem(4);
   background-color: rgba($white, 0.12);
   box-shadow: 8px 8px 12px 0 rgba(0, 0, 0, 0.04);
 
   @include mq("md") {
     padding: rem(24);
+    aspect-ratio: 155 / 87;
   }
 }
 
 .document-card__image img {
+  display: block;
   width: 100%;
-  aspect-ratio: 212 / 119;
+  height: 100%;
   border-radius: rem(2);
   object-fit: cover;
-
-  @include mq('md'){
-    aspect-ratio: 155 / 87;
-  }
 }
 
 .document-card__category {
@@ -2210,6 +2211,8 @@ padding-bottom: rem(24);
 
 .comparison-table-scroll {
   margin-top: rem(40);
+  // .document-sliderと同じ手法で、親（.inner--content）の右paddingに阻まれず画面右端まで広げる。
+  margin-right: calc(50% - 50vw);
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   scrollbar-width: thin;
@@ -2217,6 +2220,7 @@ padding-bottom: rem(24);
 
   @include mq("md") {
     margin-top: rem(56);
+    margin-right: 0;
     overflow-x: visible;
   }
 }
