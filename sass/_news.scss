@@ -1,0 +1,542 @@
+@use "global" as *;
+
+// ==============================
+// お知らせ一覧ページ
+// ==============================
+
+.page-archive-news {
+  background-color: $navy;
+  --wave-offset-y-sp: #{rem(-80)};
+
+}
+
+.news-archive-section {
+  padding-top: rem(48);
+  padding-bottom: rem(96);
+  color: $beige;
+  background-color: $navy;
+
+  @include mq("md") {
+    padding-top: rem(120);
+    padding-bottom: rem(120);
+  }
+}
+
+
+.news-filter__select-wrap {
+  position: relative;
+}
+
+.news-filter__select-wrap::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: rem(15);
+  z-index: 1;
+  width: 0;
+  height: 0;
+  border-top: rem(4) solid $beige;
+  border-right: rem(3) solid transparent;
+  border-left: rem(3) solid transparent;
+  transform: translateY(-25%);
+  pointer-events: none;
+}
+
+.news-filter__select-wrap::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: rem(39);
+  width: rem(1);
+  height: rem(20);
+  background-color: rgba($beige, 0.5);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.news-filter__select {
+  width: 100%;
+  height: rem(44);
+  padding: 0 rem(56) 0 rem(12);
+  color: $beige;
+  border: 0;
+  border-radius: 0;
+  background: rgba(241, 240, 234, 0.10);
+  appearance: none;
+  @include font(14, 14, null, $medium);
+}
+
+.news-archive__layout {
+  margin-top: rem(40);
+
+  @include mq("md") {
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: rem(280) minmax(0, 1fr);
+    column-gap: rem(120);
+    align-items: start;
+  }
+}
+
+.news-category-nav {
+  @include mq("md") {
+    position: sticky;
+    top: rem(145);
+    max-height: calc(100vh - #{rem(145)});
+    overflow-y: auto;
+  }
+}
+
+.news-category-nav__link {
+  min-height: rem(65);
+  padding: rem(24) 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem(16);
+  color: $beige;
+  border-bottom: rem(1) solid rgba(241, 240, 234, 0.20);
+  @include font(16, 16, 0, $medium);
+
+  &:hover{
+    opacity: 0.7;
+  }
+}
+
+.news-category-nav__link.is-current{
+  border-color: $beige;
+
+  &:hover{
+    opacity: 1;
+  }
+}
+
+.news-category-nav__link img {
+  width: rem(16);
+  height: rem(16);
+  flex-shrink: 0;
+}
+
+.news-list__item {
+  border-bottom: 1px solid #5B5C71;
+
+}
+
+.news-list__item:first-child {
+  border-top: 1px solid #5B5C71;
+
+}
+
+.news-card__link {
+  position: relative;
+  min-height: rem(103);
+  padding: rem(24) rem(24) rem(24) 0;
+  display: block;
+  color: $beige;
+
+  @include mq("md") {
+    min-height: rem(114);
+  }
+
+  &:hover{
+    opacity: 0.7;
+  }
+}
+
+.news-card__meta {
+  display: flex;
+  align-items: center;
+  gap: rem(6);
+  @include font(14, 14, 40, $medium);
+
+  @include mq("md") {
+    gap: rem(8);
+    @include font(16, 16, 40, $medium);
+  }
+}
+
+.news-card__weekday {
+  width: rem(19);
+  height: rem(19);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: rem(6);
+  color: $beige;
+  background: rgba(241, 240, 234, 0.30);
+  @include font(13, 13, 40, $medium);
+
+  @include mq("md") {
+    width: rem(20);
+    height: rem(20);
+    @include font(14, 14, 40, $medium);
+  }
+}
+
+.news-card__category {
+  letter-spacing: 0;
+}
+
+.news-card__title {
+  margin-top: rem(8);
+  font-family: $serif;
+  @include font(18, null, 60, $medium);
+
+  @include mq("md") {
+    margin-top: rem(12);
+    @include font(22, null, 60, $medium);
+  }
+}
+
+.news-card__icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: rem(16);
+  height: rem(16);
+  transform: translateY(-50%);
+}
+
+.news-archive-pagination {
+  margin-top: rem(48);
+}
+
+// ==============================
+// お知らせ詳細ページ
+// ==============================
+
+.page-single-news {
+  color: $beige;
+  background-color: $navy;
+  --wave-offset-y-sp: #{rem(-80)};
+
+  @include mq('md'){
+    --wave-offset-y-pc: #{rem(-380)};
+  }
+}
+
+.news-single {
+  padding-bottom: rem(96);
+  color: $beige;
+  background-color: $navy;
+
+  @include mq("md") {
+    padding-bottom: rem(120);
+  }
+}
+
+.news-single::before {
+  // @include mq("md") {
+  //   top: rem(-262);
+  //   left: 50%;
+  //   width: calc(1581 / 1440 * 100vw);
+  //   aspect-ratio: 1581 / 763.48;
+  //   transform: translateX(-50%);
+  // }
+}
+
+.news-single > .sub-hero__breadcrumb-area {
+  padding-top: rem(96);
+
+  @include mq("md") {
+    padding-top: rem(120);
+  }
+}
+
+.news-single__breadcrumb-current {
+  display: block;
+  // 固定の文字数ではなく、そのパンくずの行の残り幅いっぱいまで伸ばし、
+  // 折り返さずに画面（コンテナ）端で「...」にする。
+  flex: 1 1 0%;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  @include mq("md") {
+    flex: initial;
+    min-width: auto;
+    overflow: visible;
+    white-space: normal;
+  }
+}
+
+.news-single__inner {
+  padding-top: rem(48);
+
+  @include mq("md") {
+    max-width: rem(1020);
+    padding-top: rem(64);
+  }
+}
+
+.news-single__header h1 {
+  font-family: $serif;
+  @include font(22, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(32, null, 60, $medium);
+  }
+}
+
+.news-single__header .news-card__meta {
+  margin-top: rem(16);
+  color: $beige;
+
+  @include mq("md") {
+    margin-top: rem(24);
+  }
+}
+
+.news-single__header .news-card__category {
+  color: inherit;
+}
+
+// WordPressのthe_content()を.entry-content内に出力する想定。
+// ブロックごとの固有クラスがなくても、標準要素だけで本文の体裁が整うようにする。
+.entry-content {
+  margin-top: rem(48);
+  overflow-wrap: anywhere;
+  @include font(14, 25.2, null, $medium);
+
+  @include mq("md") {
+    margin-top: rem(64);
+    @include font(17, 30.6, null, $medium);
+  }
+}
+
+.entry-content > * + * {
+  margin-top: rem(16);
+
+  @include mq("md") {
+    margin-top: rem(32);
+  }
+}
+
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+  font-family: $serif;
+  font-weight: $medium;
+  line-height: 1.5;
+}
+
+.entry-content h2 {
+  margin-top: rem(48);
+  @include font(24, 36, 40, $medium);
+
+  @include mq("md") {
+    margin-top: rem(56);
+    @include font(28, 42, 40, $medium);
+  }
+}
+
+.entry-content h3 {
+  margin-top: rem(40);
+  @include font(20, 32, 40, $medium);
+
+  @include mq("md") {
+    margin-top: rem(48);
+    @include font(24, 36, 40, $medium);
+  }
+}
+
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+  margin-top: rem(32);
+  @include font(18, 28, 40, $medium);
+
+  @include mq("md") {
+    margin-top: rem(40);
+    @include font(20, 32, 40, $medium);
+  }
+}
+
+.entry-content h2 + *,
+.entry-content h3 + *,
+.entry-content h4 + *,
+.entry-content h5 + *,
+.entry-content h6 + * {
+  margin-top: rem(16);
+}
+
+.entry-content a:not(.wp-block-button__link) {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: rem(4);
+
+  &:hover{
+    opacity: 0.7;
+  }
+}
+
+.entry-content ul,
+.entry-content ol {
+  padding-left: rem(24);
+}
+
+.entry-content ul {
+  list-style: disc;
+}
+
+.entry-content ol {
+  list-style: decimal;
+}
+
+.entry-content li + li {
+  margin-top: rem(8);
+}
+
+.entry-content li > ul,
+.entry-content li > ol {
+  margin-top: rem(8);
+}
+
+.entry-content figure,
+.entry-content .wp-block-image,
+.entry-content .wp-block-video,
+.entry-content .wp-block-embed {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.entry-content img,
+.entry-content video,
+.entry-content iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+.entry-content figcaption {
+  margin-top: rem(8);
+  color: rgba($beige, 0.72);
+  text-align: center;
+  @include font(12, 20, 40, $regular);
+}
+
+.entry-content blockquote,
+.entry-content .wp-block-quote {
+  padding: rem(16) rem(20);
+  border-left: rem(3) solid $brown;
+  background-color: rgba($beige, 0.08);
+
+  @include mq("md") {
+    padding: rem(20) rem(24);
+  }
+}
+
+.entry-content blockquote cite {
+  margin-top: rem(8);
+  display: block;
+  color: rgba($beige, 0.72);
+  @include font(12, 20, 40, $regular);
+}
+
+.entry-content hr,
+.entry-content .wp-block-separator {
+  height: rem(1);
+  border: 0;
+  background-color: rgba($beige, 0.3);
+}
+
+.entry-content .wp-block-table {
+  overflow-x: auto;
+}
+
+.entry-content table {
+  width: 100%;
+  min-width: rem(560);
+  border-collapse: collapse;
+}
+
+.entry-content th,
+.entry-content td {
+  padding: rem(12) rem(16);
+  border: rem(1) solid rgba($beige, 0.3);
+  text-align: left;
+}
+
+.entry-content th {
+  background-color: rgba($beige, 0.1);
+}
+
+.entry-content .wp-block-columns {
+  display: grid;
+  gap: rem(24);
+
+  @include mq("md") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: rem(32);
+  }
+}
+
+.entry-content .wp-block-button__link {
+  min-height: rem(56);
+  padding: rem(16) rem(24);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  border-radius: rem(2);
+  background-color: $brown;
+  @include font(14, 20, 40, $medium);
+
+  &:hover{
+    opacity: 0.7;
+  }
+}
+
+.entry-content pre,
+.entry-content code {
+  font-family: monospace;
+}
+
+.entry-content pre {
+  padding: rem(16);
+  overflow-x: auto;
+  background-color: rgba($beige, 0.08);
+  white-space: pre;
+}
+
+.entry-content .aligncenter {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.entry-content .alignleft,
+.entry-content .alignright {
+  @include mq("md") {
+    max-width: 48%;
+  }
+}
+
+.entry-content .alignleft {
+  @include mq("md") {
+    margin-right: rem(24);
+    float: left;
+  }
+}
+
+.entry-content .alignright {
+  @include mq("md") {
+    margin-left: rem(24);
+    float: right;
+  }
+}
+
+.entry-content::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.news-single__share {
+  margin-top: rem(40);
+
+  @include mq("md") {
+    margin-top: rem(48);
+  }
+}

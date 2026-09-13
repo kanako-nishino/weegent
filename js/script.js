@@ -32,14 +32,18 @@ jQuery(function ($) { // この中であればWordPressでも「$」が使用可
   var topBtn = $(".pagetop");
   topBtn.hide();
 
-  // ボタンの表示設定
+  var $header = $(".header");
+
+  // ボタンの表示設定・ヘッダーの背景切り替え
   $(window).scroll(function () {
     if ($(this).scrollTop() > 70) {
       // 指定px以上のスクロールでボタンを表示
       topBtn.fadeIn();
+      $header.addClass("is-scrolled");
     } else {
       // 画面が指定pxより上ならボタンを非表示
       topBtn.fadeOut();
+      $header.removeClass("is-scrolled");
     }
   });
 
@@ -173,6 +177,83 @@ jQuery(function ($) { // この中であればWordPressでも「$」が使用可
       $(this).prop("hidden", true);
     });
     $("html,body").css("overflow", "initial");
+  });
+
+  // 対応可能サービス モーダル
+  var $serviceModal = $(".js-service-modal");
+  var $serviceModalDialog = $serviceModal.find(".service-modal__dialog");
+  var $serviceModalTitle = $serviceModal.find(".js-service-modal-title");
+  var $serviceModalIcon = $serviceModal.find(".js-service-modal-icon");
+  var $serviceModalBody = $serviceModal.find(".js-service-modal-body");
+  var $serviceModalTrigger = $();
+  var serviceModalCloseTimer;
+
+  function openServiceModal($trigger) {
+    var source = $trigger.closest(".available-service-list__item").find(".js-service-modal-source").get(0);
+    var $cardIcon = $trigger.find(".available-service-card__icon img").first();
+    var cardTitle = $trigger.find(".available-service-card__title").text().replace(/\s+/g, " ").trim();
+    var modalTitle = $trigger.data("modal-title") || cardTitle + "とは？";
+
+    if (!$serviceModal.length || !source) return;
+
+    window.clearTimeout(serviceModalCloseTimer);
+    $serviceModalTrigger = $trigger;
+    $serviceModalTitle.text(modalTitle);
+    $serviceModalIcon.attr("src", $cardIcon.attr("src") || "");
+    $serviceModalBody.empty().append(source.content.cloneNode(true));
+    $serviceModal.prop("hidden", false).attr("aria-hidden", "false");
+    $("html").addClass("is-fixed");
+
+    window.requestAnimationFrame(function () {
+      $serviceModal.addClass("is-open");
+      $serviceModalDialog.trigger("focus");
+    });
+  }
+
+  function closeServiceModal() {
+    if (!$serviceModal.hasClass("is-open")) return;
+
+    $serviceModal.removeClass("is-open").attr("aria-hidden", "true");
+    $("html").removeClass("is-fixed");
+
+    serviceModalCloseTimer = window.setTimeout(function () {
+      $serviceModal.prop("hidden", true);
+      $serviceModalBody.empty();
+
+      if ($serviceModalTrigger.length) {
+        $serviceModalTrigger.trigger("focus");
+      }
+    }, 200);
+  }
+
+  $(".js-service-modal-open").on("click", function () {
+    openServiceModal($(this));
+  });
+
+  $(".js-service-modal-close").on("click", closeServiceModal);
+
+  $serviceModalDialog.on("keydown", function (event) {
+    if (event.key !== "Tab") return;
+
+    var $focusableElements = $serviceModalDialog.find('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    var firstElement = $focusableElements.get(0);
+    var lastElement = $focusableElements.get($focusableElements.length - 1);
+
+    if (!firstElement || !lastElement) return;
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  });
+
+  $(document).on("keydown", function (event) {
+    if (event.key === "Escape" && $serviceModal.hasClass("is-open")) {
+      closeServiceModal();
+    }
   });
 
   // お役立ち資料スライダー

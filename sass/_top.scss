@@ -8,3 +8,9 @@
   --fv-image-sp: url("../img/top/fv-top-sp.jpg");
   --fv-image-pc: url("../img/top/fv-top.jpg");
 }
+
+// service末尾の波と、直後のstrength先頭の波が重複するため、
+// TOPではstrength側の1つだけを表示する。
+.page-top .service-section::before {
+  content: none;
+}

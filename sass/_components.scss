@@ -10,6 +10,13 @@
   overflow: hidden;
   color: $white;
   background-color: $navy;
+  z-index: 2;
+
+  @include mq("md") {
+    // 1440pxカンプの高さを基準にしつつ、768〜1199pxではremの可変値に追従する。
+    // コンテンツがこれを超える場合は、gridの内容量に合わせてFV自体が伸びる。
+    min-height: rem(618);
+  }
 }
 
 .fv__background {
@@ -24,7 +31,10 @@
   background-size: cover;
 
   @include mq("md") {
-    aspect-ratio: var(--fv-image-aspect-pc, 1440 / 618);
+    // PCでは画像比率を要素の高さに使わず、FVの確定した高さまで背景を広げる。
+    // 1440pxでは618px、狭い画面では内容を収め、広い画面では縦に伸びすぎない。
+    aspect-ratio: auto;
+    align-self: stretch;
     background-image: var(--fv-image-pc, var(--fv-image-sp, none));
   }
 }
@@ -1003,7 +1013,10 @@ padding-block: rem(110);
 
 .resource-background {
   position: relative;
+  // 後続セクションからはみ出した波を、背景画像の上には重ねない。
+  z-index: 2;
   overflow: hidden;
+  background: #616885;
 }
 
 .resource-background::before {
@@ -1013,7 +1026,7 @@ padding-block: rem(110);
   bottom: 0;
   left: 50%;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 390 / 280;
   background-image: url("../img/support/support-bg.jpg");
   background-repeat: no-repeat;
   background-position: top center;
@@ -1026,6 +1039,8 @@ padding-block: rem(110);
   @include mq('md'){
     background-image: url("../img/support/support-bg-pc.jpg");
     mask-image: none;
+    aspect-ratio: initial;
+    height:100%;
   }
 }
 
@@ -1037,7 +1052,9 @@ padding-block: rem(110);
 
 .resource-background > * {
   position: relative;
-  z-index: 1;
+  // 隣接するsection-waveがセクション境界を越えても、
+  // 見出しやカードなどのコンテンツは波より手前に保つ。
+  z-index: 2;
 }
 
 .support-section__title {
@@ -1144,6 +1161,7 @@ padding-block: rem(110);
   @include mq("md") {
     min-height: rem(66);
     @include font(18, 18, null, $bold);
+    justify-content: center;
   }
 }
 
@@ -1156,7 +1174,13 @@ padding-block: rem(110);
   color: $beige;
 
   @include mq("md") {
-    --wave-offset-y-pc: #{rem(-280)};
+    // 波を画面幅に合わせて拡大した分だけ上へ戻し、
+    // 1440px以上でも下端がイラスト側へ降りてこないようにする。
+    --wave-offset-y-pc: clamp(
+      #{rem(-528)},
+      calc(#{rem(-280)} - (100vw - #{rem(1440)}) * 0.5174),
+      #{rem(-280)}
+    );
     padding-bottom: rem(120);
   }
 }
@@ -1383,21 +1407,34 @@ padding-block: rem(110);
 
 .available-service-card {
   position: relative;
+  width: 100%;
   padding: rem(16) rem(2);
   height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
+  color: $navy;
   text-align: center;
   background-color: $white;
   border-radius: rem(4);
   overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 
   @include mq("md") {
     min-height: rem(172);
     padding: rem(24) rem(12);
   }
+}
+
+.available-service-card:hover {
+  transform: translateY(rem(-3));
+  box-shadow: 0 rem(8) rem(24) rgba($navy, 0.14);
+}
+
+.available-service-card:focus-visible {
+  outline: rem(3) solid $brown;
+  outline-offset: rem(3);
 }
 
 .available-service-card__icon {
@@ -1435,10 +1472,248 @@ padding-block: rem(110);
   width: rem(16);
   height: rem(16);
   display: block;
+  transition: transform 0.25s ease;
 
   @include mq("md") {
     width: rem(24);
     height: rem(24);
+  }
+}
+
+.available-service-card:hover .available-service-card__plus,
+.available-service-card:focus-visible .available-service-card__plus {
+  transform: rotate(90deg);
+}
+
+// --------------------------------
+// 対応可能サービス モーダル
+// --------------------------------
+.service-modal {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  padding: rem(24) rem(16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+
+  &.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+
+  @include mq("md") {
+    padding: rem(40);
+  }
+}
+
+.service-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba($navy, 0.78);
+  backdrop-filter: blur(rem(3));
+}
+
+.service-modal__dialog {
+  position: relative;
+  width: min(100%, rem(980));
+  min-width: 0;
+  max-height: calc(100dvh - #{rem(48)});
+  padding: rem(56) rem(20) rem(24);
+  overflow-y: auto;
+  color: $navy;
+  background-color: $white;
+  box-shadow: 0 rem(20) rem(60) rgba(#000, 0.24);
+  border-radius: rem(4);
+  transform: translateY(rem(12));
+  transition: transform 0.2s ease;
+
+  @include mq("md") {
+    max-height: calc(100dvh - #{rem(80)});
+    padding: rem(40) rem(48) rem(32);
+  }
+}
+
+.service-modal.is-open .service-modal__dialog {
+  transform: translateY(0);
+}
+
+.service-modal__close {
+  position: absolute;
+  top: rem(12);
+  right: rem(12);
+  width: rem(36);
+  height: rem(36);
+  background-color: $navy;
+  border-radius: rem(2);
+
+  @include mq("md") {
+    top: rem(16);
+    right: rem(16);
+    width: rem(40);
+    height: rem(40);
+  }
+}
+
+.service-modal__close span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: rem(18);
+  height: rem(2);
+  background-color: $white;
+  border-radius: rem(1);
+
+  &:first-child {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &:last-child {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+
+.service-modal__close:focus-visible {
+  outline: rem(3) solid $brown;
+  outline-offset: rem(3);
+}
+
+.service-modal__header {
+  text-align: center;
+}
+
+.service-modal__icon {
+  width: rem(64);
+  height: rem(64);
+  margin-inline: auto;
+  padding: rem(16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $beige;
+  border-radius: 50%;
+
+  @include mq("md") {
+    width: rem(80);
+    height: rem(80);
+    padding: rem(20);
+  }
+}
+
+.service-modal__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.service-modal__title {
+  margin-top: rem(16);
+  font-family: $serif;
+  color: $camel;
+  @include font(20, null, 60, $bold);
+
+  @include mq("md") {
+    margin-top: rem(20);
+    @include font(26, null, 60, $bold);
+  }
+}
+
+.service-modal__body {
+  min-width: 0;
+  margin-top: rem(16);
+
+  @include mq("md") {
+    margin-top: rem(20);
+  }
+}
+
+.service-modal__description {
+  text-align: left;
+  @include font(14, 24, 40, $medium);
+
+  @include mq("md") {
+    text-align: center;
+    @include font(16, 28, 40, $medium);
+  }
+}
+
+.service-modal__section {
+  margin-top: rem(24);
+  padding-top: rem(24);
+  border-top: rem(1) solid rgba($navy, 0.16);
+
+  @include mq("md") {
+    margin-top: rem(28);
+    padding-top: rem(28);
+  }
+}
+
+.service-modal__section-title {
+  overflow-wrap: anywhere;
+  font-family: $serif;
+  color: $camel;
+  text-align: center;
+  @include font(18, null, 60, $bold);
+
+  @include mq("md") {
+    @include font(22, null, 60, $bold);
+  }
+}
+
+.service-modal__list {
+  width: 100%;
+  max-width: 100%;
+  margin: rem(14) auto 0;
+
+  @include mq("md") {
+    width: fit-content;
+  }
+}
+
+.service-modal__list li {
+  position: relative;
+  overflow-wrap: anywhere;
+  padding-left: rem(18);
+  @include font(14, 22, 40, $medium);
+
+  @include mq("md") {
+    padding-left: rem(22);
+    @include font(16, 26, 40, $medium);
+  }
+}
+
+.service-modal__list li::before {
+  content: "";
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: rem(8);
+  height: rem(8);
+  background-color: $brown;
+  border-radius: 50%;
+
+  @include mq("md") {
+    width: rem(10);
+    height: rem(10);
+  }
+}
+
+.service-modal__recommend {
+  margin-top: rem(24);
+  padding: rem(24) rem(16);
+  background-color: $beige;
+  border-radius: rem(4);
+
+  @include mq("md") {
+    margin-top: rem(32);
+    padding: rem(28) rem(32);
   }
 }
 
@@ -1615,8 +1890,8 @@ padding-block: rem(110);
 }
 
 .document-list__item {
-  width: calc(100vw - #{rem(110)});
-  flex: 0 0 calc(100vw - #{rem(110)});
+  width: linear_func(390,280,760,400);
+  flex: 0 0 linear_func(390,280,760,400);
   scroll-snap-align: start;
 
   @include mq("md") {
@@ -1942,7 +2217,7 @@ padding-bottom: rem(24);
 
   @include mq("md") {
     margin-top: rem(56);
-    overflow: visible;
+    overflow-x: visible;
   }
 }
 
@@ -1978,7 +2253,7 @@ padding-bottom: rem(24);
   width: rem(108);
 
   @include mq("md") {
-    width: rem(125);
+    width: 10.408%;
   }
 }
 
@@ -1986,13 +2261,14 @@ padding-bottom: rem(24);
   width: rem(220);
 
   @include mq("md") {
-    width: rem(252);
+    width: 20.982%;
   }
 }
 
 .comparison-table__service-column--featured {
   @include mq("md") {
-    width: rem(320);
+    // 1440px時は約320px。狭いPC幅では表全体と同じ比率で縮小する。
+    width: 26.646%;
   }
 }
 
@@ -2183,7 +2459,6 @@ padding-bottom: rem(24);
 }
 
 .flow-card {
-  min-height: rem(184);
   padding: rem(24);
   color: $navy;
   border-radius: rem(4);
@@ -2506,12 +2781,21 @@ padding-bottom: rem(24);
     height: rem(48);
     @include font(14, 14, null, $medium);
   }
+
+  &:hover{
+    opacity: 0.7;
+  }
 }
 
 .pagination__link.is-current {
   color: $navy;
   border-color: $beige;
   background-color: $beige;
+  pointer-events: none;
+
+  &:hover{
+    opacity: 1;
+  }
 }
 
 .pagination__link--prev img,
@@ -2523,4 +2807,235 @@ padding-bottom: rem(24);
 .pagination__link.is-disabled {
   opacity: 0.35;
   pointer-events: none;
+}
+
+// --------------------------------
+// 下層ページ共通・フッター前お問い合わせ導線
+// --------------------------------
+.sub-footer-cta {
+  min-height: rem(1088);
+  padding-top: rem(56);
+  padding-bottom: rem(56);
+  color: $navy;
+  background: url("../img/common/sub-footer-bg.jpg") no-repeat center / cover;
+
+  @include mq("md") {
+    min-height: rem(750);
+    padding-top: rem(80);
+    padding-bottom: rem(80);
+    background-image: url("../img/common/sub-footer-bg-pc.jpg");
+  }
+}
+
+.sub-footer-cta__heading {
+  color: $beige;
+  font-family: $serif;
+  text-align: center;
+  @include font(22, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(40, null, 60, $medium);
+  }
+}
+
+.sub-footer-cta__cards {
+  margin-top: rem(32);
+  display: grid;
+  gap: rem(8);
+
+  @include mq("md") {
+    margin-top: rem(32);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: rem(24);
+  }
+}
+
+.sub-footer-card {
+  padding: rem(20) rem(24) rem(24);
+  display: flex;
+  flex-direction: column;
+  background-color: $beige;
+  border-radius: rem(4);
+
+  @include mq("md") {
+    min-height: rem(298);
+    padding:  rem(24);
+    text-align: center;
+  }
+}
+
+.sub-footer-cta__cards-item:not(:first-child) .sub-footer-card {
+  // min-height: rem(212);
+}
+
+.sub-footer-card__header {
+  display: flex;
+  align-items: center;
+  gap: rem(12);
+
+  @include mq("md") {
+    flex-direction: column;
+    justify-content: center;
+    gap: rem(16);
+  }
+}
+
+.sub-footer-card__icon {
+  width: rem(24);
+  height: rem(24);
+  object-fit: contain;
+
+  @include mq("md") {
+    width: rem(39);
+    height: rem(39);
+  }
+}
+
+.sub-footer-card__title {
+  font-family: $serif;
+  @include font(20, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(24, null, 60, $medium);
+  }
+}
+
+.sub-footer-card__description {
+  margin-top: rem(10);
+  @include font(14, 22.4, 40, $medium);
+
+  @include mq("md") {
+    margin-top: rem(8);
+    @include font(17, 27.2, 40, $medium);
+  }
+}
+
+.sub-footer-card__button {
+  min-height: rem(56);
+  margin-top: rem(16);
+
+  @include mq("md") {
+    min-height: rem(66);
+    justify-content: center;
+    position: relative;
+  }
+}
+
+.sub-footer-card__button > img {
+  @include mq("md") {
+    position: absolute;
+    top: 50%;
+    right: rem(16);
+    transform: translateY(-50%);
+  }
+}
+
+.sub-footer-phone {
+  // min-height: rem(212);
+  margin-top: rem(8);
+  padding: rem(24);
+  background-color: $beige;
+  border-radius: rem(2);
+
+  @include mq("md") {
+    min-height: rem(122);
+    margin-top: rem(24);
+    padding: rem(24) rem(48);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.sub-footer-phone__heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(12);
+  font-family: $serif;
+  @include font(18, 28.8, 60, $medium);
+
+  @include mq("md") {
+    gap: rem(8);
+    justify-content: flex-start;
+    @include font(24, null, 60, $medium);
+  }
+}
+
+.sub-footer-phone__heading img {
+  width: rem(24);
+  height: rem(24);
+
+  @include mq("md") {
+    width: rem(36);
+    height: rem(36);
+  }
+}
+
+.sub-footer-phone__tel {
+  margin-top: rem(8);
+  display: block;
+  color: $navy;
+  text-align: center;
+
+  @include mq("md") {
+    margin-top: 0;
+    padding: 0 rem(40);
+    border-right: rem(1) solid rgba(26, 28, 61, 0.10);
+  }
+}
+
+.sub-footer-phone__tel > span {
+  padding-bottom: rem(14);
+  display: block;
+  font-family: $serif;
+  border-bottom: rem(1) solid $navy;
+  @include font(32, 32, 0, $medium);
+
+  @include mq('md'){
+    padding-bottom: rem(11);
+  }
+}
+
+.sub-footer-phone__tel--en{
+  @include font(24, 24, 0, $medium);
+}
+
+.sub-footer-phone__tel small {
+  margin-top: rem(15);
+  display: block;
+  @include font(14, 14, 60, $medium);
+
+  @include mq("md") {
+    margin-top: rem(11);
+  }
+}
+
+.sub-footer-phone__faq {
+  margin-top: rem(15);
+  padding-top: rem(15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(6);
+  color: $navy;
+  border-top: rem(1) solid rgba(26, 28, 61, 0.10);
+  @include font(14, 14, 0, $medium);
+
+  @include mq("md") {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+    padding-left: rem(40);
+    @include font(16, 16, 0, $medium);
+  }
+
+  &:hover{
+    opacity: 0.7;
+  }
+}
+
+.sub-footer-phone__faq img {
+  width: rem(16);
+  height: rem(16);
 }

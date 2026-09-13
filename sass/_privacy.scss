@@ -1,0 +1,78 @@
+@use "global" as *;
+
+// ==============================
+// プライバシーポリシー
+// ==============================
+
+.page-privacy {
+  color: $beige;
+  background-color: $navy;
+  --wave-offset-y-sp: #{rem(-74)};
+
+  @include mq('md'){
+    --wave-offset-y-pc: #{rem(2)};
+  }
+}
+
+.sub-privacy__hero{
+  padding-top: rem(40);
+
+  @include mq('md'){
+    padding-top: rem(64);
+  }
+
+}
+
+.page-privacy .sub-hero__title {
+}
+
+.privacy-section {
+  padding-top: rem(48);
+  padding-bottom: rem(96);
+  color: $beige;
+  background-color: $navy;
+
+  @include mq("md") {
+    padding-top: rem(120);
+    padding-bottom: rem(120);
+  }
+}
+
+.privacy-list {
+  counter-reset: privacy-item;
+}
+
+.privacy-list__item {
+  counter-increment: privacy-item;
+}
+
+.privacy-list__item + .privacy-list__item {
+  margin-top: rem(48);
+
+  @include mq("md") {
+    margin-top: rem(64);
+  }
+}
+
+.privacy-list__item h2 {
+  font-family: $serif;
+  @include font(20, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(28, null, 60, $medium);
+  }
+}
+
+.privacy-list__item h2::before {
+  content: counter(privacy-item) ". ";
+}
+
+.privacy-list__item p {
+  margin-top: rem(16);
+  @include font(14, 25.2, 40, $medium);
+
+  @include mq("md") {
+    margin-top: rem(24);
+    @include font(18, 32.4, 40, $medium);
+  }
+}

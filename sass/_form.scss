@@ -1,0 +1,755 @@
+@use "global" as *;
+
+// ==============================
+// フォームページ共通
+// ==============================
+
+.page-form {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: $beige;
+  background-color: $navy;
+
+  --wave-offset-y-sp: #{rem(-90)};
+
+  @include mq('md'){
+    --wave-offset-y-pc: #{rem(-270)};
+  }
+}
+
+.form-page {
+  min-height: calc(100vh - #{rem(80)});
+  padding-top: rem(24);
+  padding-bottom: rem(56);
+  flex: 1;
+  color: $beige;
+  background-color: $navy;
+
+  @include mq("md") {
+    min-height: calc(100vh - #{rem(96)});
+    padding-top: rem(40);
+    padding-bottom: rem(120);
+  }
+}
+
+.form-page__logo {
+  width: rem(131);
+  display: block;
+
+  @include mq("md") {
+    width: rem(196);
+  }
+}
+
+.form-page__layout {
+  margin-top: rem(40);
+  display: grid;
+  gap: rem(56);
+
+  @include mq("md") {
+    margin-top: rem(59);
+    grid-template-columns: minmax(0, rem(525)) minmax(rem(430), rem(600));
+    justify-content: space-between;
+    align-items: start;
+    gap: rem(75);
+  }
+}
+
+.form-intro__eyebrow {
+  font-family: $serif;
+  @include font(18, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(32, null, 60, $medium);
+  }
+}
+
+.form-intro__title {
+  font-family: $serif;
+  @include font(28, null, 0, $medium);
+
+  @include mq("md") {
+    @include font(48, null, 60, $medium);
+  }
+}
+
+.form-intro__eyebrow + .form-intro__title {
+}
+
+.form-intro__title small {
+font-family: $serif;
+  @include font(18, null, 0, $medium);
+
+  @include mq("md") {
+    @include font(24, null, 0, $medium);
+  }
+}
+
+.form-page--document .form-intro__title,
+.form-page--case .form-intro__title {
+  letter-spacing: 0;
+
+  @include mq('xl'){
+    white-space: nowrap;
+  }
+}
+
+.form-trust {
+  margin-top: rem(48);
+
+  @include mq("md") {
+    margin-top: rem(56);
+  }
+}
+
+.form-trust__lead {
+  @include font(17, 27.2, 0, $medium);
+
+  @include mq("md") {
+    @include font(20, 36, 0, $medium);
+  }
+}
+
+.form-trust__logos {
+  margin-top: rem(20);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: rem(4);
+
+  @include mq("md") {
+    margin-top: rem(24);
+  }
+}
+
+.form-trust__logos li {
+  height: rem(41);
+  padding: rem(4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $white;
+
+  @include mq("md") {
+    height: rem(64);
+    padding: rem(8);
+  }
+}
+
+.form-trust__logos img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+// --------------------------------
+// 入力フォーム
+// --------------------------------
+.form-panel {
+  width: 100%;
+  padding: rem(32) rem(24);
+  color: $navy;
+  border-radius: rem(4);
+  background-color: $white;
+
+  @include mq("md") {
+    padding: rem(40);
+  }
+}
+
+.form-panel--short {
+  @include mq("md") {
+    min-height: rem(282);
+    padding-top: rem(64);
+    padding-bottom: rem(64);
+  }
+}
+
+.form-field + .form-field {
+  margin-top: rem(20);
+
+  @include mq('md'){
+    margin-top: rem(24);
+  }
+}
+
+.form-field label {
+  margin-bottom: rem(8);
+  display: flex;
+  align-items: center;
+  gap: rem(7);
+  @include font(14, 14, 0, $medium);
+
+  @include mq("md") {
+    @include font(16, 16, 0, $medium);
+    gap: rem(8);
+  }
+}
+
+.form-field__required {
+  padding: rem(4) rem(6);
+  flex-shrink: 0;
+  color: $white;
+  background-color: $navy;
+  @include font(11, 11, 0, $medium);
+  border-radius: rem(2);
+
+  @include mq('md'){
+    padding: rem(5) rem(8);
+    font-size: rem(12);
+  line-height: 1;
+  }
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: rem(12) rem(14);
+  color: $navy;
+  border: rem(1) solid transparent;
+  border-radius: rem(2);
+  background-color: $beige;
+  transition: border-color 0.2s ease;
+  @include font(16, 16, 0, $medium);
+
+  @include mq('md'){
+    padding: rem(16) rem(18);
+  }
+}
+
+.form-field input {
+  height: rem(40);
+
+  @include mq('md'){
+    height: rem(48);
+  }
+}
+
+.form-field textarea {
+  min-height: rem(120);
+  resize: vertical;
+  line-height: 1.4;
+
+  @include mq('md'){
+    min-height: rem(160);
+      line-height: 1.6;
+  }
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: rgba($navy, 0.3);
+}
+
+.form-field textarea::placeholder{
+  line-height: 1.4;
+
+  @include mq('md'){
+    line-height: 1.6;
+  }
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: $brown;
+  outline: rem(2) solid rgba($brown, 0.2);
+  outline-offset: 0;
+}
+
+.form-panel__agreement {
+  margin-top: rem(24);
+  @include f(15, 140, 0, $medium);
+
+  @include mq('md'){
+    @include font(16, 16, 0, $medium);
+  }
+
+}
+
+.form-panel__agreement a {
+  position: relative;
+  display: inline-block;
+  margin-right: rem(14);
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: rem(2);
+
+  &:hover{
+    opacity: 0.7;
+  }
+}
+
+.form-panel__agreement a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(100% + #{rem(3)});
+  width: rem(8);
+  height: rem(8);
+  background: url("../img/common/icon-file.svg") center / contain no-repeat;
+}
+
+.form-panel__submit {
+  margin-top: rem(32);
+  min-height: rem(56);
+  padding: rem(8) rem(20);
+  position: relative;
+  @include font(15, 15, 0, $bold);
+
+  @include mq('md'){
+    margin-top: rem(38);
+    min-height: rem(64);
+    justify-content: center;
+    @include font(18,18);
+  }
+}
+
+.form-panel__submit > img {
+  position: absolute;
+  top: 50%;
+  right: rem(16);
+  transform: translateY(-50%);
+}
+
+.form-panel__submit small {
+  padding: rem(3) rem(7);
+  @include font(11, 11, 0, $bold);
+
+  @include mq('md'){
+    @include font(12,12);
+    padding: rem(4) rem(9);
+  }
+}
+
+.form-panel__submit span{
+  display: flex;
+  align-items: center;
+}
+
+
+// --------------------------------
+// 電話CTA
+// --------------------------------
+.form-call {
+  margin-top: rem(56);
+  padding: rem(24);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: rem(2);
+  border: rem(2) solid $beige;
+  text-align: center;
+
+  @include mq("md") {
+    margin-top: rem(64);
+    padding: rem(40) rem(48);
+    flex-direction: row;
+    gap: rem(80);
+  }
+}
+
+.form-call__message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(8);
+
+  @include mq("md") {
+    flex-direction: row;
+    gap: rem(14);
+  }
+}
+
+.form-call__message img {
+  width: rem(24);
+  height: rem(24);
+  filter: brightness(0) invert(1);
+
+  @include mq("md") {
+    width: rem(36);
+    height: rem(36);
+  }
+}
+
+.form-call__message p {
+  max-width: rem(265);
+  font-family: $serif;
+  @include font(18, 28.8, -30, $medium);
+
+  @include mq("md") {
+    max-width: none;
+    @include font(20, 24, 60, $medium);
+  }
+}
+
+.form-call__tel-wrapper{
+  @include mq('md'){
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.form-call__tel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $beige;
+  margin-top: rem(24);
+
+  @include mq('md'){
+    margin-top: 0;
+  }
+}
+
+.form-call__tel  {
+  padding-bottom: rem(14);
+  font-family: $serif;
+  border-bottom: rem(1) solid $beige;
+  @include font(32, 32, 0, $medium);
+
+  @include mq("md") {
+    @include font(40, 40, 0, $medium);
+    padding-bottom: rem(15);
+  }
+}
+
+.form-call__tel--en{
+  @include font(24,24);
+
+  @include mq('md'){
+    @include font(32,32);
+  }
+  
+}
+
+.form-call__note {
+  margin-top: rem(14);
+  @include font(14, 14, 60, $medium);
+
+  @include mq("md") {
+    @include font(16, 16, 60, $medium);
+  margin-top: rem(15);
+  }
+}
+
+// --------------------------------
+// フォームページ専用の簡易フッター
+// --------------------------------
+.form-footer {
+  min-height: rem(80);
+  color: $beige;
+  background: #090A1B;
+
+  @include mq("md") {
+    min-height: rem(96);
+  }
+}
+
+.form-footer__inner {
+  min-height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem(24);
+}
+
+.form-footer__logo {
+  width: rem(104);
+
+  @include mq("md") {
+    width: rem(112);
+  }
+}
+
+.form-footer__inner > small {
+  white-space: nowrap;
+  @include font(12, 12, 60, $medium);
+
+  @include mq("md") {
+    @include font(14, 14, 60, $medium);
+  }
+}
+
+// ==============================
+// フォーム完了ページ共通
+// ==============================
+
+.page-thanks {
+  color: $beige;
+  background-color: $navy;
+
+  --wave-offset-y-sp: #{rem(-90)};
+
+  @include mq('md'){
+    --wave-offset-y-pc: #{rem(-300)};
+  }
+}
+
+.thanks-page {
+  padding-top: rem(24);
+  padding-bottom: rem(56);
+  color: $beige;
+  background-color: $navy;
+
+  @include mq("md") {
+    padding-top: rem(40);
+    padding-bottom: rem(120);
+  }
+}
+
+
+.thanks-hero {
+  margin-top: rem(40);
+
+  @include mq("md") {
+    margin-top: rem(60);
+    text-align: center;
+  }
+}
+
+.thanks-hero h1 {
+  font-family: $serif;
+  @include font(28, null, 10, $medium);
+
+  @include mq("md") {
+    @include font(56, null, 10, $medium);
+  }
+}
+
+.thanks-hero p {
+  margin-top: rem(24);
+  @include font(14, 25.2, 50, $medium);
+
+  @include mq("md") {
+    @include font(18, 32.4, 50, $medium);
+  }
+}
+
+.thanks-hero__button {
+  margin-top: rem(56);
+  min-height: rem(48);
+  padding: rem(8) rem(20);
+  position: relative;
+
+  @include mq("md") {
+    width: rem(360);
+    justify-content: center;
+    min-height: rem(64);
+    margin-right: auto;
+    margin-left: auto;
+    @include font(18,18);
+  }
+}
+
+.thanks-hero__button img {
+  position: absolute;
+  top: 50%;
+  right: rem(16);
+  transform: translateY(-50%);
+
+  @include mq('md'){
+    width: rem(18);
+  }
+}
+
+.thanks-divider {
+  height: rem(1);
+  margin-top: rem(40);
+  background: rgba(241, 240, 234, 0.20);
+
+  @include mq("md") {
+    margin-top: rem(65);
+  }
+}
+
+// --------------------------------
+// 資料DL・事例集DL完了後の相談フォーム
+// --------------------------------
+.thanks-consult {
+  margin-top: rem(40);
+  display: grid;
+  gap: rem(40);
+
+  @include mq("md") {
+    margin-top: rem(65);
+    grid-template-columns: minmax(0, rem(525)) minmax(rem(430), rem(600));
+    justify-content: space-between;
+    align-items: start;
+    gap: rem(75);
+  }
+}
+
+.thanks-consult__content h2 {
+  font-family: $serif;
+  @include font(22, null, 30, $medium);
+
+  @include mq("md") {
+    @include font(32, null, 60, $medium);
+  }
+}
+
+.thanks-consult__content h3 {
+  margin-top: rem(32);
+  @include font(18, 32.4, null, $bold);
+
+  @include mq("md") {
+    margin-top: rem(40);
+    @include font(24, 43.2, null, $bold);
+  }
+}
+
+.thanks-consult__content > ul {
+  margin-top: rem(12);
+  display: grid;
+  gap: rem(6);
+  @include font(13, 23.4, null, $medium);
+
+  @include mq("md") {
+    margin-top: rem(16);
+    @include font(18, 32.4, null, $medium);
+  }
+}
+
+.thanks-consult__content > ul li {
+  position: relative;
+  padding-left: rem(14);
+
+  @include mq('md'){
+    padding-left: rem(20);
+  }
+}
+
+.thanks-consult__content > ul li::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+  color: $brown;
+}
+
+.thanks-consult__image {
+  margin-top: rem(24);
+  overflow: hidden;
+  aspect-ratio: 344 / 158;
+  border-radius: rem(2);
+}
+
+.thanks-consult__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thanks-consult__trust {
+  margin-top: rem(32);
+
+  @include mq('md'){
+    margin-top: rem(40);
+  }
+}
+
+.thanks-consult__form {
+  margin-top: 0;
+}
+
+// --------------------------------
+// 問い合わせ完了後の資料一覧
+// --------------------------------
+.thanks-page--contact .thanks-divider {
+  @include mq("md") {
+    margin-top: rem(65);
+  }
+}
+
+.thanks-resources {
+  margin-top: rem(40);
+
+  @include mq("md") {
+    margin-top: rem(64);
+  }
+}
+
+.thanks-resources > h2{
+  font-family: $serif;
+  @include font(18,25.2,60,$medium);
+
+  @include mq('md'){
+    @include font(32,57.6);
+  }
+}
+
+.thanks-resources__emphasis {
+  -webkit-text-emphasis: filled dot;
+  text-emphasis: filled dot;
+  -webkit-text-emphasis-position: over;
+  text-emphasis-position: over;
+}
+
+.thanks-resources__subline {
+  margin-top: rem(12);
+  display: block;
+
+  @include mq("md") {
+    margin-top: 0;
+  }
+}
+
+.thanks-resource-list {
+  margin-top: rem(40);
+  display: grid;
+  gap: rem(48);
+
+  @include mq("md") {
+    margin-top: rem(56);
+    gap: rem(48);
+  }
+}
+
+.thanks-resource-card {
+  display: grid;
+  gap: rem(20);
+
+  @include mq("md") {
+    grid-template-columns: auto minmax(0, rem(480));
+    grid-template-areas: "body image";
+    justify-content: space-between;
+    align-items: center;
+    gap: rem(32);
+  }
+}
+
+.thanks-resource-card__image {
+  @include mq("md") {
+    grid-area: image;
+    padding: rem(20);
+  }
+}
+
+.thanks-resource-card__body {
+  @include mq("md") {
+    grid-area: body;
+  }
+}
+
+.thanks-resource-card__body .document-card__category {
+  margin-top: 0;
+  font-size: rem(13);
+
+  @include mq('md'){
+    font-size: rem(14);
+  }
+}
+
+.thanks-resource-card__body .document-card__title {
+
+  @include mq('md'){
+    font-size: rem(28);
+  }
+}
+
+.thanks-resource-card__body .document-card__button {
+  @include mq("md") {
+    width: rem(220);
+  }
+}

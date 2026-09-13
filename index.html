@@ -189,7 +189,7 @@
                   <div class="case-card__image">
                     <img src="./img/case/case-01.jpg" alt="導入企業の担当者様">
                   </div>
-                  <h3 class="case-card__title">リーズナブルで多機能、利用開始後約1年で売り上げが150％増加。</h3>
+                  <h3 class="case-card__title">リーズナブルで多機能。利用開始後約1年で売り上げが150％増加。</h3>
                   <dl class="case-card__information">
                     <div class="case-card__information-row">
                       <dt>業種</dt>
@@ -251,7 +251,7 @@
                   <div class="case-card__image">
                     <img src="./img/case/case-03.jpg" alt="導入企業の担当者様">
                   </div>
-                  <h3 class="case-card__title">リーズナブルで多機能、24時間対応のサポートデスクがあるのも安心です</h3>
+                  <h3 class="case-card__title">リーズナブルで多機能。24時間対応のサポートデスクがあるのも安心です</h3>
                   <dl class="case-card__information">
                     <div class="case-card__information-row">
                       <dt>業種</dt>
@@ -414,7 +414,7 @@
             <h3 class="test-call-plan__title"><strong>300</strong>コール</h3>
             <p class="test-call-plan__subtitle">市場検証プラン</p>
             <a class="test-call-plan__button c-button c-button--brown" href="#">
-              <span>テストコール300に<br>ついて相談する</span>
+              <span>テストコール300に<br class="sp">ついて相談する</span>
               <img src="./img/common/button-icon-white.svg" alt="">
             </a>
             <p class="test-call-plan__note">本契約は必須ではありません。検証結果を見て判断できます。</p>
@@ -573,7 +573,7 @@
               </span>
               <div class="primary-service-card__body">
                 <p class="primary-service-card__label">セールスの流儀</p>
-                <h3 class="primary-service-card__title">営業戦略／組織立ち上げプラン</h3>
+                <h3 class="primary-service-card__title">営業戦略／<br class="sp">組織立ち上げプラン</h3>
               </div>
               <img class="primary-service-card__arrow" src="./img/common/button-icon-navy.svg" alt="">
             </a>
@@ -583,76 +583,263 @@
         <h3 class="available-service-title">その他、対応可能サービス</h3>
         <ul class="available-service-list">
           <li class="available-service-list__item">
-            <article class="available-service-card">
+            <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
               <div class="available-service-card__icon"><img src="./img/service/service-inbound-lead.svg" alt=""></div>
-              <h4 class="available-service-card__title">インバウンド<br>リード対応</h4>
+              <span class="available-service-card__title">インバウンド<br>リード対応</span>
               <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
-            </article>
+            </button>
+            <template class="js-service-modal-source">
+              <p class="service-modal__description">マーケティング施策を通じて得たリードに対して適切にフォローアップします。 主にWebサイトからの問い合わせや資料請求、外部媒体、ブログ、SNS、メールキャンペーンなどのオンラインチャネルを通じて発生したリードへの対応を行います。</p>
+              <section class="service-modal__section">
+                <h4 class="service-modal__section-title">Weegentのインバウンドリード対応の特徴</h4>
+                <ul class="service-modal__list">
+                  <li>リード発生時に即時対応（5分以内コール）</li>
+                  <li>BANT条件に沿ったヒアリングシート作成により、有効商談率を担保</li>
+                  <li>SFAへ詳細なデータ入力をし、属人性を排除</li>
+                </ul>
+              </section>
+              <section class="service-modal__recommend">
+                <h4 class="service-modal__section-title">このようなお悩みにオススメ</h4>
+                <ul class="service-modal__list">
+                  <li>リード獲得はできているがスムーズに商談化を図れない</li>
+                  <li>インバウンドリードの有効商談率が低い</li>
+                  <li>一時的にリソースが不足している</li>
+                </ul>
+              </section>
+            </template>
           </li>
           <li class="available-service-list__item">
-            <article class="available-service-card">
+            <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
               <div class="available-service-card__icon"><img src="./img/service/service-jump-in-sales.svg" alt=""></div>
-              <h4 class="available-service-card__title">飛び込み営業</h4>
+              <span class="available-service-card__title">飛び込み営業</span>
               <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
-            </article>
+            </button>
+            <template class="js-service-modal-source">
+              <p class="service-modal__description">法人、個人経営、個人宅、医療・福祉・介護施設などに飛び込みで営業を行います。<br>多くの営業代行会社が敬遠する施策ですが、弊社では得意領域です。</p>
+              <section class="service-modal__section">
+                <h4 class="service-modal__section-title">Weegentの飛び込み営業の特徴</h4>
+                <ul class="service-modal__list">
+                  <li>金融機関で飛び込み営業経験3年以上かつトップセールスのメンバーが責任者を担当</li>
+                  <li>全国（北海道〜沖縄まで）で飛び込みができるメンバーが在籍</li>
+                </ul>
+              </section>
+              <section class="service-modal__recommend">
+                <h4 class="service-modal__section-title">このようなお悩みにオススメ</h4>
+                <ul class="service-modal__list">
+                  <li>実店舗型ビジネスにおける販路拡大に課題がある</li>
+                  <li>エリアを拡張して飛び込み営業を行いたい</li>
+                </ul>
+              </section>
+            </template>
           </li>
           <li class="available-service-list__item">
-            <article class="available-service-card">
+            <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
               <div class="available-service-card__icon"><img src="./img/service/service-email-marketing.svg" alt=""></div>
-              <h4 class="available-service-card__title">メール<br>マーケティング</h4>
+              <span class="available-service-card__title">メール<br>マーケティング</span>
               <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
-            </article>
+            </button>
+            <template class="js-service-modal-source">
+              <p class="service-modal__description">潜在層の顧客に対して、プロダクト・サービスの情報、特典、ニュースレター、プロモーションキャンペーンなどを送信します。<br>ユーザー心理を理解して温度感を高めていくことが重要です。</p>
+              <section class="service-modal__section">
+                <h4 class="service-modal__section-title">Weegentのメールマーケティングの特徴</h4>
+                <ul class="service-modal__list">
+                  <li>GAFA出身者がメールマーケのノウハウを活かして対応</li>
+                  <li>貴社独自の内容にカスタマイズして本文作成〜効果検証まで一貫して実施</li>
+                </ul>
+              </section>
+              <section class="service-modal__recommend">
+                <h4 class="service-modal__section-title">このようなお悩みにオススメ</h4>
+                <ul class="service-modal__list">
+                  <li>ABテストの効果検証ができていない</li>
+                  <li>開封率/クリック率/反応率の数値が向上しない</li>
+                  <li>どの時間帯に送るのがいいのか分からない</li>
+                </ul>
+              </section>
+            </template>
           </li>
           <li class="available-service-list__item">
-            <article class="available-service-card">
+            <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
               <div class="available-service-card__icon"><img src="./img/service/service-contact-form.svg" alt=""></div>
-              <h4 class="available-service-card__title">問い合わせフォーム<br class="br-lg">営業</h4>
+              <span class="available-service-card__title">問い合わせフォーム<br class="br-sp">営業</span>
               <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
-            </article>
+            </button>
+            <template class="js-service-modal-source">
+              <p class="service-modal__description">企業の「問い合わせ」ページやフォームからセールス文を送ります（1000件から承ります）。<br>
+                他施策と比べて低コストかつ短時間で多くの対象企業にアプローチし、効率的な営業成果を追求します。</p>
+              <section class="service-modal__section">
+                <h4 class="service-modal__section-title">Weegentの問い合わせフォーム営業の特徴</h4>
+                <ul class="service-modal__list">
+                  <li>反応率の高い時間帯、曜日、顧客属性を集計・分析し、データに基づきアプローチ精度を向上</li>
+                  <li>ABテストを繰り返し、最適な文章を作成</li>
+                </ul>
+              </section>
+              <section class="service-modal__recommend">
+                <h4 class="service-modal__section-title">このようなお悩みにオススメ</h4>
+                <ul class="service-modal__list">
+                  <li>どんな文章構成でフォーム営業をしたらよいか分からない</li>
+                  <li>どの時間帯、曜日で行うのが相応しいかノウハウがない</li>
+                </ul>
+              </section>
+            </template>
           </li>
           <li class="available-service-list__item">
-            <article class="available-service-card">
+            <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
               <div class="available-service-card__icon"><img src="./img/service/service-sales-material.svg" alt=""></div>
-              <h4 class="available-service-card__title">営業資料作成</h4>
+              <span class="available-service-card__title">営業資料作成</span>
               <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
-            </article>
+            </button>
+            <template class="js-service-modal-source">
+              <p class="service-modal__description">提案書、プレゼンテーション資料、製品カタログなど、営業活動の効率化や成約率の向上に寄与する資料を作成します。</p>
+              <section class="service-modal__section">
+                <h4 class="service-modal__section-title">Weegentの営業資料作成の特徴</h4>
+                <ul class="service-modal__list">
+                  <li>元外資系企業やリクルート、金融機関などのメンバーが「売上」に直結する資料をゼロベースから作成</li>
+                  <li>構成は「営業のプロ」が、デザインは「プロのデザイナー」が担当し、論理・視覚の両面で最適な資料を作成</li>
+                </ul>
+              </section>
+              <section class="service-modal__recommend">
+                <h4 class="service-modal__section-title">このようなお悩みにオススメ</h4>
+                <ul class="service-modal__list">
+                  <li>一番刺さりやすいキーワードが特定できておらず、訴求ポイントが掴めてない</li>
+                  <li>無駄な情報が入ってしまい、結果として分かりにくい資料を使っている</li>
+                </ul>
+              </section>
+            </template>
           </li>
           <li class="available-service-list__item">
-            <article class="available-service-card">
+            <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
               <div class="available-service-card__icon"><img src="./img/service/service-sales-support.svg" alt=""></div>
-              <h4 class="available-service-card__title">商談同行・代行</h4>
+              <span class="available-service-card__title">商談同行・代行</span>
               <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
-            </article>
+            </button>
+            <template class="js-service-modal-source">
+              <p class="service-modal__description">貴社の営業担当者として実際に商談を行います。<br>
+                商談に同席し、進行に対するフィードバックを行うことも可能です。<br>
+                リソース面の課題解消にも、商談品質向上にも活用いただけます。</p>
+              <section class="service-modal__section">
+                <h4 class="service-modal__section-title">Weegentの商談同行・代行の特徴</h4>
+                <ul class="service-modal__list">
+                  <li>いずれも1商談から対応可能</li>
+                  <li>社内教育に活用いただきやすいよう、商談録画を提供</li>
+                  <li>他業種や他商材の営業を通して得た知見を貴社商材に還元</li>
+                </ul>
+              </section>
+              <section class="service-modal__recommend">
+                <h4 class="service-modal__section-title">このようなお悩みにオススメ</h4>
+                <ul class="service-modal__list">
+                  <li>リード獲得は出来ているが、成約率が低い、もしくはリードタイムが長い</li>
+                  <li>想定している単価より、低い単価で成約してしまっている</li>
+                  <li>商談対応できるメンバーが少ない</li>
+                </ul>
+              </section>
+            </template>
           </li>
           <li class="available-service-list__item">
-            <article class="available-service-card">
+            <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
               <div class="available-service-card__icon"><img src="./img/service/service-consulting.svg" alt=""></div>
-              <h4 class="available-service-card__title">営業コンサルティング</h4>
+              <span class="available-service-card__title">営業コンサルティング</span>
               <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
-            </article>
+            </button>
+            <template class="js-service-modal-source">
+              <p class="service-modal__description">現状の貴社営業体制をベースに、課題に応じたソリューションを提供します。<br>
+                営業戦略の立案や営業プロセスの見直し、営業チームのトレーニングなど幅広いケイパビリティを揃えています。</p>
+              <section class="service-modal__section">
+                <h4 class="service-modal__section-title">Weegentの営業コンサルティングの特徴</h4>
+                <ul class="service-modal__list">
+                  <li>弊社の役員が直接訪問</li>
+                  <li>営業上の課題を整理し、課題に応じて最適な打ち手で支援</li>
+                  <li>仕組み化まで実施し、継続的に売上が伸びる体制を構築</li>
+                </ul>
+              </section>
+              <section class="service-modal__recommend">
+                <h4 class="service-modal__section-title">このようなお悩みにオススメ</h4>
+                <ul class="service-modal__list">
+                  <li>なにが課題かも分かっていない</li>
+                  <li>社内に営業経験者がいない</li>
+                  <li>抜本的な営業改革をコストを抑えて行いたい</li>
+                </ul>
+              </section>
+            </template>
           </li>
           <li class="available-service-list__item">
-            <article class="available-service-card">
+            <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
               <div class="available-service-card__icon"><img src="./img/service/service-customer-success.svg" alt=""></div>
-              <h4 class="available-service-card__title">CS代行<br>（カスタマーサクセス）</h4>
+              <span class="available-service-card__title">CS代行<br>（カスタマーサクセス）</span>
               <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
-            </article>
+            </button>
+            <template class="js-service-modal-source">
+              <p class="service-modal__description">顧客満足度の向上や解約防止を目指します。<br>
+                顧客との関係構築や利用促進、課題解決、継続利用の促進などを行います。</p>
+              <section class="service-modal__section">
+                <h4 class="service-modal__section-title">WeegentのCS代行の特徴</h4>
+                <ul class="service-modal__list">
+                  <li>様々なバックグラウンドを持ったメンバーが貴社のコアメンバーとして実務を担当</li>
+                  <li>各種ツールを活用してコストを抑えてご支援</li>
+                </ul>
+              </section>
+              <section class="service-modal__recommend">
+                <h4 class="service-modal__section-title">このようなお悩みにオススメ</h4>
+                <ul class="service-modal__list">
+                  <li>解約率が高い</li>
+                  <li>アップセル提案ができていない</li>
+                </ul>
+              </section>
+            </template>
           </li>
           <li class="available-service-list__item">
-            <article class="available-service-card">
+            <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
               <div class="available-service-card__icon"><img src="./img/service/service-sfa.svg" alt=""></div>
-              <h4 class="available-service-card__title">SFAの導入支援・<br>活用支援</h4>
+              <span class="available-service-card__title">SFAの導入支援・<br>活用支援</span>
               <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
-            </article>
+            </button>
+            <template class="js-service-modal-source">
+              <p class="service-modal__description">企業の営業プロセスを分析して必要な要件を定義し、適切なSFAを選定・カスタマイズします。<br>
+                営業チームや管理者向けのトレーニングを行い、SFAを効果的に活用できる体制構築も支援します。</p>
+              <section class="service-modal__section">
+                <h4 class="service-modal__section-title">WeegentのSFA導入・活用支援の特徴</h4>
+                <ul class="service-modal__list">
+                  <li>セールスフォースをはじめとした、各サービスのパートナーライセンスを取得</li>
+                  <li>証券会社や外資系企業での活用事例をもとに「現場の声を反映した仕組み」を取り入れ</li>
+                  <li>既存の顧客データや営業情報のシステム移行までサポート</li>
+                </ul>
+              </section>
+              <section class="service-modal__recommend">
+                <h4 class="service-modal__section-title">このようなお悩みにオススメ</h4>
+                <ul class="service-modal__list">
+                  <li>導入しているが社員が入力してくれない</li>
+                  <li>どの支援ツールを導入すれば良いか分からない</li>
+                  <li>導入したものの機能が多すぎて使いこなせない</li>
+                </ul>
+              </section>
+            </template>
           </li>
           <li class="available-service-list__item">
-            <article class="available-service-card">
+            <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
               <div class="available-service-card__icon"><img src="./img/service/service-outbound-call.svg" alt=""></div>
-              <h4 class="available-service-card__title">アウトバウンドコール</h4>
+              <span class="available-service-card__title">アウトバウンドコール</span>
               <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
-            </article>
+            </button>
+            <template class="js-service-modal-source">
+              <p class="service-modal__description">見込み客や既存顧客に加え、全く接点のない企業に対しても積極的に電話をかけ、ビジネスチャンスを創出する営業手法です。新規顧客の開拓はもちろん、既存顧客へのフォローアップや契約更新の提案、さらにクロスセルやアップセルの機会を提供します。ダイレクトにコミュニケーションを図り、顧客のニーズや課題を的確に把握して最適な提案を行います。</p>
+              <section class="service-modal__section">
+                <h4 class="service-modal__section-title">Weegentのアウトバウンドコールの特徴</h4>
+                <ul class="service-modal__list">
+                  <li>ターゲット選定〜実働支援（トークスクリプトなどの納品物有り）までを行います。また、PMFとして潜在顧客の要望、ニーズをまとめてプロダクトやサービスの改善にも活かせるセールスデータを提供いたします。</li>
+                </ul>
+              </section>
+              <section class="service-modal__recommend">
+                <h4 class="service-modal__section-title">このようなお悩みにオススメ</h4>
+                <ul class="service-modal__list">
+                  <li>無駄なコールが増えていると感じる</li>
+                  <li>リストがすぐに枯渇してしまう</li>
+                  <li>トークスクリプトの抜本的改善を図りたい</li>
+                  <li>切り返しが少なく取りこぼしが多い</li>
+                </ul>
+              </section>
+            </template>
           </li>
         </ul>
+
       </div>
     </section>
 
@@ -1131,6 +1318,21 @@
     </section>
   </main>
 
+  <div class="service-modal js-service-modal" hidden aria-hidden="true">
+    <div class="service-modal__backdrop js-service-modal-close"></div>
+    <section class="service-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="service-modal-title" tabindex="-1">
+      <button class="service-modal__close js-service-modal-close" type="button" aria-label="モーダルを閉じる">
+        <span></span>
+        <span></span>
+      </button>
+      <header class="service-modal__header">
+        <div class="service-modal__icon"><img class="js-service-modal-icon" src="" alt=""></div>
+        <h3 class="service-modal__title js-service-modal-title" id="service-modal-title"></h3>
+      </header>
+      <div class="service-modal__body js-service-modal-body"></div>
+    </section>
+  </div>
+
   <footer class="footer">
     <div class="footer__inner inner">
       <div class="footer__main">
@@ -1226,7 +1428,7 @@
 
       <div class="footer__bottom">
         <small>&copy; <time datetime="2026">2026</time> Weegent Inc.</small>
-        <a href="#">プライバシーポリシー</a>
+        <a href="./privacy-poricy.html">プライバシーポリシー</a>
       </div>
     </div>
   </footer>
