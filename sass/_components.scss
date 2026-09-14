@@ -2564,8 +2564,7 @@ padding-bottom: rem(24);
   display: grid;
   grid-template-areas:
     "heading"
-    "list"
-    "more";
+    "list";
 
   @include mq("md") {
     grid-template-columns: auto minmax(0, 1fr);
@@ -2592,19 +2591,6 @@ padding-bottom: rem(24);
   @include mq("md") {
     grid-area: auto;
     margin-top: rem(8);
-  }
-}
-
-.faq-section__more {
-  grid-area: more;
-  min-height: rem(48);
-  margin-top: rem(40);
-
-  @include mq("md") {
-    grid-area: auto;
-    width: rem(303);
-    min-height: rem(64);
-    margin-top: rem(64);
   }
 }
 
