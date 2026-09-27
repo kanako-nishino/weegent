@@ -1,100 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
+<?php get_header(); ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="組織・人・データを活用し、企業の営業成果にコミットするインサイドセールス・営業代行サービス「Weegent」の公式サイトです。">
-  <meta name="robots" content="index, follow">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400;1,6..72,500&family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500&family=Roboto:wght@500&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="./css/style.css">
-  <title>営業代行・インサイドセールスのWeegent</title>
-</head>
-
-<body class="page-top">
-  <header class="header">
-    <div class="header__inner">
-      <a class="header__logo" href="./" aria-label="Weegent トップページへ">
-        <img src="./img/common/logo.png" alt="Weegent">
-      </a>
-
-      <div class="header__pc pc">
-        <div class="header__contact">
-          <a class="header__tel" href="tel:0368247902">
-            <span class="header__tel-number">Tel. 03-6824-7902</span>
-            <span class="header__tel-hours">24時間365日対応します</span>
-          </a>
-          <a class="header__button header__button--white" href="#document">3点セットを見る<span>無料</span></a>
-          <a class="header__button header__button--brown" href="#trial">相談する<span>無料</span></a>
-        </div>
-        <nav class="header__nav" aria-label="グローバルナビゲーション">
-          <a href="#service">サービス紹介<img class="header__nav-icon" src="./img/common/nav-dropdown-white.svg" alt=""></a>
-          <a href="#case">ご支援実績</a>
-          <a href="#knowledge">ナレッジ<img class="header__nav-icon" src="./img/common/nav-dropdown-white.svg" alt=""></a>
-          <a href="#company">会社情報</a>
-          <a href="#flow">ご利用の流れ</a>
-          <a href="#faq">よくある質問</a>
-          <a href="#recruit">採用情報</a>
-        </nav>
-      </div>
-
-      <button class="header__hamburger js-hamburger sp" type="button" aria-label="メニューを開く"
-        aria-controls="global-drawer" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-
-    <div class="drawer js-drawer" id="global-drawer" aria-hidden="true">
-      <button class="drawer__backdrop js-drawer-close" type="button" aria-label="メニューを閉じる"></button>
-      <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="メニュー">
-        <div class="drawer__header">
-          <a class="drawer__logo" href="./" aria-label="Weegent トップページへ">
-            <img src="./img/common/logo.png" alt="Weegent">
-          </a>
-          <button class="drawer__close js-drawer-close" type="button" aria-label="メニューを閉じる">
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-
-        <nav class="drawer-nav" aria-label="スマートフォン用グローバルナビゲーション">
-          <ul class="drawer-nav__list">
-            <li><a class="drawer-nav__link" href="#service">サービス紹介</a></li>
-            <li><a class="drawer-nav__link" href="#case">ご支援実績</a></li>
-            <li><a class="drawer-nav__link" href="#strength">Weegentの強み</a></li>
-            <li><a class="drawer-nav__link" href="#knowledge">お役立ち資料</a></li>
-            <li><a class="drawer-nav__link" href="#company">会社情報</a></li>
-            <li><a class="drawer-nav__link" href="#flow">ご利用の流れ</a></li>
-            <li><a class="drawer-nav__link" href="#faq">よくある質問</a></li>
-            <li><a class="drawer-nav__link" href="#">採用情報</a></li>
-          </ul>
-        </nav>
-
-        <div class="drawer-contact">
-          <a class="drawer-contact__tel" href="tel:0368247902">
-            <span>Tel. 03-6824-7902</span>
-            <small>24時間365日対応します</small>
-          </a>
-          <a class="drawer-contact__button c-button c-button--white" href="#document">
-            <span>3点セットを見る <small>無料</small></span>
-            <img src="./img/common/button-icon-navy.svg" alt="">
-          </a>
-          <a class="drawer-contact__button c-button c-button--brown" href="#trial">
-            <span>相談する <small>無料</small></span>
-            <img src="./img/common/button-icon-white.svg" alt="">
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
+<main>
     <section class="fv">
       <div class="fv__background" aria-hidden="true"></div>
 
@@ -107,32 +13,21 @@
             インサイドセールス・営業代行のWeegentです。
           </p>
 
-          <div class="fv__achievement achievement-card">
-            <p class="achievement-card__rate">
-              <span class="achievement-card__label">継続率</span>
-              <strong>90<small>%</small><span>以上</span></strong>
-            </p>
-            <div class="achievement-card__badge">
-              <img src="./img/common/logo-salesforce-partner.png" alt="Salesforce Partner">
-            </div>
-            <div class="achievement-card__badge">
-              <img src="./img/common/logo-hubspot-partner.png" alt="HubSpot Partner">
-            </div>
-          </div>
+          <?php get_template_part('template-parts/achievement-badge'); ?>
 
           <div class="fv__actions">
             <div class="fv__action" id="document">
               <p class="fv__action-label">支援内容や導入事例が分かる</p>
-              <a class="c-button c-button--white" href="#">
+              <a class="c-button c-button--white" href="<?php echo esc_url(home_url('/document-download/')); ?>">
                 <span>資料3点セットを見る <small>無料</small></span>
-                <img src="./img/common/button-icon-navy.svg" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/common/button-icon-navy.svg" alt="">
               </a>
             </div>
             <div class="fv__action" id="trial">
               <p class="fv__action-label">まずは300コール〜</p>
-              <a class="c-button c-button--brown" href="#">
+              <a class="c-button c-button--brown" href="<?php echo esc_url(home_url('/contact/')); ?>">
                 <span>テストコールを依頼してみる</span>
-                <img src="./img/common/button-icon-white.svg" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/common/button-icon-white.svg" alt="">
               </a>
             </div>
           </div>
@@ -140,212 +35,11 @@
       </div>
     </section>
 
-    <section class="client-logos" aria-label="導入企業">
-      <div class="client-logos__row client-logos__row--left">
-        <div class="client-logos__track js-logo-track">
-          <ul class="client-logos__list">
-            <li class="client-logos__item"><img src="./img/common/client-logo-hinomori.png" alt="株式会社ヒノモリ"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-avepoint.png" alt="AvePoint"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-asahi.png" alt="アサヒグループ"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-gcstory.png" alt="GCストーリー株式会社"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-tep.png" alt="TeP."></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-macromill.png" alt="MACROMILL"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-shikoku-kasei.png" alt="四国化成"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-nextpro.png" alt="ネクプロ"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-snp.png" alt="SNP"></li>
-          </ul>
-        </div>
-      </div>
-      <div class="client-logos__row client-logos__row--right">
-        <div class="client-logos__track js-logo-track">
-          <ul class="client-logos__list">
-            <li class="client-logos__item"><img src="./img/common/client-logo-leov.png" alt="LEOV"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-leadpad.png" alt="LEADPAD"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-tencent.png" alt="Tencent"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-workchat-pay.png" alt="WorkChat Pay"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-am.png" alt="A&amp;M"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-unilive.png" alt="UNILIVE CREATION"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-fp.png" alt="FP"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-logly.png" alt="LOGLY"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-standard.png" alt="STANDARD"></li>
-            <li class="client-logos__item"><img src="./img/common/client-logo-transmit.png" alt="Transmit"></li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <?php get_template_part('template-parts/client-logos'); ?>
 
-    <section class="case-section section-space section-wave" id="case">
-      <div class="inner inner--content">
-        <div class="section-layout">
-          <div class="section-head section-layout__head">
-            <h2 class="section-head__title">導入事例</h2>
-            <p class="section-head__description">業界を問わず数百社以上にご利用いただいています。</p>
-          </div>
+    <?php get_template_part('template-parts/case-list', null, ['page' => 'top']); ?>
 
-          <ul class="section-layout__body case-list">
-            <li class="case-list__item">
-              <article class="case-card">
-                <a class="case-card__link" href="#">
-                  <div class="case-card__image">
-                    <img src="./img/case/case-01.jpg" alt="導入企業の担当者様">
-                  </div>
-                  <h3 class="case-card__title">リーズナブルで多機能。利用開始後約1年で売り上げが150％増加。</h3>
-                  <dl class="case-card__information">
-                    <div class="case-card__information-row">
-                      <dt>業種</dt>
-                      <dd>製造業</dd>
-                    </div>
-                    <div class="case-card__information-row">
-                      <dt>従業員数</dt>
-                      <dd>1〜10人</dd>
-                    </div>
-                    <div class="case-card__information-row">
-                      <dt>課題</dt>
-                      <dd>〇〇〇が解決できない</dd>
-                    </div>
-                  </dl>
-                  <div class="case-card__company">
-                    <span class="case-card__company-logo">
-                      <img src="./img/common/client-logo-logly.png" alt="TeP.">
-                    </span>
-                    <span class="case-card__company-name">〇〇〇株式会社</span>
-                    <img class="case-card__icon" src="./img/common/button-icon-white.svg" alt="">
-                  </div>
-                </a>
-              </article>
-            </li>
-            <li class="case-list__item">
-              <article class="case-card">
-                <a class="case-card__link" href="#">
-                  <div class="case-card__image">
-                    <img src="./img/case/case-02.jpg" alt="導入企業の担当者様と企業ロゴ">
-                  </div>
-                  <h3 class="case-card__title">社内の無駄な作業が減り、〇〇において30％のコストカットに成功。</h3>
-                  <dl class="case-card__information">
-                    <div class="case-card__information-row">
-                      <dt>業種</dt>
-                      <dd>製造業</dd>
-                    </div>
-                    <div class="case-card__information-row">
-                      <dt>従業員数</dt>
-                      <dd>1〜10人</dd>
-                    </div>
-                    <div class="case-card__information-row">
-                      <dt>課題</dt>
-                      <dd>〇〇〇が解決できない</dd>
-                    </div>
-                  </dl>
-                  <div class="case-card__company">
-                    <span class="case-card__company-logo">
-                      <img src="./img/common/client-logo-hinomori.png" alt="TeP.">
-                    </span>
-                    <span class="case-card__company-name">〇〇〇株式会社</span>
-                    <img class="case-card__icon" src="./img/common/button-icon-white.svg" alt="">
-                  </div>
-                </a>
-              </article>
-            </li>
-            <li class="case-list__item">
-              <article class="case-card">
-                <a class="case-card__link" href="#">
-                  <div class="case-card__image">
-                    <img src="./img/case/case-03.jpg" alt="導入企業の担当者様">
-                  </div>
-                  <h3 class="case-card__title">リーズナブルで多機能。24時間対応のサポートデスクがあるのも安心です</h3>
-                  <dl class="case-card__information">
-                    <div class="case-card__information-row">
-                      <dt>業種</dt>
-                      <dd>製造業</dd>
-                    </div>
-                    <div class="case-card__information-row">
-                      <dt>従業員数</dt>
-                      <dd>1〜10人</dd>
-                    </div>
-                    <div class="case-card__information-row">
-                      <dt>課題</dt>
-                      <dd>〇〇〇が解決できない</dd>
-                    </div>
-                  </dl>
-                  <div class="case-card__company">
-                    <span class="case-card__company-logo">
-                      <img src="./img/common/client-logo-tep.png" alt="TeP.">
-                    </span>
-                    <span class="case-card__company-name">〇〇〇株式会社</span>
-                    <img class="case-card__icon" src="./img/common/button-icon-white.svg" alt="">
-                  </div>
-                </a>
-              </article>
-            </li>
-          </ul>
-
-          <a class="section-layout__button case-section__button c-button" href="#">
-            <span>事例をすべて見る</span>
-            <img src="./img/common/button-icon-navy.svg" alt="">
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="video-section section-space section-wave" id="video">
-      <div class="inner inner--content">
-        <div class="section-layout">
-          <div class="section-head section-layout__head">
-            <h2 class="section-head__title">動画で見る、<br>Weegentの品質</h2>
-            <p class="section-head__description">
-              私たちの考え方・営業現場のリアル・支援の進め方を、<br class="pc">
-              動画でご覧いただけます。
-            </p>
-          </div>
-
-          <ul class="section-layout__body video-list">
-            <li class="video-list__item">
-              <article class="video-card">
-                <a class="video-card__link" href="#" aria-label="品質保証動画1を再生する">
-                  <div class="video-card__thumbnail">
-                    <div class="video-card__thumbnail-inner"><img src="./img/video/video-01.jpg" alt="品質保証動画1のサムネイル"></div>
-                    <span class="video-card__play" aria-hidden="true"></span>
-                  </div>
-                  <h3 class="video-card__title">品質保証動画①</h3>
-                  <p class="video-card__channel">YouTube 松下雄太_SALESROOM</p>
-                </a>
-              </article>
-            </li>
-            <li class="video-list__item">
-              <article class="video-card">
-                <a class="video-card__link" href="#" aria-label="品質保証動画2を再生する">
-                  <div class="video-card__thumbnail">
-                    <div class="video-card__thumbnail-inner"><img src="./img/video/video-02.jpg" alt="品質保証動画2のサムネイル"></div>
-                    <span class="video-card__play" aria-hidden="true"></span>
-                  </div>
-                  <h3 class="video-card__title">品質保証動画②</h3>
-                  <p class="video-card__channel">YouTube 松下雄太_SALESROOM</p>
-                </a>
-              </article>
-            </li>
-            <li class="video-list__item">
-              <article class="video-card">
-                <a class="video-card__link" href="#" aria-label="品質保証動画3を再生する">
-                  <div class="video-card__thumbnail">
-                    <div class="video-card__thumbnail-inner"><img src="./img/video/video-03.jpg" alt="品質保証動画3のサムネイル"></div>
-                    <span class="video-card__play" aria-hidden="true"></span>
-                  </div>
-                  <h3 class="video-card__title">品質保証動画③</h3>
-                  <p class="video-card__channel">YouTube 松下雄太_SALESROOM</p>
-                </a>
-              </article>
-            </li>
-          </ul>
-
-          <a class="section-layout__button c-button video-section__button" href="#">
-            <span class="c-button__content">
-              <img src="./img/common/icon-youtube.svg" alt="">
-              <span>YouTubeチャンネルを見る</span>
-            </span>
-            <img src="./img/common/button-icon-navy.svg" alt="">
-          </a>
-        </div>
-      </div>
-    </section>
+    <?php get_template_part('template-parts/video-section', null, ['page' => 'top']); ?>
 
     <section class="outbound-section section-space section-wave" id="service">
       <div class="inner inner--content">
@@ -358,21 +52,21 @@
 
           <ul class="outbound-overview__achievements achievement-list" aria-label="アウトバウンド営業の支援実績">
             <li class="achievement-list__item">
-              <img class="achievement-list__icon" src="./img/outbound/icon-companies.svg" alt="">
+              <img class="achievement-list__icon" src="<?php echo get_template_directory_uri(); ?>/img/outbound/icon-companies.svg" alt="">
               <div class="achievement-list__content">
                 <p class="achievement-list__value"><strong>100</strong>社以上</p>
                 <p class="achievement-list__label">アウトバウンド営業の支援実績</p>
               </div>
             </li>
             <li class="achievement-list__item">
-              <img class="achievement-list__icon" src="./img/outbound/icon-listed-company.svg" alt="">
+              <img class="achievement-list__icon" src="<?php echo get_template_directory_uri(); ?>/img/outbound/icon-listed-company.svg" alt="">
               <div class="achievement-list__content">
                 <p class="achievement-list__value"><strong>48</strong>%</p>
                 <p class="achievement-list__label">支援企業に占める上場企業の割合</p>
               </div>
             </li>
             <li class="achievement-list__item">
-              <img class="achievement-list__icon" src="./img/outbound/icon-contract.svg" alt="">
+              <img class="achievement-list__icon" src="<?php echo get_template_directory_uri(); ?>/img/outbound/icon-contract.svg" alt="">
               <div class="achievement-list__content">
                 <p class="achievement-list__value"><strong>97.4</strong>%</p>
                 <p class="achievement-list__label">支援企業の契約継続率</p>
@@ -393,7 +87,7 @@
 
           <a class="outbound-overview__button c-button c-button--brown" href="#market-test">
             <span>同じ実行力を、貴社の営業に</span>
-            <img src="./img/common/button-icon-white.svg" alt="">
+            <img src="<?php echo get_template_directory_uri(); ?>/img/common/button-icon-white.svg" alt="">
           </a>
         </div>
 
@@ -413,9 +107,9 @@
           <div class="market-test__plan test-call-plan">
             <h3 class="test-call-plan__title"><strong>300</strong>コール</h3>
             <p class="test-call-plan__subtitle">市場検証プラン</p>
-            <a class="test-call-plan__button c-button c-button--brown" href="#">
+            <a class="test-call-plan__button c-button c-button--brown" href="<?php echo esc_url(home_url('/contact/')); ?>">
               <span>テストコール300に<br class="sp">ついて相談する</span>
-              <img src="./img/common/button-icon-white.svg" alt="">
+              <img src="<?php echo get_template_directory_uri(); ?>/img/common/button-icon-white.svg" alt="">
             </a>
             <p class="test-call-plan__note">本契約は必須ではありません。検証結果を見て判断できます。</p>
           </div>
@@ -438,41 +132,7 @@
           </p>
         </div>
 
-        <ul class="resource-list" aria-label="Weegentの資料とお問い合わせ">
-          <li class="resource-list__item">
-            <div class="resource-card">
-              <div class="resource-card__preview resource-card__preview--stacked">
-                <img src="./img/support/document-set.png" alt="資料3点セットの表紙">
-              </div>
-              <a class="resource-card__button c-button c-button--brown" href="#document">
-                <span>資料3点セットを見る</span>
-                <img src="./img/common/button-icon-white.svg" alt="">
-              </a>
-            </div>
-          </li>
-          <li class="resource-list__item">
-            <div class="resource-card">
-              <div class="resource-card__preview">
-                <img src="./img/support/contact-preview.png" alt="お問い合わせページの画面">
-              </div>
-              <a class="resource-card__button c-button c-button--brown" href="#">
-                <span>相談する <small>無料</small></span>
-                <img src="./img/common/button-icon-white.svg" alt="">
-              </a>
-            </div>
-          </li>
-          <li class="resource-list__item">
-            <div class="resource-card">
-              <div class="resource-card__preview">
-                <img src="./img/support/case-study-cover.png" alt="導入事例集の表紙">
-              </div>
-              <a class="resource-card__button c-button c-button--brown" href="#">
-                <span>事例集をDLする <small>無料</small></span>
-                <img src="./img/common/button-icon-white.svg" alt="">
-              </a>
-            </div>
-          </li>
-        </ul>
+        <?php get_template_part('template-parts/cta-resources'); ?>
       </div>
     </section>
 
@@ -487,7 +147,7 @@
           <li class="problem-list__item">
             <article class="problem-card">
               <div class="problem-card__illustration">
-                <img src="./img/problem/problem-appointment.png" alt="アポイント獲得と案件化の課題を表す図">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/problem/problem-appointment.png" alt="アポイント獲得と案件化の課題を表す図">
               </div>
               <h3 class="problem-card__title">
                 アポは取れるが案件化しない。<br>
@@ -498,7 +158,7 @@
           <li class="problem-list__item">
             <article class="problem-card">
               <div class="problem-card__illustration">
-                <img src="./img/problem/problem-recruitment.png" alt="営業組織の採用と内製化の課題を表す図">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/problem/problem-recruitment.png" alt="営業組織の採用と内製化の課題を表す図">
               </div>
               <h3 class="problem-card__title">
                 営業組織を内製化したいが、<br>
@@ -509,7 +169,7 @@
           <li class="problem-list__item">
             <article class="problem-card">
               <div class="problem-card__illustration">
-                <img src="./img/problem/problem-quality.png" alt="営業代行会社の担当者品質の課題を表す図">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/problem/problem-quality.png" alt="営業代行会社の担当者品質の課題を表す図">
               </div>
               <h3 class="problem-card__title">
                 代行会社を使ったが、<br>
@@ -522,7 +182,7 @@
       </div>
     </section>
 
-    <section class="service-section section-wave">
+    <section class="service-section section-wave" id="support-service">
       <div class="service-panel">
         <header class="service-heading">
           <p class="service-heading__eyebrow">Weegentの</p>
@@ -531,51 +191,51 @@
 
         <ul class="primary-service-list">
           <li class="primary-service-list__item">
-            <a class="primary-service-card" href="#">
+            <a class="primary-service-card" href="<?php echo esc_url(home_url('/inbound/')); ?>">
               <span class="primary-service-card__icon">
-                <img src="./img/service/service-inbound.svg" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/service/service-inbound.svg" alt="">
               </span>
               <div class="primary-service-card__body">
                 <p class="primary-service-card__label">セールスの流儀</p>
                 <h3 class="primary-service-card__title">インバウンド対応</h3>
               </div>
-              <img class="primary-service-card__arrow" src="./img/common/button-icon-navy.svg" alt="">
+              <img class="primary-service-card__arrow" src="<?php echo get_template_directory_uri(); ?>/img/common/button-icon-navy.svg" alt="">
             </a>
           </li>
           <li class="primary-service-list__item">
-            <a class="primary-service-card" href="#">
+            <a class="primary-service-card" href="<?php echo esc_url(home_url('/outbound-enterprise/')); ?>">
               <span class="primary-service-card__icon">
-                <img src="./img/service/service-enterprise.svg" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/service/service-enterprise.svg" alt="">
               </span>
               <div class="primary-service-card__body">
                 <p class="primary-service-card__label">セールスの流儀</p>
                 <h3 class="primary-service-card__title">エンタープライズ開拓</h3>
               </div>
-              <img class="primary-service-card__arrow" src="./img/common/button-icon-navy.svg" alt="">
+              <img class="primary-service-card__arrow" src="<?php echo get_template_directory_uri(); ?>/img/common/button-icon-navy.svg" alt="">
             </a>
           </li>
           <li class="primary-service-list__item">
-            <a class="primary-service-card" href="#">
+            <a class="primary-service-card" href="<?php echo esc_url(home_url('/test-marketing/')); ?>">
               <span class="primary-service-card__icon">
-                <img src="./img/service/service-test-marketing.svg" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/service/service-test-marketing.svg" alt="">
               </span>
               <div class="primary-service-card__body">
                 <p class="primary-service-card__label">セールスの流儀</p>
                 <h3 class="primary-service-card__title">テストマーケティング</h3>
               </div>
-              <img class="primary-service-card__arrow" src="./img/common/button-icon-navy.svg" alt="">
+              <img class="primary-service-card__arrow" src="<?php echo get_template_directory_uri(); ?>/img/common/button-icon-navy.svg" alt="">
             </a>
           </li>
           <li class="primary-service-list__item">
-            <a class="primary-service-card" href="#">
+            <a class="primary-service-card" href="<?php echo esc_url(home_url('/outbound-smb/')); ?>">
               <span class="primary-service-card__icon">
-                <img src="./img/service/service-strategy.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/service/service-strategy.png" alt="">
               </span>
               <div class="primary-service-card__body">
                 <p class="primary-service-card__label">セールスの流儀</p>
                 <h3 class="primary-service-card__title">営業戦略／<br class="sp">組織立ち上げプラン</h3>
               </div>
-              <img class="primary-service-card__arrow" src="./img/common/button-icon-navy.svg" alt="">
+              <img class="primary-service-card__arrow" src="<?php echo get_template_directory_uri(); ?>/img/common/button-icon-navy.svg" alt="">
             </a>
           </li>
         </ul>
@@ -584,9 +244,9 @@
         <ul class="available-service-list">
           <li class="available-service-list__item">
             <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
-              <div class="available-service-card__icon"><img src="./img/service/service-inbound-lead.svg" alt=""></div>
+              <span class="available-service-card__icon"><img src="<?php echo get_template_directory_uri(); ?>/img/service/service-inbound-lead.svg" alt=""></span>
               <span class="available-service-card__title">インバウンド<br>リード対応</span>
-              <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
+              <img class="available-service-card__plus" src="<?php echo get_template_directory_uri(); ?>/img/common/plus-navy.svg" alt="">
             </button>
             <template class="js-service-modal-source">
               <p class="service-modal__description">マーケティング施策を通じて得たリードに対して適切にフォローアップします。 主にWebサイトからの問い合わせや資料請求、外部媒体、ブログ、SNS、メールキャンペーンなどのオンラインチャネルを通じて発生したリードへの対応を行います。</p>
@@ -610,9 +270,9 @@
           </li>
           <li class="available-service-list__item">
             <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
-              <div class="available-service-card__icon"><img src="./img/service/service-jump-in-sales.svg" alt=""></div>
+              <span class="available-service-card__icon"><img src="<?php echo get_template_directory_uri(); ?>/img/service/service-jump-in-sales.svg" alt=""></span>
               <span class="available-service-card__title">飛び込み営業</span>
-              <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
+              <img class="available-service-card__plus" src="<?php echo get_template_directory_uri(); ?>/img/common/plus-navy.svg" alt="">
             </button>
             <template class="js-service-modal-source">
               <p class="service-modal__description">法人、個人経営、個人宅、医療・福祉・介護施設などに飛び込みで営業を行います。<br>多くの営業代行会社が敬遠する施策ですが、弊社では得意領域です。</p>
@@ -634,9 +294,9 @@
           </li>
           <li class="available-service-list__item">
             <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
-              <div class="available-service-card__icon"><img src="./img/service/service-email-marketing.svg" alt=""></div>
+              <span class="available-service-card__icon"><img src="<?php echo get_template_directory_uri(); ?>/img/service/service-email-marketing.svg" alt=""></span>
               <span class="available-service-card__title">メール<br>マーケティング</span>
-              <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
+              <img class="available-service-card__plus" src="<?php echo get_template_directory_uri(); ?>/img/common/plus-navy.svg" alt="">
             </button>
             <template class="js-service-modal-source">
               <p class="service-modal__description">潜在層の顧客に対して、プロダクト・サービスの情報、特典、ニュースレター、プロモーションキャンペーンなどを送信します。<br>ユーザー心理を理解して温度感を高めていくことが重要です。</p>
@@ -659,9 +319,9 @@
           </li>
           <li class="available-service-list__item">
             <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
-              <div class="available-service-card__icon"><img src="./img/service/service-contact-form.svg" alt=""></div>
+              <span class="available-service-card__icon"><img src="<?php echo get_template_directory_uri(); ?>/img/service/service-contact-form.svg" alt=""></span>
               <span class="available-service-card__title">問い合わせフォーム<br class="br-sp">営業</span>
-              <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
+              <img class="available-service-card__plus" src="<?php echo get_template_directory_uri(); ?>/img/common/plus-navy.svg" alt="">
             </button>
             <template class="js-service-modal-source">
               <p class="service-modal__description">企業の「問い合わせ」ページやフォームからセールス文を送ります（1000件から承ります）。<br>
@@ -684,9 +344,9 @@
           </li>
           <li class="available-service-list__item">
             <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
-              <div class="available-service-card__icon"><img src="./img/service/service-sales-material.svg" alt=""></div>
+              <span class="available-service-card__icon"><img src="<?php echo get_template_directory_uri(); ?>/img/service/service-sales-material.svg" alt=""></span>
               <span class="available-service-card__title">営業資料作成</span>
-              <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
+              <img class="available-service-card__plus" src="<?php echo get_template_directory_uri(); ?>/img/common/plus-navy.svg" alt="">
             </button>
             <template class="js-service-modal-source">
               <p class="service-modal__description">提案書、プレゼンテーション資料、製品カタログなど、営業活動の効率化や成約率の向上に寄与する資料を作成します。</p>
@@ -708,9 +368,9 @@
           </li>
           <li class="available-service-list__item">
             <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
-              <div class="available-service-card__icon"><img src="./img/service/service-sales-support.svg" alt=""></div>
+              <span class="available-service-card__icon"><img src="<?php echo get_template_directory_uri(); ?>/img/service/service-sales-support.svg" alt=""></span>
               <span class="available-service-card__title">商談同行・代行</span>
-              <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
+              <img class="available-service-card__plus" src="<?php echo get_template_directory_uri(); ?>/img/common/plus-navy.svg" alt="">
             </button>
             <template class="js-service-modal-source">
               <p class="service-modal__description">貴社の営業担当者として実際に商談を行います。<br>
@@ -736,9 +396,9 @@
           </li>
           <li class="available-service-list__item">
             <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
-              <div class="available-service-card__icon"><img src="./img/service/service-consulting.svg" alt=""></div>
+              <span class="available-service-card__icon"><img src="<?php echo get_template_directory_uri(); ?>/img/service/service-consulting.svg" alt=""></span>
               <span class="available-service-card__title">営業コンサルティング</span>
-              <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
+              <img class="available-service-card__plus" src="<?php echo get_template_directory_uri(); ?>/img/common/plus-navy.svg" alt="">
             </button>
             <template class="js-service-modal-source">
               <p class="service-modal__description">現状の貴社営業体制をベースに、課題に応じたソリューションを提供します。<br>
@@ -763,9 +423,9 @@
           </li>
           <li class="available-service-list__item">
             <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
-              <div class="available-service-card__icon"><img src="./img/service/service-customer-success.svg" alt=""></div>
+              <span class="available-service-card__icon"><img src="<?php echo get_template_directory_uri(); ?>/img/service/service-customer-success.svg" alt=""></span>
               <span class="available-service-card__title">CS代行<br>（カスタマーサクセス）</span>
-              <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
+              <img class="available-service-card__plus" src="<?php echo get_template_directory_uri(); ?>/img/common/plus-navy.svg" alt="">
             </button>
             <template class="js-service-modal-source">
               <p class="service-modal__description">顧客満足度の向上や解約防止を目指します。<br>
@@ -788,9 +448,9 @@
           </li>
           <li class="available-service-list__item">
             <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
-              <div class="available-service-card__icon"><img src="./img/service/service-sfa.svg" alt=""></div>
+              <span class="available-service-card__icon"><img src="<?php echo get_template_directory_uri(); ?>/img/service/service-sfa.svg" alt=""></span>
               <span class="available-service-card__title">SFAの導入支援・<br>活用支援</span>
-              <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
+              <img class="available-service-card__plus" src="<?php echo get_template_directory_uri(); ?>/img/common/plus-navy.svg" alt="">
             </button>
             <template class="js-service-modal-source">
               <p class="service-modal__description">企業の営業プロセスを分析して必要な要件を定義し、適切なSFAを選定・カスタマイズします。<br>
@@ -815,9 +475,9 @@
           </li>
           <li class="available-service-list__item">
             <button class="available-service-card js-service-modal-open" type="button" aria-haspopup="dialog">
-              <div class="available-service-card__icon"><img src="./img/service/service-outbound-call.svg" alt=""></div>
+              <span class="available-service-card__icon"><img src="<?php echo get_template_directory_uri(); ?>/img/service/service-outbound-call.svg" alt=""></span>
               <span class="available-service-card__title">アウトバウンドコール</span>
-              <img class="available-service-card__plus" src="./img/common/plus-navy.svg" alt="">
+              <img class="available-service-card__plus" src="<?php echo get_template_directory_uri(); ?>/img/common/plus-navy.svg" alt="">
             </button>
             <template class="js-service-modal-source">
               <p class="service-modal__description">見込み客や既存顧客に加え、全く接点のない企業に対しても積極的に電話をかけ、ビジネスチャンスを創出する営業手法です。新規顧客の開拓はもちろん、既存顧客へのフォローアップや契約更新の提案、さらにクロスセルやアップセルの機会を提供します。ダイレクトにコミュニケーションを図り、顧客のニーズや課題を的確に把握して最適な提案を行います。</p>
@@ -854,7 +514,7 @@
           <li class="strength-list__item">
             <article class="strength-card">
               <div class="strength-card__image">
-                <img src="./img/top/strength-people.jpg" alt="ノートパソコンを見ながら業務を行う営業担当者">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/top/strength-people.jpg" alt="ノートパソコンを見ながら業務を行う営業担当者">
               </div>
               <div class="strength-card__content">
                 <p class="strength-card__number">POINT 01</p>
@@ -868,7 +528,7 @@
           <li class="strength-list__item">
             <article class="strength-card">
               <div class="strength-card__image">
-                <img src="./img/top/strength-organization.jpg" alt="営業成果について会議を行うチーム">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/top/strength-organization.jpg" alt="営業成果について会議を行うチーム">
               </div>
               <div class="strength-card__content">
                 <p class="strength-card__number">POINT 02</p>
@@ -882,7 +542,7 @@
           <li class="strength-list__item">
             <article class="strength-card">
               <div class="strength-card__image">
-                <img src="./img/top/strength-data.jpg" alt="営業データを確認しながら改善策を検討する様子">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/top/strength-data.jpg" alt="営業データを確認しながら改善策を検討する様子">
               </div>
               <div class="strength-card__content">
                 <p class="strength-card__number">POINT 03</p>
@@ -897,89 +557,7 @@
       </div>
     </section>
 
-    <section class="document-section section-space section-wave" id="knowledge">
-      <div class="inner inner--content document-section__inner">
-        <header class="document-heading">
-          <h2 class="section-head__title">お役立ち資料</h2>
-          <p class="section-head__description">Weegentのノウハウをぜひご覧ください。</p>
-        </header>
-
-        <div class="document-slider js-document-slider">
-          <ul class="document-list js-document-track">
-            <li class="document-list__item js-document-slide">
-              <article class="document-card">
-                <div class="document-card__image">
-                <div class="document-card__image-inner">
-                  <img src="./img/document/document-client-work-01.jpg" alt="クライアントワークにおける電話について解説する資料の表紙">
-                </div>
-              </div>
-                <p class="document-card__category">カテゴリ</p>
-                <h3 class="document-card__title">3分でわかる〇〇〇〇紹介資料</h3>
-                <p class="document-card__description">〇〇〇〇に関するすべての情報を1冊にまとめた資料です。まずはこちらからご確認ください。</p>
-                <ul class="document-card__points">
-                  <li>〇〇〇〇って何ができるの？</li>
-                  <li>〇〇〇〇の費用やサポート体制</li>
-                  <li>実際の導入効果やお客様の声</li>
-                </ul>
-                <a class="document-card__button c-button c-button--brown" href="#">
-                  <span>資料をダウンロードする</span>
-                  <img src="./img/common/button-icon-white.svg" alt="">
-                </a>
-              </article>
-            </li>
-            <li class="document-list__item js-document-slide">
-              <article class="document-card">
-                <div class="document-card__image">
-                <div class="document-card__image-inner">
-                  <img src="./img/document/document-client-work-02.jpg" alt="クライアントワークにおける電話について解説する資料の表紙">
-                </div>
-              </div>
-                <p class="document-card__category">カテゴリ</p>
-                <h3 class="document-card__title">3分でわかる〇〇〇〇紹介資料</h3>
-                <p class="document-card__description">〇〇〇〇に関するすべての情報を1冊にまとめた資料です。まずはこちらからご確認ください。</p>
-                <ul class="document-card__points">
-                  <li>〇〇〇〇って何ができるの？</li>
-                  <li>〇〇〇〇の費用やサポート体制</li>
-                  <li>実際の導入効果やお客様の声</li>
-                </ul>
-                <a class="document-card__button c-button c-button--brown" href="#">
-                  <span>資料をダウンロードする</span>
-                  <img src="./img/common/button-icon-white.svg" alt="">
-                </a>
-              </article>
-            </li>
-            <li class="document-list__item js-document-slide">
-              <article class="document-card">
-                <div class="document-card__image">
-                <div class="document-card__image-inner">
-                  <img src="./img/document/document-client-work-03.jpg" alt="クライアントワークにおける電話について解説する資料の表紙">
-                </div>
-              </div>
-                <p class="document-card__category">カテゴリ</p>
-                <h3 class="document-card__title">3分でわかる〇〇〇〇紹介資料</h3>
-                <p class="document-card__description">〇〇〇〇に関するすべての情報を1冊にまとめた資料です。まずはこちらからご確認ください。</p>
-                <ul class="document-card__points">
-                  <li>〇〇〇〇って何ができるの？</li>
-                  <li>〇〇〇〇の費用やサポート体制</li>
-                  <li>実際の導入効果やお客様の声</li>
-                </ul>
-                <a class="document-card__button c-button c-button--brown" href="#">
-                  <span>資料をダウンロードする</span>
-                  <img src="./img/common/button-icon-white.svg" alt="">
-                </a>
-              </article>
-            </li>
-          </ul>
-        </div>
-
-        <div class="document-pagination js-document-pagination" aria-label="資料スライダーのページ"></div>
-
-        <a class="document-section__more c-button" href="#">
-          <span>お役立ち資料をすべて見る</span>
-          <img src="./img/common/button-icon-navy.svg" alt="">
-        </a>
-      </div>
-    </section>
+    <?php get_template_part('template-parts/document-slider', null, ['page' => 'top']); ?>
 
     <section class="member-section section-space section-wave" id="company">
       <div class="inner inner--content">
@@ -989,7 +567,7 @@
           <li class="member-list__item">
             <article class="member-card">
               <div class="member-card__image">
-                <img src="./img/member/yuta-matsushita.jpg" alt="代表取締役 松下雄太">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/member/yuta-matsushita.jpg" alt="代表取締役 松下雄太">
               </div>
               <div class="member-card__content">
                 <header class="member-card__identity">
@@ -1001,17 +579,13 @@
                   その後アマゾンジャパンへ転職しマーケティングを経験。主に大手ベンダーのECコンサルティング業務に従事。<br>
                   2023年に株式会社Weegentを創業し、代表取締役に就任。
                 </p>
-                <a class="member-card__link" href="#">
-                  <span>松下 雄太の詳細を見る</span>
-                  <img src="./img/common/button-icon-white.svg" alt="">
-                </a>
               </div>
             </article>
           </li>
           <li class="member-list__item">
             <article class="member-card">
               <div class="member-card__image">
-                <img src="./img/member/naoto-oyama.jpg" alt="大山尚人">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/member/naoto-oyama.jpg" alt="大山尚人">
               </div>
               <div class="member-card__content">
                 <header class="member-card__identity">
@@ -1022,10 +596,6 @@
                   新卒で証券会社に入社。個人・法人顧客の新規開拓、証券コンサルティング業務に従事し、史上最年少で昇級。数々の社内表彰を受賞。2023年に代表の松下と共に株式会社Weegentの立ち上げに参画。<br>
                   IT/SaaS・システム・医療業界の営業組織の立上げに携わり、営業戦略立案やKPI設計から実働支援までを得意とする。
                 </p>
-                <a class="member-card__link" href="#">
-                  <span>大山 尚人の詳細を見る</span>
-                  <img src="./img/common/button-icon-white.svg" alt="">
-                </a>
               </div>
             </article>
           </li>
@@ -1050,7 +620,7 @@
             <thead>
               <tr>
                 <th aria-hidden="true"></th>
-                <th class="comparison-table__featured" scope="col"><img class="comparison-table__logo" src="./img/common/logo.png" alt="Weegent"></th>
+                <th class="comparison-table__featured" scope="col"><img class="comparison-table__logo" src="<?php echo get_template_directory_uri(); ?>/img/common/logo.png" alt="Weegent"></th>
                 <th scope="col">内製</th>
                 <th scope="col">大手代行会社</th>
                 <th scope="col">格安代行会社</th>
@@ -1061,25 +631,25 @@
                 <th scope="row">立ち上げ速度</th>
                 <td class="comparison-table__featured">
                   <span class="comparison-table__mark" aria-label="非常に優れている">
-                    <img class="comparison-table__mark-image" src="./img/common/circle-camel.svg" alt="">
+                    <img class="comparison-table__mark-image" src="<?php echo get_template_directory_uri(); ?>/img/common/circle-camel.svg" alt="">
                   </span>
                   <p>最短1週間でテストコール開始。オンボーディングの仕組みが整っており、初週から成果を出す体制。</p>
                 </td>
                 <td>
                   <span class="comparison-table__mark" aria-label="課題がある">
-                    <img class="comparison-table__mark-image" src="./img/common/triangle-beige.svg" alt="">
+                    <img class="comparison-table__mark-image" src="<?php echo get_template_directory_uri(); ?>/img/common/triangle-beige.svg" alt="">
                   </span>
                   <p>採用・教育〜立ち上げまで3〜6か月。採用自体が難航するケースも多い。</p>
                 </td>
                 <td>
                   <span class="comparison-table__mark" aria-label="優れている">
-                    <img class="comparison-table__mark-image" src="./img/common/circle-beige.svg" alt="">
+                    <img class="comparison-table__mark-image" src="<?php echo get_template_directory_uri(); ?>/img/common/circle-beige.svg" alt="">
                   </span>
                   <p>体制は整っているが社内調整・契約に2〜4週間。最低2名〜3か月等の条件あり。</p>
                 </td>
                 <td>
                   <span class="comparison-table__mark" aria-label="非常に優れている">
-                    <img class="comparison-table__mark-image" src="./img/common/circle-beige.svg" alt="">
+                    <img class="comparison-table__mark-image" src="<?php echo get_template_directory_uri(); ?>/img/common/circle-beige.svg" alt="">
                   </span>
                   <p>即日〜1週間で稼働可能。ただし品質の担保がない状態でのスタート。</p>
                 </td>
@@ -1088,25 +658,25 @@
                 <th scope="row">品質管理</th>
                 <td class="comparison-table__featured">
                   <span class="comparison-table__mark" aria-label="非常に優れている">
-                    <img class="comparison-table__mark-image" src="./img/common/circle-camel.svg" alt="">
+                    <img class="comparison-table__mark-image" src="<?php echo get_template_directory_uri(); ?>/img/common/circle-camel.svg" alt="">
                   </span>
                   <p>毎月SABCランクで全メンバーを評価・入替。IS経験者だけがマネージャーに。結果が出ない時はマネージャーが自ら電話してリカバリー。</p>
                 </td>
                 <td>
                   <span class="comparison-table__mark" aria-label="課題がある">
-                    <img class="comparison-table__mark-image" src="./img/common/triangle-beige.svg" alt="">
+                    <img class="comparison-table__mark-image" src="<?php echo get_template_directory_uri(); ?>/img/common/triangle-beige.svg" alt="">
                   </span>
                   <p>評価制度があっても営業代行の文脈では機能しにくい。辞められたら採用し直し。</p>
                 </td>
                 <td>
                   <span class="comparison-table__mark" aria-label="優れている">
-                    <img class="comparison-table__mark-image" src="./img/common/circle-beige.svg" alt="">
+                    <img class="comparison-table__mark-image" src="<?php echo get_template_directory_uri(); ?>/img/common/circle-beige.svg" alt="">
                   </span>
                   <p>評価制度はあるがPDCAが遅い。入替にも社内調整が必要。役員が入って改善を議論する文化はない。</p>
                 </td>
                 <td>
                   <span class="comparison-table__mark" aria-label="適していない">
-                    <img class="comparison-table__mark-image" src="./img/common/x-beige.svg" alt="">
+                    <img class="comparison-table__mark-image" src="<?php echo get_template_directory_uri(); ?>/img/common/x-beige.svg" alt="">
                   </span>
                   <p>品質評価・入替の仕組みがない。担当者がダメでも放置。成果が出なければ契約終了。</p>
                 </td>
@@ -1115,25 +685,25 @@
                 <th scope="row">支援幅</th>
                 <td class="comparison-table__featured">
                   <span class="comparison-table__mark" aria-label="非常に優れている">
-                    <img class="comparison-table__mark-image" src="./img/common/circle-camel.svg" alt="">
+                    <img class="comparison-table__mark-image" src="<?php echo get_template_directory_uri(); ?>/img/common/circle-camel.svg" alt="">
                   </span>
                   <p>テレアポ・フォーム営業・手紙・飛び込み・セミナー支援・データに基づいて最適な施策を提案。エンプラ開拓にも対応。</p>
                 </td>
                 <td>
                   <span class="comparison-table__mark" aria-label="優れている">
-                    <img class="comparison-table__mark-image" src="./img/common/circle-beige.svg" alt="">
+                    <img class="comparison-table__mark-image" src="<?php echo get_template_directory_uri(); ?>/img/common/circle-beige.svg" alt="">
                   </span>
                   <p>自社で手を広げられるが、各施策のノウハウ習得に時間がかかる。</p>
                 </td>
                 <td>
                   <span class="comparison-table__mark" aria-label="課題がある">
-                    <img class="comparison-table__mark-image" src="./img/common/triangle-beige.svg" alt="">
+                    <img class="comparison-table__mark-image" src="<?php echo get_template_directory_uri(); ?>/img/common/triangle-beige.svg" alt="">
                   </span>
                   <p>インサイドセールスに特化している会社が多い。飛び込み・手紙等に対応できないケースあり。</p>
                 </td>
                 <td>
                   <span class="comparison-table__mark" aria-label="適していない">
-                    <img class="comparison-table__mark-image" src="./img/common/x-beige.svg" alt="">
+                    <img class="comparison-table__mark-image" src="<?php echo get_template_directory_uri(); ?>/img/common/x-beige.svg" alt="">
                   </span>
                   <p>架電のみに特化。他の施策は対応範囲外であることがほとんど。</p>
                 </td>
@@ -1146,41 +716,7 @@
 
     <section class="resource-section resource-background resource-background--secondary" aria-label="資料請求・お問い合わせ">
       <div class="inner inner--content">
-        <ul class="resource-list resource-list--standalone" aria-label="Weegentの資料とお問い合わせ">
-          <li class="resource-list__item">
-            <div class="resource-card">
-              <div class="resource-card__preview resource-card__preview--stacked">
-                <img src="./img/support/document-set.png" alt="資料3点セットの表紙">
-              </div>
-              <a class="resource-card__button c-button c-button--brown" href="#document">
-                <span>資料3点セットを見る</span>
-                <img src="./img/common/button-icon-white.svg" alt="">
-              </a>
-            </div>
-          </li>
-          <li class="resource-list__item">
-            <div class="resource-card">
-              <div class="resource-card__preview">
-                <img src="./img/support/contact-preview.png" alt="お問い合わせページの画面">
-              </div>
-              <a class="resource-card__button c-button c-button--brown" href="#">
-                <span>相談する <small>無料</small></span>
-                <img src="./img/common/button-icon-white.svg" alt="">
-              </a>
-            </div>
-          </li>
-          <li class="resource-list__item">
-            <div class="resource-card">
-              <div class="resource-card__preview">
-                <img src="./img/support/case-study-cover.png" alt="導入事例集の表紙">
-              </div>
-              <a class="resource-card__button c-button c-button--brown" href="#">
-                <span>事例集をDLする <small>無料</small></span>
-                <img src="./img/common/button-icon-white.svg" alt="">
-              </a>
-            </div>
-          </li>
-        </ul>
+        <?php get_template_part('template-parts/cta-resources', null, ['standalone' => true]); ?>
       </div>
     </section>
 
@@ -1279,7 +815,7 @@
               </button>
             </h3>
             <div class="faq-item__answer js-faq-answer" id="faq-answer-02" hidden>
-              <p><span class="faq-item__initial">A.</span>回答テキストが入ります。</p>
+              <p><span class="faq-item__initial">A.</span>IT・SaaS・製造・建設・人材など幅広く対応しています。商材理解から入り、業界ごとに刺さる部署・役職・訴求を丁寧に設計したうえで、支援を開始します。</p>
             </div>
           </li>
           <li class="faq-list__item faq-item">
@@ -1290,7 +826,7 @@
               </button>
             </h3>
             <div class="faq-item__answer js-faq-answer" id="faq-answer-03" hidden>
-              <p><span class="faq-item__initial">A.</span>回答テキストが入ります。</p>
+              <p><span class="faq-item__initial">A.</span>毎月SABCランクで評価し、基準に満たなければ入れ替えます。数字が悪い場合は責任者も現場に入り、品質を改善します。</p>
             </div>
           </li>
           <li class="faq-list__item faq-item">
@@ -1301,7 +837,7 @@
               </button>
             </h3>
             <div class="faq-item__answer js-faq-answer" id="faq-answer-04" hidden>
-              <p><span class="faq-item__initial">A.</span>回答テキストが入ります。</p>
+              <p><span class="faq-item__initial">A.</span>次の定例まで待ちません。数字が悪ければその日のうちに、リスト・トーク・担当者を見直し、必要に応じて行動量も増やします。また、成果保証プランを選択いただくことも可能です。</p>
             </div>
           </li>
           <li class="faq-list__item faq-item">
@@ -1312,7 +848,7 @@
               </button>
             </h3>
             <div class="faq-item__answer js-faq-answer" id="faq-answer-05" hidden>
-              <p><span class="faq-item__initial">A.</span>回答テキストが入ります。</p>
+              <p><span class="faq-item__initial">A.</span>コール内容や顧客の反応まで共有します。アポにならなかった理由も掘り下げ、次に何を変えるかまで定例でお伝えします。</p>
             </div>
           </li>
         </ul>
@@ -1320,123 +856,4 @@
     </section>
   </main>
 
-  <div class="service-modal js-service-modal" hidden aria-hidden="true">
-    <div class="service-modal__backdrop js-service-modal-close"></div>
-    <section class="service-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="service-modal-title" tabindex="-1">
-      <button class="service-modal__close js-service-modal-close" type="button" aria-label="モーダルを閉じる">
-        <span></span>
-        <span></span>
-      </button>
-      <header class="service-modal__header">
-        <div class="service-modal__icon"><img class="js-service-modal-icon" src="" alt=""></div>
-        <h3 class="service-modal__title js-service-modal-title" id="service-modal-title"></h3>
-      </header>
-      <div class="service-modal__body js-service-modal-body"></div>
-    </section>
-  </div>
-
-  <footer class="footer">
-    <div class="footer__inner inner">
-      <div class="footer__main">
-        <div class="footer__brand">
-          <a class="footer__logo" href="./" aria-label="Weegent トップページへ">
-            <img src="./img/common/logo.png" alt="Weegent">
-          </a>
-          <ul class="footer-social" aria-label="公式SNS">
-            <li class="footer-social__item">
-              <a href="#" aria-label="Weegent公式YouTube">
-                <img src="./img/common/icon-youtube.svg" alt="">
-              </a>
-            </li>
-            <li class="footer-social__item">
-              <a href="#" aria-label="Weegent公式note">
-                <img src="./img/common/icon-note.svg" alt="">
-              </a>
-            </li>
-            <li class="footer-social__item">
-              <a href="#" aria-label="Weegent公式X">
-                <img src="./img/common/icon-x.svg" alt="">
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="footer-company">
-          <p class="footer-company__name">株式会社Weegent</p>
-          <address class="footer-company__addresses">
-            <div class="footer-company__address">
-              <p class="footer-company__office">本社</p>
-              <p>〒150-0011<br>東京都渋谷区東3丁目24-13<br>Sreed EBISU+L 8階</p>
-            </div>
-            <div class="footer-company__address">
-              <p class="footer-company__office">大阪拠点</p>
-              <p>〒530-0001<br>大阪府大阪市北区梅田1丁目3-1<br>大阪駅前第一ビル 6階</p>
-            </div>
-          </address>
-        </div>
-
-        <nav class="footer-nav" aria-label="フッターナビゲーション">
-          <div class="footer-nav__group footer-nav__group--top">
-            <p class="footer-nav__heading"><a href="./">TOPページ</a></p>
-          </div>
-          <div class="footer-nav__group footer-nav__group--company">
-            <p class="footer-nav__heading">会社情報</p>
-            <ul class="footer-nav__list">
-              <li><a class="footer-nav__link" href="#"><img src="./img/common/button-icon-white.svg" alt="">当社について</a></li>
-              <li><a class="footer-nav__link" href="#"><img src="./img/common/button-icon-white.svg" alt="">会社概要</a></li>
-              <li><a class="footer-nav__link" href="#"><img src="./img/common/button-icon-white.svg" alt="">お知らせ</a></li>
-              <li><a class="footer-nav__link" href="#"><img src="./img/common/button-icon-white.svg" alt="">採用情報</a></li>
-            </ul>
-          </div>
-          <div class="footer-nav__group footer-nav__group--service">
-            <p class="footer-nav__heading">サービス情報</p>
-            <ul class="footer-nav__list">
-              <li><a class="footer-nav__link" href="#"><img src="./img/common/button-icon-white.svg" alt="">サービス一覧</a></li>
-              <li><a class="footer-nav__link" href="#"><img src="./img/common/button-icon-white.svg" alt="">ご支援実績</a></li>
-            </ul>
-          </div>
-          <div class="footer-nav__group footer-nav__group--knowledge">
-            <p class="footer-nav__heading">お役立ち情報</p>
-            <ul class="footer-nav__list">
-              <li><a class="footer-nav__link" href="#"><img src="./img/common/button-icon-white.svg" alt="">お役立ち資料</a></li>
-            </ul>
-          </div>
-        </nav>
-
-        <div class="footer-contact">
-          <a class="footer-contact__tel" href="tel:0368247902">
-            <span>Tel. <strong>03-6824-7902</strong></span>
-            <small>24時間365日対応します</small>
-          </a>
-          <div class="footer-contact__actions">
-            <a class="footer-contact__button c-button c-button--white" href="#document">
-              <span>3点セットを見る <small>無料</small></span>
-            </a>
-            <a class="footer-contact__button c-button c-button--brown" href="#trial">
-              <span>相談する <small>無料</small></span>
-            </a>
-          </div>
-        </div>
-
-        <ul class="footer-badges" aria-label="認定パートナー">
-          <li class="footer-badges__item">
-            <img src="./img/common/logo-salesforce-partner.png" alt="Salesforce Partner">
-          </li>
-          <li class="footer-badges__item">
-            <img src="./img/common/logo-hubspot-partner.png" alt="HubSpot Partner">
-          </li>
-        </ul>
-      </div>
-
-      <div class="footer__bottom">
-        <small>&copy; <time datetime="2026">2026</time> Weegent Inc.</small>
-        <a href="./privacy-poricy.html">プライバシーポリシー</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="./js/script.js?v=6"></script>
-</body>
-
-</html>
+<?php get_footer(); ?>

@@ -83,6 +83,11 @@ height: rem(16);
 }
 
 .company-about__body {
+  // 次セクション(.section-wave)の波が上に負のオフセットではみ出してくるため、
+  // company-about-sectionは自身がsection-waveではなく z-index の土台がない。
+  // テキストを波より前面に出すため、ここで独自のスタッキングコンテキストを作る。
+  position: relative;
+  z-index: 2;
   margin-top: rem(32);
 
   @include mq("md") {
@@ -245,7 +250,7 @@ height: rem(16);
 
   @include mq("md") {
     margin-top: rem(56);
-    grid-template-columns: repeat(2, minmax(0, rem(240)));
+    grid-template-columns: repeat(3, minmax(0, rem(240)));
     column-gap: rem(40);
   }
 }
@@ -266,6 +271,7 @@ height: rem(16);
 
 .manager-card__image {
   grid-area: image;
+  overflow: hidden;
   aspect-ratio: 1 / 1;
   border-radius: rem(2);
   background-color: #d9d9d9;
@@ -273,6 +279,35 @@ height: rem(16);
   @include mq("md") {
     max-width: rem(360);
   }
+}
+
+.manager-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(2);
+  transform-origin: center 22%;
+}
+
+// 3人の頭の上端の高さを、枠の上から約7.5%にそろえている(manager-03 は拡大できないため、それに合わせる)。
+// 拡大の基準点(transform-origin の縦位置)は「元写真での頭の上端の位置」から逆算した値。
+// 写真を差し替えた場合は、この値も調整が必要。
+.manager-card__image--01 img {
+  object-position: center 14%;
+  transform: scale(2.4);
+  transform-origin: center 41.8%;
+}
+
+.manager-card__image--02 img {
+  object-position: center 8%;
+  transform-origin: center 39.3%;
+}
+
+// manager-03 は他の2枚(全身写真を拡大して切り抜き)と違い、横長の上半身写真。
+// 拡大はせず(元写真の時点で他の2枚より顔が大きいため)、顔が枠の左右中央に来るよう位置だけ合わせる。
+.manager-card__image--03 img {
+  object-position: 51% center;
+  transform: none;
 }
 
 .manager-card__role {

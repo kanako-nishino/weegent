@@ -2103,8 +2103,7 @@ padding-bottom: rem(24);
   grid-template-columns: rem(120) minmax(0, 1fr);
   grid-template-areas:
     "image identity"
-    "profile profile"
-    "link link";
+    "profile profile";
   column-gap: rem(24);
 
   @include mq("md") {
@@ -2182,31 +2181,6 @@ padding-bottom: rem(24);
   @include mq("md") {
     margin-top: rem(16);
     @include font(16, 25.6, null, $medium);
-  }
-}
-
-.member-card__link {
-  grid-area: link;
-  width: fit-content;
-  margin-top: rem(16);
-  padding-bottom: rem(11);
-  display: flex;
-  align-items: center;
-  gap: rem(8);
-  color: $beige;
-  border-bottom: rem(1) solid $beige;
-  @include font(14, 14, null, $bold);
-
-  img {
-    width: rem(16);
-    height: rem(16);
-  }
-
-  @include mq("md") {
-    margin-top: rem(16);
-    padding-bottom: rem(11);
-    gap: rem(8);
-    @include font(16, 16, null, $bold);
   }
 }
 
@@ -2724,19 +2698,27 @@ padding-bottom: rem(24);
 // --------------------------------
 // パンくずリスト
 // --------------------------------
+// .breadcrumb 直下は、静的フォールバック時は .breadcrumb__list(<ol>)一つだけ、
+// Breadcrumb NavXT稼働時はプラグインが出力する各項目が直接並ぶ。
+// どちらでも横並び・折り返しになるよう、レイアウトはここに持たせる。
 .breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: rem(8);
+  row-gap: rem(4);
   color: $beige;
+  @include font(12, 12, null, $medium);
+
+  @include mq("md") {
+    @include font(16, 16, null, $medium);
+  }
 }
 
 .breadcrumb__list {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  @include font(12, 12, null, $medium);
-
-  @include mq("md") {
-    @include font(14, 14, null, $medium);
-  }
 }
 
 .breadcrumb__item {
@@ -2750,10 +2732,31 @@ padding-bottom: rem(24);
   opacity: 0.6;
 }
 
-.breadcrumb__item a {
+.breadcrumb a {
   color: $beige;
   text-decoration: underline;
   text-underline-offset: rem(3);
+}
+
+// Breadcrumb NavXTは区切り文字をプラグイン設定に従って出力するため、
+// 管理画面(設定 > Breadcrumb NavXT > 一般 > 区切り文字)を "/" に合わせておくこと。
+// 現在ページの項目は、プラグインが出力する最後の <span property="itemListElement">。
+// SPでは折り返さず、その行の残り幅いっぱいまで表示して画面端で「...」にする。
+// PCでは長いタイトルも省略せず、折り返して全文を表示する。
+.breadcrumb > [property="itemListElement"]:last-child {
+  display: block;
+  flex: 1 1 0%;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  @include mq("md") {
+    flex: initial;
+    min-width: auto;
+    overflow: visible;
+    white-space: normal;
+  }
 }
 
 // --------------------------------

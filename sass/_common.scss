@@ -233,6 +233,15 @@
   }
 }
 
+// 404ページ(404.php)。見出しエリアの下に本文セクションがないため、フッターとの間に余白をとる。
+.sub-hero--404 .sub-hero__inner {
+  padding-bottom: rem(80);
+
+  @include mq("md") {
+    padding-bottom: rem(120);
+  }
+}
+
 .sub-hero__action {
   width: 100%;
   @include mq('md'){

@@ -89,38 +89,30 @@
     }
 }
 
+// サイドバーは追従させない(5件+ボタンで画面の高さを超えることが多く、
+// 追従させるとサイドバー内だけのスクロールが発生するため)。
 .work-layout__aside {
     min-width: 0;
-
-    // 固定ヘッダーの高さ分オフセットして追従させる。
-    // 関連事例は5件までの表示想定だが、念のため画面をはみ出す分はスクロールさせる。
-    @include mq("md") {
-        position: sticky;
-        top: rem(145);
-        max-height: calc(100vh - #{rem(145)});
-        overflow-y: auto;
-    }
 }
 
 // --------------------------------
 // アイキャッチ画像 + 担当者タグ
 // --------------------------------
+// 高さは画像の比率に任せる(比率で固定すると、人物やロゴが端で切れるため)。
+// 入稿時は横長(約2.37:1、例: 1600×676px)で作成する運用。
 .work-eyecatch {
     margin-top: rem(24);
     overflow: hidden;
     border-radius: rem(4);
-    aspect-ratio: 343 / 148;
 
     @include mq("md") {
         margin-top: rem(0);
-        aspect-ratio: 800 / 337.84;
     }
 }
 
 .work-eyecatch img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
 }
 
 .work-eyecatch__staff {
@@ -155,18 +147,21 @@
 // 出力される実際のHTML構造・クラス名（#toc_container, .toc_title, .toc_toggle,
 // .toc_toggle_indicator, .toc_list, .toc_number 等）にそのままスタイルを当てている。
 // プラグイン側のCSS/JS（screen.css・front.js）は「TOCのCSS/JSを出力しない」設定を
-// 前提としており、開閉インタラクションも front.js と同じ「#toc_containerに
-// .contractedクラスを付け外しする」方式に合わせてある。
+// 前提としている。開閉ボタンはプラグインのものを使わず(設定でオフ)、js/script.js で
+// デザインのボタンを追加し、#toc_containerに.contractedクラスを付け外しする。
+// 目次は本文(.work-article)の中に自動挿入されるため、本文側の p などのスタイルに
+// 上書きされないよう、すべて #toc_container 起点のセレクタにしている。
 //
 // 見出し番号（1. / 2.1. など）は、プラグイン設定画面（TOC+の設定）内
 // 「Number list items」のチェックを外せば .toc_number 自体が出力されなくなる。
 // 万一チェックが入ったまま運用された場合の保険として、.toc_number は
 // 念のためCSS側でも非表示にしている（下記参照）。
+// 数値はFigma(SP: node 1021-42738 / PC: node 1021-41530)に合わせている。
 #toc_container {
     margin-top: rem(32);
-    padding: rem(20) rem(20) rem(24);
+    padding: rem(16) rem(24) rem(24);
     border-radius: rem(4);
-    background-color: rgba($beige, 0.06);
+    background-color: rgba($beige, 0.1);
 
     @include mq("md") {
         margin-top: rem(40);
@@ -174,39 +169,46 @@
     }
 }
 
-.toc_title {
+#toc_container .toc_title {
+    // 本文(.work-article p)のスタイルを打ち消す
+    padding-top: 0;
     padding-bottom: rem(16);
+    color: $beige;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: rem(16);
-    border-bottom: rem(1) solid rgba($beige, 0.15);
-    @include font(18, null, 60, $medium);
+    border-bottom: rem(1) solid rgba($beige, 0.5);
+    @include font(17, 27.2, 0, $medium);
 
     @include mq("md") {
-        @include font(20, null, 60, $medium);
+        @include font(20, 32);
     }
 }
 
-.toc_toggle {
+#toc_container .toc_toggle {
     display: inline-flex;
     flex-shrink: 0;
 }
 
-.toc_toggle a {
+#toc_container .toc_toggle a {
     display: inline-flex;
     align-items: center;
-    gap: rem(6);
+    gap: rem(8);
 }
 
-.toc_toggle_label {
+#toc_container .toc_toggle_label {
     color: $beige;
     text-decoration: underline;
     text-underline-offset: rem(3);
-    @include font(13, null, 60, $medium);
+    @include font(13, 13, 0, $medium);
+
+    @include mq("md") {
+        @include font(16, 16);
+    }
 }
 
-.toc_toggle_box {
+#toc_container .toc_toggle_box {
     position: relative;
     display: flex;
     align-items: center;
@@ -217,12 +219,12 @@
     background-color: $beige;
 }
 
-.toc_toggle_indicator {
+#toc_container .toc_toggle_indicator {
     width: 0;
     height: 0;
-    border-left: rem(4) solid transparent;
-    border-right: rem(4) solid transparent;
-    border-bottom: rem(5) solid $navy;
+    border-left: rem(3) solid transparent;
+    border-right: rem(3) solid transparent;
+    border-bottom: rem(4) solid $navy;
     transition: transform 0.2s ease;
 }
 
@@ -230,54 +232,83 @@
     transform: rotate(180deg);
 }
 
-.toc_list {
+// マーカーはデザインの「茶色の丸(4px)」を ::before で描く
+#toc_container .toc_list {
     margin-top: rem(20);
-    padding-left: rem(18);
     display: grid;
     gap: rem(16);
-    list-style: disc;
+    list-style: none;
 
     @include mq("md") {
-        gap: rem(20);
+        margin-top: rem(15);
+        gap: rem(12);
     }
 }
 
-.toc_list>li::marker {
-    color: rgba($beige, 0.5);
+// 文字サイズ・行間は li 側に指定する(a だけに指定すると li の行の高さが親の値のまま残り、項目が縦に広がるため)
+#toc_container .toc_list > li {
+    position: relative;
+    padding-left: rem(11);
+    @include f(15, 140, 0, $medium);
+
+    @include mq("md") {
+        padding-left: rem(17);
+        @include f(17, 180);
+    }
+}
+
+#toc_container .toc_list > li::before {
+    content: "";
+    position: absolute;
+    top: rem(12);
+    left: 0;
+    width: rem(4);
+    height: rem(4);
+    border-radius: 50%;
+    background-color: $brown;
+
+    @include mq("md") {
+        top: rem(15);
+    }
 }
 
 // プラグインの「Number list items」設定を外していれば出力されない想定だが、
 // 万一出力された場合に備えた保険。
-.toc_number {
+#toc_container .toc_number {
     display: none;
 }
 
-.toc_list>li>a {
+#toc_container .toc_list > li > a {
     color: $beige;
     text-decoration: underline;
     text-underline-offset: rem(3);
-    @include font(14, 20.3, null, $medium);
-
-    @include mq("md") {
-        @include font(15, 22.5, null, $medium);
-    }
 }
 
-.toc_list li ul {
-    margin-top: rem(12);
-    padding-left: rem(20);
+// h3はマーカー位置から18px字下げ(li側の字下げとの差分をここで足す)
+#toc_container .toc_list li ul {
+    margin-top: rem(10);
+    padding-left: rem(7);
     display: grid;
-    gap: rem(10);
+    gap: rem(6);
     list-style: none;
-}
-
-.toc_list li li a {
-    color: $beige;
-    @include font(13, 19.5, null, $medium);
 
     @include mq("md") {
-        @include font(14, 21, null, $medium);
+        margin-top: rem(8);
+        padding-left: rem(1);
+        gap: rem(4);
     }
+}
+
+#toc_container .toc_list li li {
+    @include f(14, 140, 0, $medium);
+
+    @include mq("md") {
+        @include f(14, 180);
+    }
+}
+
+#toc_container .toc_list li li a {
+    color: $beige;
 }
 
 // --------------------------------
@@ -341,6 +372,12 @@
 }
 
 .work-related__text {
+    // タイトルは3行まで表示し、以降は「…」で省略する
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
     color: $beige;
     @include font(14, 20, 60, $medium);
     font-family: $serif;

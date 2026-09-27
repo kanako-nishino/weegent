@@ -325,18 +325,33 @@ jQuery(function ($) { // この中であればWordPressでも「$」が使用可
     $faqItem.toggleClass("is-open", !isOpen);
   });
 
-  // 事例詳細ページ：目次の開閉
-  // ※Table of Contents Plus導入後は本体のfront.jsが同じ処理を行うため、
-  //   プラグイン差し替え時にこのハンドラは削除すること。
-  $("#toc_container .toc_toggle a").on("click", function (event) {
-    event.preventDefault();
-    var $toggle = $(this);
-    var $container = $toggle.closest("#toc_container");
-    var willContract = !$container.hasClass("contracted");
+  // 事例詳細ページ：目次(Table of Contents Plus)の開閉
+  // プラグインの開閉ボタンはデザインと形が異なるため、プラグイン側の設定
+  // 「目次の表示/非表示の切り替えを許可」はオフにし、デザインのボタンをここで追加する。
+  var $toc = $("#toc_container");
+  if ($toc.length) {
+    // プラグイン側の設定がオンのままだった場合の保険(ボタンの二重表示と閉じた状態を解除)
+    $toc.find(".toc_toggle").remove();
+    $toc.removeClass("contracted").css({ width: "", display: "" });
+    $toc.find(".toc_list").show();
 
-    $toggle.attr("aria-label", willContract ? "show" : "hide");
-    $toggle.find(".toc_toggle_label").text(willContract ? "開く" : "閉じる");
-    $container.toggleClass("contracted", willContract);
-    $container.find(".toc_list").toggle(!willContract);
-  });
+    var $tocToggle = $(
+      '<span class="toc_toggle"><a href="#" role="button" aria-expanded="true">' +
+        '<span class="toc_toggle_label">閉じる</span>' +
+        '<span class="toc_toggle_box"><span class="toc_toggle_indicator" aria-hidden="true"></span></span>' +
+      "</a></span>"
+    );
+    $toc.find(".toc_title").append($tocToggle);
+
+    $tocToggle.find("a").on("click", function (event) {
+      event.preventDefault();
+      var willContract = !$toc.hasClass("contracted");
+
+      $(this).attr("aria-expanded", String(!willContract));
+      $(this).find(".toc_toggle_label").text(willContract ? "開く" : "閉じる");
+      $toc.toggleClass("contracted", willContract);
+      $toc.find(".toc_list").toggle(!willContract);
+    });
+  }
+
 });

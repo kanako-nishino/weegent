@@ -326,6 +326,42 @@ font-family: $serif;
   align-items: center;
 }
 
+// --------------------------------
+// Contact Form 7 の状態表示(入力エラー・送信中・送信結果)
+// --------------------------------
+$form-error: #c8372d;
+
+.form-panel .wpcf7-form-control-wrap {
+  display: block;
+}
+
+.form-field .wpcf7-not-valid {
+  border-color: $form-error;
+}
+
+.form-panel .wpcf7-not-valid-tip {
+  margin-top: rem(6);
+  color: $form-error;
+  @include font(13, 13, 0, $medium);
+
+  @include mq('md'){
+    @include font(14, 14);
+  }
+}
+
+// 送信中は二重送信を防ぐためボタンを押せなくする
+.form-panel.submitting .form-panel__submit {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.wpcf7 .form-panel .wpcf7-response-output {
+  margin: rem(20) 0 0;
+  padding: rem(12) rem(14);
+  border-radius: rem(2);
+  @include f(14, 160, 0, $medium);
+}
+
 
 // --------------------------------
 // 電話CTA
@@ -523,33 +559,6 @@ font-family: $serif;
 
   @include mq("md") {
     @include font(18, 32.4, 50, $medium);
-  }
-}
-
-.thanks-hero__button {
-  margin-top: rem(56);
-  min-height: rem(48);
-  padding: rem(8) rem(20);
-  position: relative;
-
-  @include mq("md") {
-    width: rem(360);
-    justify-content: center;
-    min-height: rem(64);
-    margin-right: auto;
-    margin-left: auto;
-    @include font(18,18);
-  }
-}
-
-.thanks-hero__button img {
-  position: absolute;
-  top: 50%;
-  right: rem(16);
-  transform: translateY(-50%);
-
-  @include mq('md'){
-    width: rem(18);
   }
 }
 
