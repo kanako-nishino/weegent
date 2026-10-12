@@ -124,7 +124,7 @@ font-family: $serif;
 
 .form-trust__logos li {
   height: rem(41);
-  padding: rem(4);
+  padding: rem(8) rem(10);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,7 +132,7 @@ font-family: $serif;
 
   @include mq("md") {
     height: rem(64);
-    padding: rem(8);
+    padding: rem(14) rem(18);
   }
 }
 

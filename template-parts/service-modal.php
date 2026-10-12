@@ -17,5 +17,9 @@
       <h3 class="service-modal__title js-service-modal-title" id="service-modal-title"></h3>
     </header>
     <div class="service-modal__body js-service-modal-body"></div>
+    <a class="service-modal__cta c-button c-button--brown" href="<?php echo esc_url(home_url('/contact/')); ?>">
+      <span>まずは無料相談</span>
+      <img src="<?php echo get_template_directory_uri(); ?>/img/common/button-icon-white.svg" alt="">
+    </a>
   </section>
 </div>

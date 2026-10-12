@@ -76,3 +76,41 @@
     @include font(18, 32.4, 40, $medium);
   }
 }
+
+.privacy-list__item ul {
+  margin-top: rem(16);
+  @include font(14, 25.2, 40, $medium);
+
+  @include mq("md") {
+    margin-top: rem(24);
+    @include font(18, 32.4, 40, $medium);
+  }
+}
+
+.privacy-list__item ul ul {
+  margin-top: rem(4);
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.privacy-list__item li {
+  position: relative;
+  padding-left: 1em;
+}
+
+.privacy-list__item li::before {
+  content: "・";
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.privacy-list__item li + li {
+  margin-top: rem(4);
+}
+
+.privacy-list__item a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

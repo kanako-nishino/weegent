@@ -250,7 +250,7 @@ height: rem(16);
 
   @include mq("md") {
     margin-top: rem(56);
-    grid-template-columns: repeat(3, minmax(0, rem(240)));
+    grid-template-columns: repeat(4, minmax(0, rem(240)));
     column-gap: rem(40);
   }
 }
@@ -307,6 +307,12 @@ height: rem(16);
 // 拡大はせず(元写真の時点で他の2枚より顔が大きいため)、顔が枠の左右中央に来るよう位置だけ合わせる。
 .manager-card__image--03 img {
   object-position: 51% center;
+  transform: none;
+}
+
+// manager-04 も manager-03 と同じ横長の上半身写真のため、同じく拡大せず位置だけ合わせる。
+.manager-card__image--04 img {
+  object-position: 50% center;
   transform: none;
 }
 

@@ -15,7 +15,9 @@ if (! $work) {
 $dir = get_template_directory_uri();
 $industry = get_field('work_industry', $work->ID);
 $employee_count = get_field('work_employee_count', $work->ID);
-$challenge = get_field('work_challenge', $work->ID);
+// 支援プランは事例カテゴリで管理している(複数選択可)。選ばれたカテゴリを「、」区切りで表示する
+$terms = get_the_terms($work->ID, 'work_category');
+$service = (! empty($terms) && ! is_wp_error($terms)) ? implode('、', wp_list_pluck($terms, 'name')) : '';
 $client_name = get_field('work_client_name', $work->ID);
 $client_logo = get_field('work_client_logo', $work->ID);
 $thumbnail = get_the_post_thumbnail_url($work, 'large') ?: $dir . '/img/case/case-01.jpg';
@@ -27,7 +29,7 @@ $thumbnail = get_the_post_thumbnail_url($work, 'large') ?: $dir . '/img/case/cas
         <img src="<?php echo esc_url($thumbnail); ?>" alt="導入企業の担当者様">
       </div>
       <h3 class="case-card__title"><?php echo esc_html(get_the_title($work)); ?></h3>
-      <?php if ($industry || $employee_count || $challenge) : ?>
+      <?php if ($industry || $employee_count || $service) : ?>
         <dl class="case-card__information">
           <?php if ($industry) : ?>
             <div class="case-card__information-row">
@@ -41,10 +43,10 @@ $thumbnail = get_the_post_thumbnail_url($work, 'large') ?: $dir . '/img/case/cas
               <dd><?php echo esc_html($employee_count); ?></dd>
             </div>
           <?php endif; ?>
-          <?php if ($challenge) : ?>
+          <?php if ($service) : ?>
             <div class="case-card__information-row">
-              <dt>課題</dt>
-              <dd><?php echo esc_html($challenge); ?></dd>
+              <dt>支援プラン</dt>
+              <dd><?php echo esc_html($service); ?></dd>
             </div>
           <?php endif; ?>
         </dl>

@@ -24,7 +24,7 @@
     <section class="sub-footer-cta" aria-labelledby="sub-footer-cta-heading">
       <div class="inner inner--content sub-footer-cta__inner">
         <h2 class="sub-footer-cta__heading" id="sub-footer-cta-heading">
-          〇〇に関してご不明な点が<br class="sp">ございましたら、<br>お気軽にお問い合わせください。
+          営業に関してご不明な点が<br class="sp">ございましたら、<br>お気軽にお問い合わせください。
         </h2>
 
         <ul class="sub-footer-cta__cards">
@@ -35,7 +35,7 @@
                   <img class="sub-footer-card__icon" src="<?php echo get_template_directory_uri(); ?>/img/service/service-email-marketing.svg" alt="">
                   <p class="sub-footer-card__title">ご相談・問い合わせ</p>
                 </div>
-                <p class="sub-footer-card__description">〇〇の専門家が<br class="pc">ご不安な点をお伺いします。</p>
+                <p class="sub-footer-card__description">営業の専門家が<br class="pc">ご不安な点をお伺いします。</p>
               </div>
               <a class="c-button c-button--brown sub-footer-card__button" href="<?php echo esc_url(home_url('/contact/')); ?>">
                 <span>相談する</span>

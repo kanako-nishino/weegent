@@ -20,15 +20,21 @@
         <section class="sub-document section-space" aria-labelledby="document-download-heading">
             <div class="inner inner--content sub-document__inner">
 
+                <?php
+                // サムネ(資料のキャプチャ)の表示切り替え。template-parts/cta-resources.php と共通。
+                $show_preview = (bool) apply_filters('weegent_show_resource_previews', false);
+                ?>
                 <ul class="document-download-list">
                     <li class="document-download-list__item">
-                        <article class="document-download-card">
+                        <article class="document-download-card<?php echo $show_preview ? '' : ' document-download-card--no-preview'; ?>">
                             <div class="document-download-card__body">
-                                <div class="resource-card__preview resource-card__preview--stacked document-download-card__preview"
-                                    aria-hidden="true">
-                                    <p>もし可能であれば、<br>資料のキャプチャを入れたいです。</p>
-                                </div>
-                                <p class="document-download-card__title">〇〇がわかる、<br class="sp">お役立ち資料3点セット</p>
+                                <?php if ($show_preview) : ?>
+                                    <div class="resource-card__preview resource-card__preview--stacked document-download-card__preview"
+                                        aria-hidden="true">
+                                        <p>もし可能であれば、<br>資料のキャプチャを入れたいです。</p>
+                                    </div>
+                                <?php endif; ?>
+                                <p class="document-download-card__title">Weegentがわかる、<br>お役立ち資料3点セット</p>
                             </div>
                             <a class="c-button c-button--brown document-download-card__button" href="<?php echo esc_url(home_url('/document-download/')); ?>">
                                 <span>資料をダウンロードする</span>
@@ -38,13 +44,15 @@
                     </li>
 
                     <li class="document-download-list__item">
-                        <article class="document-download-card">
+                        <article class="document-download-card<?php echo $show_preview ? '' : ' document-download-card--no-preview'; ?>">
                             <div class="document-download-card__body">
-                                <div class="resource-card__preview resource-card__preview--stacked document-download-card__preview"
-                                    aria-hidden="true">
-                                    <p>もし可能であれば、<br>全資料のキャプチャを入れたいです。</p>
-                                </div>
-                                <p class="document-download-card__title">すべての資料を<br class="sp">ダウンロード</p>
+                                <?php if ($show_preview) : ?>
+                                    <div class="resource-card__preview resource-card__preview--stacked document-download-card__preview"
+                                        aria-hidden="true">
+                                        <p>もし可能であれば、<br>全資料のキャプチャを入れたいです。</p>
+                                    </div>
+                                <?php endif; ?>
+                                <p class="document-download-card__title">すべての資料を<br>ダウンロード</p>
                             </div>
                             <a class="c-button c-button--brown document-download-card__button" href="<?php echo esc_url(weegent_resource_download_url()); ?>">
                                 <span>資料をダウンロードする</span>
@@ -56,7 +64,7 @@
                     <li class="document-download-list__item document-download-list__item--wide">
                         <article class="document-download-card document-download-card--case">
                             <div class="document-download-card__body">
-                                <p class="document-download-card__title">〇〇の事例集</p>
+                                <p class="document-download-card__title">Weegentの事例集</p>
                             </div>
                             <a class="c-button c-button--brown document-download-card__button" href="<?php echo esc_url(home_url('/case-download/')); ?>">
                                 <span>事例集を一括でダウンロードする<small>無料</small></span>

@@ -502,12 +502,59 @@
     }
 }
 
+// 本文中のリスト(目次のリストは #toc_container 側で指定しているため除外)。
+// リセットCSSで消しているマーカーを本文内だけ戻し、文字は本文の段落にそろえる。
+.work-article ul:not(#toc_container ul),
+.work-article ol:not(#toc_container ol) {
+    margin-top: rem(16);
+    padding-left: 1.5em;
+    color: $beige;
+    @include f(14, 180, null, $medium);
+
+    @include mq("md") {
+        margin-top: rem(32);
+        @include f(17, 180, null, $medium);
+    }
+}
+
+.work-article ul:not(#toc_container ul) {
+    list-style: disc;
+}
+
+.work-article ol:not(#toc_container ol) {
+    list-style: decimal;
+}
+
+.work-article li:not(#toc_container li) + li {
+    margin-top: rem(12);
+
+    @include mq("md") {
+        margin-top: rem(16);
+    }
+}
+
+.work-article li:not(#toc_container li)::marker {
+    color: $beige;
+}
+
+// 本文中のリンク(目次のリンクは #toc_container 側で指定しているため除外)
+.work-article a:not(#toc_container a) {
+    color: $beige;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    // URLをそのまま載せたリンクがはみ出さないよう折り返す
+    overflow-wrap: anywhere;
+}
+
+// 記事内の画像は切り抜かず、コンテンツ幅を上限に自然な縦横比で表示する
 .work-article img {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
+    height: auto;
     margin-top: rem(40);
+    margin-right: auto;
+    margin-left: auto;
     border-radius: rem(4);
-    aspect-ratio: 4 / 3.6;
-    object-fit: cover;
 
     @include mq('md') {
         margin-top: rem(48);

@@ -1,0 +1,144 @@
+@use "global" as *;
+
+// ==============================
+// 役員の個別ページ(single-member.php)
+// レイアウト・本文の体裁はお知らせ詳細(.news-single / .entry-content)を流用し、
+// プロフィール(写真・役職・氏名)と他の役員へのリンクだけをここで定義する。
+// ==============================
+
+// --------------------------------
+// プロフィール
+// 会社情報の役員紹介(.member-card)と同じく、SPは写真と氏名を横並び、PCは写真を大きく取る。
+// --------------------------------
+.member-single__header {
+  display: grid;
+  grid-template-columns: rem(120) minmax(0, 1fr);
+  column-gap: rem(24);
+  align-items: center;
+
+  @include mq("md") {
+    grid-template-columns: rem(240) minmax(0, 1fr);
+    column-gap: rem(40);
+  }
+}
+
+.member-single__image {
+  overflow: hidden;
+  border-radius: rem(2);
+  aspect-ratio: 1 / 1;
+}
+
+.member-single__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-single__role {
+  @include font(14, 14, null, $medium);
+}
+
+.member-single__name {
+  margin-top: rem(8);
+  font-family: $serif;
+  @include font(24, null, 60, $medium);
+
+  @include mq("md") {
+    margin-top: rem(12);
+    @include font(32, null, 60, $medium);
+  }
+}
+
+.member-single__name-en {
+  margin-top: rem(8);
+  color: $camel;
+  font-family: $serif;
+  @include font(14, null, 60, $medium);
+
+  @include mq("md") {
+    @include font(18, null, 60, $medium);
+  }
+}
+
+// --------------------------------
+// 他の役員へのリンク
+// --------------------------------
+.member-single__others {
+  margin-top: rem(64);
+  padding-top: rem(40);
+  border-top: rem(1) solid rgba($beige, 0.2);
+
+  @include mq("md") {
+    margin-top: rem(80);
+    padding-top: rem(48);
+  }
+}
+
+.member-single__others-title {
+  font-family: $serif;
+  @include font(20, null, 40, $medium);
+
+  @include mq("md") {
+    @include font(24, null, 40, $medium);
+  }
+}
+
+.member-single__others-list {
+  display: grid;
+  gap: rem(16);
+  margin-top: rem(24);
+
+  @include mq("md") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: rem(24);
+  }
+}
+
+.member-single__other {
+  display: flex;
+  align-items: center;
+  gap: rem(16);
+  padding: rem(16);
+  border: rem(1) solid rgba($beige, 0.2);
+  border-radius: rem(2);
+  color: inherit;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.member-single__other-image {
+  flex-shrink: 0;
+  overflow: hidden;
+  width: rem(64);
+  border-radius: rem(2);
+  aspect-ratio: 1 / 1;
+}
+
+.member-single__other-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-single__other-text {
+  display: grid;
+  flex: 1;
+  gap: rem(4);
+}
+
+.member-single__other-role {
+  @include font(12, 12, null, $medium);
+}
+
+.member-single__other-name {
+  font-family: $serif;
+  @include font(18, null, 60, $medium);
+}
+
+.member-single__other-icon {
+  flex-shrink: 0;
+  width: rem(16);
+}

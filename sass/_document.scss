@@ -197,6 +197,28 @@
   }
 }
 
+// サムネ非表示時は事例集カード(--case)と同じく、タイトルとボタンのみの構成にする。
+.document-download-card--no-preview {
+  min-height: rem(168);
+
+  @include mq("md") {
+    min-height: rem(190);
+  }
+}
+
+.document-download-card--no-preview .document-download-card__body {
+  display: block;
+
+  // 隣のカードとタイトルの行数が違ってもボタンの位置がそろうよう、
+  // タイトル部分を伸ばしてボタンをカード下端に寄せる。
+  @include mq("md") {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 // --------------------------------
 // お役立ち資料一覧
 // --------------------------------
@@ -232,14 +254,6 @@
   min-width: 0;
   flex: none;
   scroll-snap-align: none;
-}
-
-.document-list--archive .document-card {
-  @include mq("md") {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
 }
 
 .document-list--archive .document-card__image {

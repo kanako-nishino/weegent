@@ -151,6 +151,82 @@ jQuery(function ($) { // この中であればWordPressでも「$」が使用可
     }
   });
 
+  // ヘッダーの「サービス紹介」ドロップダウン(PC)
+  // マウス操作ではホバーで開き、クリック・タップ・キーボードでは開閉を切り替える
+  var $navDropdowns = $(".js-nav-dropdown");
+  var canHover = window.matchMedia("(hover: hover)").matches;
+
+  function setNavDropdown($dropdown, isOpen) {
+    $dropdown.toggleClass("is-open", isOpen);
+    $dropdown.find(".js-nav-dropdown-trigger").attr("aria-expanded", String(isOpen));
+  }
+
+  $navDropdowns.each(function () {
+    var $dropdown = $(this);
+
+    $dropdown.find(".js-nav-dropdown-trigger").on("click", function (event) {
+      // マウスではホバーで既に開いているため、クリックで閉じないようにする
+      // (キーボード操作のクリックは event.detail が0)
+      if (canHover && event.detail > 0) {
+        setNavDropdown($dropdown, true);
+        return;
+      }
+      setNavDropdown($dropdown, !$dropdown.hasClass("is-open"));
+    });
+
+    $dropdown.on("mouseenter", function () {
+      if (canHover) setNavDropdown($dropdown, true);
+    });
+
+    $dropdown.on("mouseleave", function () {
+      if (canHover) setNavDropdown($dropdown, false);
+    });
+
+    // フォーカスがメニューの外に出たら閉じる
+    $dropdown.on("focusout", function (event) {
+      if (!event.relatedTarget || !$.contains(this, event.relatedTarget)) {
+        setNavDropdown($dropdown, false);
+      }
+    });
+
+    $dropdown.find("a[href]").on("click", function () {
+      setNavDropdown($dropdown, false);
+    });
+  });
+
+  // メニューの外をクリック・タップしたら閉じる
+  $(document).on("click", function (event) {
+    $navDropdowns.each(function () {
+      if (!$.contains(this, event.target)) {
+        setNavDropdown($(this), false);
+      }
+    });
+  });
+
+  // Escキーでドロップダウンを閉じ、トリガーにフォーカスを戻す
+  $(document).on("keydown", function (event) {
+    if (event.key !== "Escape") return;
+
+    $navDropdowns.filter(".is-open").each(function () {
+      setNavDropdown($(this), false);
+      $(this).find(".js-nav-dropdown-trigger").trigger("focus");
+    });
+  });
+
+  // ドロワー内の「サービス紹介」アコーディオン
+  $(".js-drawer-accordion").on("click", function () {
+    var $trigger = $(this);
+    var isOpen = $trigger.attr("aria-expanded") !== "true";
+    var $panel = $("#" + $trigger.attr("aria-controls"));
+
+    $trigger.attr("aria-expanded", String(isOpen));
+    if (isOpen) {
+      $panel.stop(true).slideDown(250);
+    } else {
+      $panel.stop(true).slideUp(250);
+    }
+  });
+
   // Escキーでドロワーを閉じる
   $(document).on("keydown", function (event) {
     if (event.key === "Escape" && $hamburger.attr("aria-expanded") === "true") {
@@ -352,6 +428,81 @@ jQuery(function ($) { // この中であればWordPressでも「$」が使用可
       $toc.toggleClass("contracted", willContract);
       $toc.find(".toc_list").toggle(!willContract);
     });
+  }
+
+  // トップページ：実績の数字(.js-counter)のカウントアップ
+  // 一覧が画面に少しでも入ったら、3つ同時に0から約2.5秒かけて最終的な数字まで増やし、最後に少し減速して止める。
+  // HTMLには最終的な数字をそのまま書いておき(読み上げ・検索エンジン・JS無効時用)、JSで動きだけを付ける。
+  var counterGroups = document.querySelectorAll(".js-counter-group");
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (counterGroups.length && !reduceMotion && "IntersectionObserver" in window) {
+    var COUNTER_DURATION = 2500;
+
+    // カウントアップ：0から最終的な数字まで数を増やす(小数点以下の桁数は元の数字に合わせる)
+    var setupCount = function (el) {
+      var value = el.textContent.trim();
+      var target = parseFloat(value);
+      var decimals = (value.split(".")[1] || "").length;
+
+      el.setAttribute("aria-label", value);
+      el.style.display = "inline-block";
+      // 桁が増えても横の文字がずれないように、最終的な数字の幅を確保しておく(文字サイズに対する比率で指定)
+      el.style.minWidth = el.getBoundingClientRect().width / parseFloat(window.getComputedStyle(el).fontSize) + "em";
+      el.style.textAlign = "right";
+      el.textContent = (0).toFixed(decimals);
+
+      return function () {
+        var start = null;
+        var step = function (time) {
+          if (start === null) {
+            start = time;
+          }
+          var progress = Math.min((time - start) / COUNTER_DURATION, 1);
+          var eased = 1 - Math.pow(1 - progress, 3); // 最後に減速
+          el.textContent = (target * eased).toFixed(decimals);
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          } else {
+            el.textContent = value;
+          }
+        };
+        window.requestAnimationFrame(step);
+      };
+    };
+
+    // 数字の幅を測って確保するため、Webフォントの読み込みが終わってから組み立てる
+    // (読み込み前に測ると代わりのフォントの幅になり、表示がずれる)
+    var fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+
+    counterGroups.forEach(function (group) {
+      fontsReady.then(function () {
+        observeCounterGroup(group);
+      });
+    });
+
+    function observeCounterGroup(group) {
+      var starters = Array.prototype.map.call(group.querySelectorAll(".js-counter"), function (el) {
+        return setupCount(el);
+      });
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          observer.disconnect();
+          // 初期状態の描画を確定させてから動かす
+          window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(function () {
+              starters.forEach(function (start) { start(); });
+            });
+          });
+        });
+      }, { threshold: 0 }); // 一覧が画面に少しでも入ったら開始する
+
+      observer.observe(group);
+    }
   }
 
 });

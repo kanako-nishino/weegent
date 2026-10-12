@@ -182,7 +182,7 @@
               <div class="member-card__content">
                 <header class="member-card__identity">
                   <h3 class="member-card__name">松下 雄太</h3>
-                  <p class="member-card__name-en" lang="en">YUTA Matsushita</p>
+                  <p class="member-card__name-en" lang="en">Yuta Matsushita</p>
                 </header>
                 <p class="member-card__profile">
                   新卒で証券会社に入社。法人顧客の新規開拓、エンプラ向けウェルスコンサルティング業務に従事し、全社1位など数々の表彰を受賞。最年少でプライベートバンキング部門の立ち上げに参画。<br>
@@ -200,7 +200,7 @@
               <div class="member-card__content">
                 <header class="member-card__identity">
                   <h3 class="member-card__name">大山 尚人</h3>
-                  <p class="member-card__name-en" lang="en">NAOTO Oyama</p>
+                  <p class="member-card__name-en" lang="en">Naoto Oyama</p>
                 </header>
                 <p class="member-card__profile">
                   新卒で証券会社に入社。個人・法人顧客の新規開拓、証券コンサルティング業務に従事し、史上最年少で昇級。数々の社内表彰を受賞。2023年に代表の松下と共に株式会社Weegentの立ち上げに参画。<br>
@@ -210,6 +210,10 @@
             </article>
           </li>
         </ul>
+        <a class="member-section__more c-button" href="<?php echo esc_url(home_url('/company/#officer')); ?>">
+          <span>全てのメンバーを見る</span>
+          <img src="<?php echo get_template_directory_uri(); ?>/img/common/button-icon-navy.svg" alt="">
+        </a>
       </div>
     </section>
 

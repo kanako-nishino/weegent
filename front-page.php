@@ -50,25 +50,25 @@
             顧客を開拓してきました。
           </h2>
 
-          <ul class="outbound-overview__achievements achievement-list" aria-label="アウトバウンド営業の支援実績">
+          <ul class="outbound-overview__achievements achievement-list js-counter-group" aria-label="アウトバウンド営業の支援実績">
             <li class="achievement-list__item">
               <img class="achievement-list__icon" src="<?php echo get_template_directory_uri(); ?>/img/outbound/icon-companies.svg" alt="">
               <div class="achievement-list__content">
-                <p class="achievement-list__value"><strong>100</strong>社以上</p>
+                <p class="achievement-list__value"><strong class="js-counter">100</strong>社以上</p>
                 <p class="achievement-list__label">アウトバウンド営業の支援実績</p>
               </div>
             </li>
             <li class="achievement-list__item">
               <img class="achievement-list__icon" src="<?php echo get_template_directory_uri(); ?>/img/outbound/icon-listed-company.svg" alt="">
               <div class="achievement-list__content">
-                <p class="achievement-list__value"><strong>48</strong>%</p>
+                <p class="achievement-list__value"><strong class="js-counter">48</strong>%</p>
                 <p class="achievement-list__label">支援企業に占める上場企業の割合</p>
               </div>
             </li>
             <li class="achievement-list__item">
               <img class="achievement-list__icon" src="<?php echo get_template_directory_uri(); ?>/img/outbound/icon-contract.svg" alt="">
               <div class="achievement-list__content">
-                <p class="achievement-list__value"><strong>97.4</strong>%</p>
+                <p class="achievement-list__value"><strong class="js-counter">97.4</strong>%</p>
                 <p class="achievement-list__label">支援企業の契約継続率</p>
               </div>
             </li>
@@ -85,7 +85,7 @@
             </p>
           </div>
 
-          <a class="outbound-overview__button c-button c-button--brown" href="#market-test">
+          <a class="outbound-overview__button c-button c-button--brown" href="<?php echo esc_url(home_url('/contact/')); ?>">
             <span>同じ実行力を、貴社の営業に</span>
             <img src="<?php echo get_template_directory_uri(); ?>/img/common/button-icon-white.svg" alt="">
           </a>
@@ -186,7 +186,7 @@
       <div class="service-panel">
         <header class="service-heading">
           <p class="service-heading__eyebrow">Weegentの</p>
-          <h2 class="service-heading__title section-head__title">主な支援内容</h2>
+          <h2 class="service-heading__title section-head__title">主な支援プラン</h2>
         </header>
 
         <ul class="primary-service-list">
@@ -572,7 +572,7 @@
               <div class="member-card__content">
                 <header class="member-card__identity">
                   <h3 class="member-card__name">松下 雄太</h3>
-                  <p class="member-card__name-en" lang="en">YUTA Matsushita</p>
+                  <p class="member-card__name-en" lang="en">Yuta Matsushita</p>
                 </header>
                 <p class="member-card__profile">
                   新卒で証券会社に入社。法人顧客の新規開拓、エンプラ向けウェルスコンサルティング業務に従事し、全社1位など数々の表彰を受賞。最年少でプライベートバンキング部門の立ち上げに参画。<br>
@@ -590,7 +590,7 @@
               <div class="member-card__content">
                 <header class="member-card__identity">
                   <h3 class="member-card__name">大山 尚人</h3>
-                  <p class="member-card__name-en" lang="en">NAOTO Oyama</p>
+                  <p class="member-card__name-en" lang="en">Naoto Oyama</p>
                 </header>
                 <p class="member-card__profile">
                   新卒で証券会社に入社。個人・法人顧客の新規開拓、証券コンサルティング業務に従事し、史上最年少で昇級。数々の社内表彰を受賞。2023年に代表の松下と共に株式会社Weegentの立ち上げに参画。<br>
@@ -600,6 +600,10 @@
             </article>
           </li>
         </ul>
+        <a class="member-section__more c-button" href="<?php echo esc_url(home_url('/company/#officer')); ?>">
+          <span>全てのメンバーを見る</span>
+          <img src="<?php echo get_template_directory_uri(); ?>/img/common/button-icon-navy.svg" alt="">
+        </a>
       </div>
     </section>
 
@@ -798,23 +802,12 @@
         <ul class="faq-list">
           <li class="faq-list__item faq-item is-open">
             <h3 class="faq-item__heading">
-              <button class="faq-item__trigger js-faq-trigger" type="button" aria-expanded="true" aria-controls="faq-answer-01">
-                <span class="faq-item__question"><span class="faq-item__initial">Q.</span>最低契約期間はありますか？</span>
-                <span class="faq-item__icon" aria-hidden="true"></span>
-              </button>
-            </h3>
-            <div class="faq-item__answer js-faq-answer" id="faq-answer-01">
-              <p><span class="faq-item__initial">A.</span>テストコール300件からのスモールスタートが可能です。まず成果を見ていただき、継続をご判断いただけます。</p>
-            </div>
-          </li>
-          <li class="faq-list__item faq-item">
-            <h3 class="faq-item__heading">
-              <button class="faq-item__trigger js-faq-trigger" type="button" aria-expanded="false" aria-controls="faq-answer-02">
+              <button class="faq-item__trigger js-faq-trigger" type="button" aria-expanded="true" aria-controls="faq-answer-02">
                 <span class="faq-item__question"><span class="faq-item__initial">Q.</span>どのような業界に対応していますか？</span>
                 <span class="faq-item__icon" aria-hidden="true"></span>
               </button>
             </h3>
-            <div class="faq-item__answer js-faq-answer" id="faq-answer-02" hidden>
+            <div class="faq-item__answer js-faq-answer" id="faq-answer-02">
               <p><span class="faq-item__initial">A.</span>IT・SaaS・製造・建設・人材など幅広く対応しています。商材理解から入り、業界ごとに刺さる部署・役職・訴求を丁寧に設計したうえで、支援を開始します。</p>
             </div>
           </li>

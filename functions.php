@@ -12,7 +12,7 @@ add_action('init', function () {
         'label' => 'ご支援実績',
         'public' => true,
         'has_archive' => true,
-        'rewrite' => ['slug' => 'archive-work'],
+        'rewrite' => ['slug' => 'work'],
         'menu_icon' => 'dashicons-portfolio',
         'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
         'show_in_rest' => true,
@@ -38,6 +38,19 @@ add_action('init', function () {
         'show_in_menu' => true,
         'menu_icon' => 'dashicons-video-alt3',
         'supports' => ['title'],
+        'show_in_rest' => true,
+    ]);
+
+    // メンバーの個別ページ。旧サイトのURL(/member/matsushita-yuta/ 等)を引き継ぐ。
+    // 一覧ページは持たず、/member/ へのアクセスは会社情報の役員紹介へ転送する。
+    register_post_type('member', [
+        'label' => 'メンバー',
+        'public' => true,
+        'has_archive' => false,
+        'rewrite' => ['slug' => 'member'],
+        'menu_icon' => 'dashicons-id',
+        // 写真はアイキャッチ、経歴・実績は本文で入力する
+        'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'page-attributes'],
         'show_in_rest' => true,
     ]);
 
@@ -78,20 +91,6 @@ add_action('pre_get_posts', function ($query) {
 });
 
 // header.php / template-parts で共通利用するヘルパー
-function weegent_meta_description()
-{
-    if (is_singular()) {
-        $custom = get_post_meta(get_the_ID(), 'meta_description', true);
-        if ($custom) {
-            return $custom;
-        }
-        if (has_excerpt()) {
-            return get_the_excerpt();
-        }
-    }
-    return get_bloginfo('description');
-}
-
 // トップページのセクションID(#service等)を指すリンクを生成。
 // トップページ以外ではホームURL付きのリンクにする。
 function weegent_home_anchor($hash)
@@ -135,14 +134,14 @@ add_action('acf/init', function () {
         return;
     }
 
-    // ご支援実績(work)の詳細情報。事例カード(業種/従業員数/課題/導入企業)の表示に使う。
+    // ご支援実績(work)の詳細情報。事例カード(業種/従業員数/導入企業)の表示に使う。
+    // 支援プランは事例カテゴリ(work_category)で管理する。
     acf_add_local_field_group([
         'key' => 'group_weegent_work_details',
         'title' => 'ご支援実績の詳細情報',
         'fields' => [
             ['key' => 'field_weegent_work_industry', 'label' => '業種', 'name' => 'work_industry', 'type' => 'text'],
             ['key' => 'field_weegent_work_employee_count', 'label' => '従業員数', 'name' => 'work_employee_count', 'type' => 'text'],
-            ['key' => 'field_weegent_work_challenge', 'label' => '課題', 'name' => 'work_challenge', 'type' => 'text'],
             ['key' => 'field_weegent_work_client_name', 'label' => '導入企業名', 'name' => 'work_client_name', 'type' => 'text'],
             ['key' => 'field_weegent_work_client_logo', 'label' => '導入企業ロゴ', 'name' => 'work_client_logo', 'type' => 'image', 'return_format' => 'url', 'preview_size' => 'thumbnail'],
             [
@@ -178,6 +177,22 @@ add_action('acf/init', function () {
                 ['param' => 'user_form', 'operator' => '==', 'value' => 'all'],
             ],
         ],
+    ]);
+
+    // メンバー(member)の詳細情報。氏名は投稿タイトルを使う。
+    acf_add_local_field_group([
+        'key' => 'group_weegent_member_details',
+        'title' => 'メンバーの詳細情報',
+        'fields' => [
+            ['key' => 'field_weegent_member_role', 'label' => '役職', 'name' => 'member_role', 'type' => 'text', 'instructions' => '例）代表取締役'],
+            ['key' => 'field_weegent_member_name_en', 'label' => '氏名(英語表記)', 'name' => 'member_name_en', 'type' => 'text', 'instructions' => '例）Yuta Matsushita'],
+        ],
+        'location' => [
+            [
+                ['param' => 'post_type', 'operator' => '==', 'value' => 'member'],
+            ],
+        ],
+        'position' => 'acf_after_title',
     ]);
 
     // 動画(video)の詳細情報。タイトルは投稿タイトルを使う。
@@ -435,7 +450,8 @@ function weegent_youtube_thumbnail_url($post_id, $youtube_id)
 }
 
 // 動画カードの表示データ。サムネイルは差し替え画像があればそれ(thumbnail_id)、
-// なければYouTubeのサムネイル(thumbnail_url)を使う。
+// なければYouTubeのサムネイル(thumbnail_url)を使う。URLからYouTubeの動画IDを
+// 読み取れない場合は、ロゴ入りのプレースホルダー画像にする。
 function weegent_get_video_card($video)
 {
     $video = get_post($video);
@@ -454,7 +470,7 @@ function weegent_get_video_card($video)
         'thumbnail_id' => $thumbnail_id,
         'thumbnail_url' => (! $thumbnail_id && $youtube_id)
             ? weegent_youtube_thumbnail_url($video->ID, $youtube_id)
-            : get_template_directory_uri() . '/img/video/video-01.jpg',
+            : get_template_directory_uri() . '/img/work-detail/weegent-placeholder.jpg',
     ];
 }
 
@@ -525,11 +541,75 @@ add_action('template_redirect', function () {
     }
 });
 
+// メンバーは一覧ページを持たないため、/member/ へのアクセスは会社情報の役員紹介へ転送する。
+add_action('template_redirect', function () {
+    if (is_404() && trim((string) wp_parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH), '/') === 'member') {
+        wp_safe_redirect(home_url('/company/#officer'), 301);
+        exit;
+    }
+});
+
+// メンバーページの構造化データ(ProfilePage / Person)。
+// 氏名で検索された際に、検索エンジンへ「この人物のプロフィールページ」であることを伝える。
+add_action('wp_head', function () {
+    if (! is_singular('member')) {
+        return;
+    }
+
+    $post_id = get_queried_object_id();
+    $person = [
+        '@type' => 'Person',
+        'name' => get_the_title($post_id),
+        'url' => get_permalink($post_id),
+        'worksFor' => [
+            '@type' => 'Organization',
+            'name' => '株式会社Weegent',
+            'url' => home_url('/'),
+        ],
+    ];
+
+    $role = function_exists('get_field') ? get_field('member_role', $post_id) : '';
+    if ($role) {
+        $person['jobTitle'] = $role;
+    }
+    $name_en = function_exists('get_field') ? get_field('member_name_en', $post_id) : '';
+    if ($name_en) {
+        $person['alternateName'] = $name_en;
+    }
+    if (has_post_thumbnail($post_id)) {
+        $person['image'] = get_the_post_thumbnail_url($post_id, 'full');
+    }
+
+    $data = [
+        '@context' => 'https://schema.org',
+        '@type' => 'ProfilePage',
+        'url' => get_permalink($post_id),
+        'dateModified' => get_the_modified_date('c', $post_id),
+        'mainEntity' => $person,
+    ];
+
+    echo '<script type="application/ld+json">' . wp_json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+});
+
 // 転送されるだけの資料個別URLはサイトマップに載せない。
 add_filter('wp_sitemaps_post_types', function ($post_types) {
     unset($post_types['document']);
     return $post_types;
 });
+
+// 投稿者ページ(/author/{ユーザー名}/)は使わない。URLにログインIDが出るため、サイトマップから外し、
+// アクセスはトップへ転送する。?author=1 から投稿者ページへの自動転送でIDが漏れないよう、
+// WordPress標準の転送(redirect_canonical)より先に処理する。
+add_filter('wp_sitemaps_add_provider', function ($provider, $name) {
+    return $name === 'users' ? false : $provider;
+}, 10, 2);
+
+add_action('template_redirect', function () {
+    if (is_author() || isset($_GET['author'])) {
+        wp_safe_redirect(home_url('/'), 301);
+        exit;
+    }
+}, 1);
 
 // ユーザーに紐づく担当者情報。名前は表示名、画像は未設定ならプレースホルダーにフォールバックする。
 // ユーザーが未選択・削除済みの場合は null を返す。
@@ -581,6 +661,8 @@ function my_body_class($classes)
         $classes[] = 'page-archive-work';
     } elseif (is_singular('work')) {
         $classes[] = 'page-single-work';
+    } elseif (is_singular('member')) {
+        $classes[] = 'page-single-member';
     } elseif (is_home() || is_category()) {
         $classes[] = 'page-archive-news';
     } elseif (is_singular('post')) {
@@ -620,24 +702,6 @@ add_action('wp_enqueue_scripts', function () {
     wp_dequeue_style('toc-screen');
     wp_deregister_style('toc-screen');
 }, 20);
-
-
-
-// wppagenaviのカスタマイズ
-
-function custom_wp_pagenavi($html) {
-    // 前へのリンクのテキストを画像に置き換える
-    $html = str_replace('class="previouspostslink"', 'class="previouspostslink"', $html);
-    $html = str_replace('←', '<img src="' . get_template_directory_uri() . '/img/common/next-arrow.svg" alt="前へ">', $html);
-
-    // 次へのリンクのテキストを画像に置き換える
-    $html = str_replace('class="nextpostslink"', 'class="nextpostslink"', $html);
-    $html = str_replace('→', '<img src="' . get_template_directory_uri() . '/img/common/next-arrow.svg" alt="次へ">', $html);
-
-    return $html;
-}
-add_filter('wp_pagenavi', 'custom_wp_pagenavi');
-
 
 // --------------------------------
 // Contact Form 7
@@ -715,7 +779,10 @@ add_action('wp_enqueue_scripts', function () {
 }, 21);
 
 // フォーム本文はHTMLで組むため、CF7の自動整形(<p>/<br>の挿入)は使わない。
-add_filter('wpcf7_autop_or_not', '__return_false');
+// メール本文(HTML形式のメール)は自動整形で改行を<br>にするため、フォームだけを対象にする。
+add_filter('wpcf7_autop_or_not', function ($autop, $options) {
+    return ($options['for'] ?? 'form') === 'mail' ? $autop : false;
+}, 10, 2);
 
 // 既存デザインの送信ボタン(アイコン付きの<button>)を出すフォームタグ。
 // CF7のフォーム編集画面で [weegent_submit "問い合わせる" free] のように使う。

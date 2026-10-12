@@ -9,7 +9,7 @@ $categories = get_categories(['hide_empty' => false]);
 <div class="news-filter sp">
   <div class="news-filter__select-wrap">
     <select class="news-filter__select" id="news-category" name="news-category" onchange="if(this.value) location.href=this.value;">
-      <option value="<?php echo esc_url(home_url('/')); ?>"<?php selected(! is_category()); ?>>すべて</option>
+      <option value="<?php echo esc_url(weegent_news_archive_link()); ?>"<?php selected(! is_category()); ?>>すべて</option>
       <?php foreach ($categories as $category) : ?>
         <option value="<?php echo esc_url(get_category_link($category)); ?>"<?php selected(is_category($category->term_id)); ?>><?php echo esc_html($category->name); ?></option>
       <?php endforeach; ?>

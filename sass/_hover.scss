@@ -27,7 +27,11 @@
 .toc_toggle a,
 .work-share__list a,
 .work-carousel__item a,
-.work-quicklinks__item a {
+.work-quicklinks__item a,
+.privacy-list__item a,
+.header__dropdown-link,
+.drawer-nav__sub-link,
+.work-article a:not(#toc_container a) {
   transition: opacity 0.3s;
 
   &:hover {
@@ -38,7 +42,8 @@
 // --------------------------------
 // グロナビ → 下線が左から右に伸び、離すと戻って消える
 // --------------------------------
-.header__nav a {
+.header__nav > a,
+.header__nav-trigger {
   &::after {
     content: "";
     position: absolute;
@@ -55,6 +60,11 @@
   &:hover::after {
     transform: scaleX(1);
   }
+}
+
+// ドロップダウンを開いている間は下線を表示したままにする
+.header__nav-dropdown.is-open .header__nav-trigger::after {
+  transform: scaleX(1);
 }
 
 // --------------------------------
